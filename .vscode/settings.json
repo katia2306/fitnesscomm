@@ -1,0 +1,42 @@
+{
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.renderWhitespace": "boundary",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.rulers": [80],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "editor.formatOnSave": true,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "files.autoSave": "off",
+  "files.exclude": {
+    "package-lock.json": true
+  },
+  "files.eol": "\n",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "breadcrumbs.enabled": true,
+  "bracketPairColorizer.showBracketsInGutter": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": true,
+  "advancedNewFile.exclude": {
+    "node_modules": true,
+    "node_modules_electron": true,
+    "dev": true,
+    "dist": true
+  },
+  "advancedNewFile.showInformationMessages": true,
+  "advancedNewFile.convenienceOptions": ["last", "current", "root"],
+  "path-intellisense.autoSlashAfterDirectory": true,
+  "material-icon-theme.activeIconPack": "react_redux",
+  "material-icon-theme.folders.associations": {
+    "forms": "template"
+  }
+}
