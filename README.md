@@ -2,25 +2,25 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## How to install
+## How To Install
 
 ```sh
 npm install
 npm install -g source-map-explorer npm-check-updates
 ```
 
-## Required VSCode Extensions
+## Install VSCode Recommended Extensions
 
-- TSLint
-- Prettier
+> See `.vscode/extensions.json` to check for recommended extensions.
 
-## Recommended VSCode Extensions
+If **material-icon-theme** extension is installed then add this configuration to **VSCode User Settings**. This is because the extension does not feature **Workspace Settings** yet.
 
-- advanced-new-file
-- Bracket Pair Colorizer
-- File Utils
-- GitLens
-- Import Cost
-- Material Icon Theme
-- npm Intellisense
-- Path Intellisense
+```json
+"material-icon-theme.activeIconPack": "react_redux",
+"material-icon-theme.folders.associations": {
+  "forms": "messages"
+},
+"material-icon-theme.files.associations": {
+  "package.json": "npm"
+}
+```
