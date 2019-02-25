@@ -7,6 +7,20 @@
   ],
   "rules": {
     "no-submodule-imports": { "severity": "off" },
-    "object-literal-sort-keys": { "severity": "off" }
+    "object-literal-sort-keys": { "severity": "off" },
+    "ban-ts-ignore": { "severity": "error" },
+    "no-any": { "severity": "error" },
+    "no-inferrable-types": { "severity": "error" },
+    "no-implicit-dependencies": { "severity": "error" },
+    "no-null-keyword": { "severity": "error" },
+    "no-object-literal-type-assertion": { "severity": "error" },
+    "no-switch-case-fall-through": { "severity": "error" },
+    "no-this-assignment": { "severity": "error" },
+    "prefer-object-spread": { "severity": "error" },
+    "restrict-plus-operands": { "severity": "error" },
+    "switch-default": { "severity": "error" },
+    "triple-equals": { "severity": "error" },
+    "typeof-compare": { "severity": "error" },
+    "prefer-switch": { "severity": "error" }
   }
 }

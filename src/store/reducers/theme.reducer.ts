@@ -12,7 +12,10 @@ const initialState: IThemeState = {
   isThemeDark: localStorage.isThemeDark === 'true'
 };
 
-export default (state = initialState, action: IAction<IThemeState>) => {
+export default (
+  state = initialState,
+  action: IAction<IThemeState>
+): IThemeState => {
   const { type } = action;
 
   switch (type) {
