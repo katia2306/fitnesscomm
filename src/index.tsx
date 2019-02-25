@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
 import App from './App';
+import './bootstrapMUI'; /* Remove after Material-UI v4 release */
 import browserHistory from './browserHistory';
 import * as serviceWorker from './serviceWorker';
 import store from './store/redux.store';

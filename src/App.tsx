@@ -1,13 +1,18 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Home, Login, Signup } from './pages';
+import IReduxState from './store/redux.model';
 import { darkTheme, lightTheme } from './themes';
 
-const App = ({ isThemeDark }) => {
+interface IProps {
+  isThemeDark: boolean;
+}
+
+const App = (props: IProps) => {
+  const { isThemeDark } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
 
   return (
@@ -22,11 +27,7 @@ const App = ({ isThemeDark }) => {
   );
 };
 
-App.propTypes = {
-  isThemeDark: PropTypes.bool.isRequired
-};
-
-const mapStateToProps = () => ({
+const mapStateToProps = (state: IReduxState) => ({
   isThemeDark: state.theme.isThemeDark
 });
 

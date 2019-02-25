@@ -1,66 +1,41 @@
 import { Button, FormControl, TextField } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
-const styles = () => ({
-  form: {
-    alignItems: 'center'
-  },
+const useStyles = makeStyles({
   button: {
     marginTop: '20px'
+  },
+  form: {
+    alignItems: 'center'
   }
 });
 
-const SignupForm = ({ classes }) => {
-  return (
-    <div>
-      <FormControl className={classes.form}>
-        <div>
-          <TextField
-            label="Username"
-            type="text"
-            name="username"
-            required={true}
-          />
-        </div>
-        <div>
-          <TextField label="Email" type="email" name="email" required={true} />
-        </div>
-        <div>
-          <TextField
-            label="Password"
-            type="password"
-            name="password"
-            required={true}
-          />
-        </div>
-        <div>
-          <TextField
-            label="Repeat password"
-            type="password"
-            name="repeat-password"
-            required={true}
-          />
-        </div>
+const SignupForm = () => {
+  const classes = useStyles();
 
-        <div>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Submit
-          </Button>
-        </div>
-      </FormControl>
-    </div>
+  return (
+    <FormControl className={classes.form}>
+      <TextField label="Username" type="text" name="username" required={true} />
+      <TextField label="Email" type="email" name="email" required={true} />
+      <TextField
+        label="Password"
+        type="password"
+        name="password"
+        required={true}
+      />
+      <TextField
+        label="Repeat password"
+        type="password"
+        name="repeat-password"
+        required={true}
+      />
+
+      <Button variant="contained" color="primary" className={classes.button}>
+        Submit
+      </Button>
+    </FormControl>
   );
 };
 
-SignupForm.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(SignupForm);
+export default SignupForm;

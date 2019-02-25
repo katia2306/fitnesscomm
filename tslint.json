@@ -6,6 +6,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "no-submodule-imports": { "severity": "off" }
+    "no-submodule-imports": { "severity": "off" },
+    "object-literal-sort-keys": { "severity": "off" }
   }
 }

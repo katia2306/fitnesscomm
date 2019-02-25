@@ -1,23 +1,20 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
 import { actions as themeActions } from '../../store/reducers/theme.reducer';
 
-const ToggleTheme = ({ toggleTheme }) => {
-  const handleToggleTheme = () => {
-    toggleTheme();
-  };
+interface IProps {
+  toggleTheme: typeof themeActions.toggleTheme;
+}
+
+const ToggleTheme = (props: IProps) => {
+  const { toggleTheme } = props;
 
   return (
-    <Button variant='contained' color='primary' onClick={handleToggleTheme}>
+    <Button variant="contained" color="primary" onClick={toggleTheme}>
       Toggle Theme
     </Button>
   );
-};
-
-ToggleTheme.propTypes = {
-  toggleTheme: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
