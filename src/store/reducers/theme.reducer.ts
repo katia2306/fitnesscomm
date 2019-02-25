@@ -28,7 +28,7 @@ export default (state = initialState, action: IAction<IThemeState>) => {
 };
 
 interface IThemeActions {
-  toggleTheme: () => IAction<IThemeState>;
+  readonly toggleTheme: () => IAction<IThemeState>;
 }
 
 export const actions: IThemeActions = {

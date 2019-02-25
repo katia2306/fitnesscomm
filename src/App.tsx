@@ -8,7 +8,7 @@ import IReduxState from './store/redux.model';
 import { darkTheme, lightTheme } from './themes';
 
 interface IProps {
-  isThemeDark: boolean;
+  isThemeDark: IReduxState['theme']['isThemeDark'];
 }
 
 const App = (props: IProps) => {
