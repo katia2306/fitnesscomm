@@ -20,7 +20,6 @@
     "restrict-plus-operands": { "severity": "error" },
     "switch-default": { "severity": "error" },
     "triple-equals": { "severity": "error" },
-    "typeof-compare": { "severity": "error" },
     "prefer-switch": { "severity": "error" }
   }
 }

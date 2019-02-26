@@ -22,6 +22,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  null,
+  undefined,
   mapDispatchToProps
 )(ToggleTheme);
