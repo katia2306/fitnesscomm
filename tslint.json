@@ -5,21 +5,27 @@
     "tslint-eslint-rules",
     "tslint-config-prettier"
   ],
+  "defaultSeverity": "warning",
   "rules": {
-    "no-submodule-imports": { "severity": "off" },
-    "object-literal-sort-keys": { "severity": "off" },
-    "ban-ts-ignore": { "severity": "error" },
-    "no-any": { "severity": "error" },
-    "no-inferrable-types": { "severity": "error" },
-    "no-implicit-dependencies": { "severity": "error" },
-    "no-null-keyword": { "severity": "error" },
-    "no-object-literal-type-assertion": { "severity": "error" },
-    "no-switch-case-fall-through": { "severity": "error" },
-    "no-this-assignment": { "severity": "error" },
-    "prefer-object-spread": { "severity": "error" },
-    "restrict-plus-operands": { "severity": "error" },
-    "switch-default": { "severity": "error" },
-    "triple-equals": { "severity": "error" },
-    "prefer-switch": { "severity": "error" }
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
+    "ban-ts-ignore": true,
+    "no-any": true,
+    "no-inferrable-types": true,
+    "no-implicit-dependencies": true,
+    "no-null-keyword": true,
+    "no-object-literal-type-assertion": true,
+    "no-switch-case-fall-through": true,
+    "no-this-assignment": true,
+    "prefer-object-spread": true,
+    "restrict-plus-operands": true,
+    "switch-default": true,
+    "triple-equals": true,
+    "prefer-switch": true,
+    "no-var-requires": true,
+    "import-blacklist": [
+      true,
+      ["^@material-ui/core/(?!styles|NoSsr|CssBaseline).*$"]
+    ]
   }
 }
