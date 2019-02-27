@@ -1,21 +1,18 @@
 import { IAction } from '../redux.model';
 
+export interface ITheme {
+  readonly isThemeDark: boolean;
+}
+
 export enum types {
-  TOGGLE_THEME
+  TOGGLE_THEME = 'TOGGLE_THEME'
 }
 
-export interface IThemeState {
-  isThemeDark: boolean;
-}
-
-const initialState: IThemeState = {
+const initState: ITheme = {
   isThemeDark: localStorage.isThemeDark === 'true'
 };
 
-export default (
-  state = initialState,
-  action: IAction<IThemeState>
-): IThemeState => {
+export default (state: ITheme = initState, action: IAction<ITheme>): ITheme => {
   const { type } = action;
 
   switch (type) {
@@ -31,7 +28,7 @@ export default (
 };
 
 export const actions = {
-  toggleTheme: (): IAction<IThemeState> => ({
+  toggleTheme: (): IAction<ITheme> => ({
     type: types.TOGGLE_THEME
   })
 };

@@ -4,11 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Home, Login, Signup } from './pages';
-import IReduxState from './store/redux.model';
+import IReduxModel from './store/redux.model';
 import { darkTheme, lightTheme } from './themes';
 
 interface IProps {
-  isThemeDark: IReduxState['theme']['isThemeDark'];
+  isThemeDark: IReduxModel['theme']['isThemeDark'];
 }
 
 const App = (props: IProps) => {
@@ -27,7 +27,7 @@ const App = (props: IProps) => {
   );
 };
 
-const mapStateToProps = (state: IReduxState) => ({
+const mapStateToProps = (state: IReduxModel) => ({
   isThemeDark: state.theme.isThemeDark
 });
 

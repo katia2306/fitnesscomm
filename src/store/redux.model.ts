@@ -1,4 +1,4 @@
-import { IThemeState, types as themeTypes } from './reducers/theme.reducer';
+import { ITheme, types as themeTypes } from './reducers/theme.reducer';
 
 /* Union of every action types */
 type ActionTypes = themeTypes;
@@ -8,6 +8,6 @@ export interface IAction<T> {
   readonly payload?: T;
 }
 
-export default interface IReduxState {
-  theme: IThemeState;
+export default interface IReduxModel {
+  theme: ITheme;
 }
