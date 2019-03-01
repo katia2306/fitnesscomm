@@ -16,22 +16,17 @@ const SignupForm = () => {
 
   return (
     <FormControl className={classes.form}>
-      <TextField label="Username" type="text" name="username" required={true} />
-      <TextField label="Email" type="email" name="email" required={true} />
+      <TextField label='Username' type='text' name='username' required />
+      <TextField label='Email' type='email' name='email' required />
+      <TextField label='Password' type='password' name='password' required />
       <TextField
-        label="Password"
-        type="password"
-        name="password"
-        required={true}
-      />
-      <TextField
-        label="Repeat password"
-        type="password"
-        name="repeat-password"
-        required={true}
+        label='Repeat password'
+        type='password'
+        name='repeat-password'
+        required
       />
 
-      <Button variant="contained" color="primary" className={classes.button}>
+      <Button variant='contained' color='primary' className={classes.button}>
         Submit
       </Button>
     </FormControl>

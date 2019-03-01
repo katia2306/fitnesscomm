@@ -11,7 +11,7 @@ const ToggleTheme = (props: IProps) => {
   const { toggleTheme } = props;
 
   return (
-    <Button variant="contained" color="primary" onClick={toggleTheme}>
+    <Button variant='contained' color='primary' onClick={toggleTheme}>
       Toggle Theme
     </Button>
   );

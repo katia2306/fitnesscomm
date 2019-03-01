@@ -19,9 +19,9 @@ const App = (props: IProps) => {
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <Switch>
-        <Route exact={true} path="/" component={Home} />
-        <Route exact={true} path="/login" component={Login} />
-        <Route exact={true} path="/signup" component={Signup} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
       </Switch>
     </MuiThemeProvider>
   );

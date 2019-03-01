@@ -25,9 +25,11 @@
     "@types/react-redux": "7.0.1",
     "@types/react-router": "4.4.4",
     "@types/react-router-dom": "4.3.1",
+    "prettier": "^1.16.4",
     "tslint": "5.13.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0",
+    "tslint-plugin-prettier": "2.0.1",
     "tslint-react": "3.6.0",
     "typescript": "3.3.3333"
   },
@@ -37,7 +39,7 @@
     "test": "react-scripts test",
     "analyze": "source-map-explorer build/static/js/main.*",
     "update": "ncu -u",
-    "lint": "tslint -c tslint.json -p tsconfig.json"
+    "lint": "tslint -c tslint.json -p tsconfig.json && tslint-config-prettier-check ./tslint.json"
   },
   "eslintConfig": {
     "extends": "react-app"
