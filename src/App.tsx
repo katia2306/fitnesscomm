@@ -1,17 +1,17 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router';
-import { Home, Login, Signup } from './pages';
-import IReduxModel from './store/redux.model';
-import { darkTheme, lightTheme } from './themes';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import React from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router";
+import { Home, Login, Signup } from "./pages";
+import IReduxModel from "./store/redux.model";
+import { darkTheme, lightTheme } from "./themes";
 
-interface IProps {
-  isThemeDark: IReduxModel['theme']['isThemeDark'];
+interface Props {
+  isThemeDark: IReduxModel["theme"]["isThemeDark"];
 }
 
-const App = (props: IProps) => {
+const App = (props: Props) => {
   const { isThemeDark } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
 
@@ -19,9 +19,9 @@ const App = (props: IProps) => {
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
       </Switch>
     </MuiThemeProvider>
   );

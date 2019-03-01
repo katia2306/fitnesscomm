@@ -1,5 +1,5 @@
-import React from 'react';
-import { LoginForm } from '../../forms';
+import React from "react";
+import { LoginForm } from "../../forms";
 
 const Login = () => {
   return (

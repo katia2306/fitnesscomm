@@ -10,6 +10,7 @@
   "rules": {
     "prettier": [true, ".prettierrc"],
     "jsx-boolean-value": [true, "never"],
+    "interface-name": [true, "never-prefix"],
     "no-submodule-imports": false,
     "object-literal-sort-keys": false,
     "ban-ts-ignore": true,

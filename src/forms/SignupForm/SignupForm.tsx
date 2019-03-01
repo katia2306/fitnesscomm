@@ -1,13 +1,13 @@
-import { Button, FormControl, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import React from 'react';
+import { Button, FormControl, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import React from "react";
 
 const useStyles = makeStyles({
   button: {
-    marginTop: '20px'
+    marginTop: "20px"
   },
   form: {
-    alignItems: 'center'
+    alignItems: "center"
   }
 });
 
@@ -16,17 +16,17 @@ const SignupForm = () => {
 
   return (
     <FormControl className={classes.form}>
-      <TextField label='Username' type='text' name='username' required />
-      <TextField label='Email' type='email' name='email' required />
-      <TextField label='Password' type='password' name='password' required />
+      <TextField label="Username" type="text" name="username" required />
+      <TextField label="Email" type="email" name="email" required />
+      <TextField label="Password" type="password" name="password" required />
       <TextField
-        label='Repeat password'
-        type='password'
-        name='repeat-password'
+        label="Repeat password"
+        type="password"
+        name="repeat-password"
         required
       />
 
-      <Button variant='contained' color='primary' className={classes.button}>
+      <Button variant="contained" color="primary" className={classes.button}>
         Submit
       </Button>
     </FormControl>
