@@ -1,10 +1,10 @@
 import { Button, Grid, Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
-import { SignupForm } from "../../forms";
+import { SigninForm } from "../../forms";
 
 interface Props {
-  handleSigninButton: () => void;
+  handleSignupButton: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,33 +22,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Signup = (props: Props) => {
+const Signin = (props: Props) => {
   const classes = useStyles();
-  const { handleSigninButton } = props;
+  const { handleSignupButton } = props;
 
   return (
     <Grid container alignItems="stretch">
-      <Grid item className={classes.welcomeMessage}>
-        <Typography component="h1" variant="h4">
-          Welcome Back!
-        </Typography>
-        <Typography variant="subtitle1" className={classes.subtitle}>
-          To keep connected with us please login using your account.
-        </Typography>
-        <Button variant="outlined" size="large" onClick={handleSigninButton}>
-          SIGN IN
-        </Button>
-      </Grid>
-
       <Grid item className={classes.formContainer}>
         <Typography component="h1" variant="h3">
-          Create Account
+          Sign in
         </Typography>
 
-        <SignupForm />
+        <Typography component="h1" variant="h4">
+          to Fitnesscomm
+        </Typography>
+
+        <SigninForm />
+      </Grid>
+
+      <Grid item className={classes.welcomeMessage}>
+        <Typography component="h1" variant="h4">
+          Hello, Friend!
+        </Typography>
+        <Typography variant="subtitle1" className={classes.subtitle}>
+          Enter your account information and join us.
+        </Typography>
+        <Button variant="outlined" size="large" onClick={handleSignupButton}>
+          SIGN UP
+        </Button>
       </Grid>
     </Grid>
   );
 };
 
-export default Signup;
+export default Signin;

@@ -1,9 +1,9 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
-import { Home, Login, Signup } from "./pages";
+import { Home, Signin, Signup } from "./pages";
 import IReduxModel from "./store/redux.model";
 import { darkTheme, lightTheme } from "./themes";
 
@@ -16,14 +16,14 @@ const App = (props: Props) => {
   const theme = isThemeDark ? darkTheme : lightTheme;
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
       </Switch>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 

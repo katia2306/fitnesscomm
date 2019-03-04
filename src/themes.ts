@@ -11,5 +11,12 @@ export const darkTheme = createMuiTheme({
   palette: {
     type: "dark"
   },
+  overrides: {
+    MuiPaper: {
+      root: {
+        background: "linear-gradient(to right, #232526, #424242)"
+      }
+    }
+  },
   typography: { useNextVariants: true }
 });
