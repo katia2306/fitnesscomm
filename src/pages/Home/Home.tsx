@@ -1,12 +1,8 @@
-import React from 'react';
-import { ToggleTheme } from '../../components';
+import React from "react";
+import Authentication from "../../components/Authentication";
 
 const Home = () => {
-  return (
-    <div>
-      <ToggleTheme />
-    </div>
-  );
+  return <Authentication />;
 };
 
 export default Home;

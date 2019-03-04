@@ -7,16 +7,16 @@ import { Home, Login, RecoverPassword, Signup } from './pages';
 import IReduxModel from './store/redux.model';
 import { darkTheme, lightTheme } from './themes';
 
-interface IProps {
-  isThemeDark: IReduxModel['theme']['isThemeDark'];
+interface Props {
+  isThemeDark: IReduxModel["theme"]["isThemeDark"];
 }
 
-const App = (props: IProps) => {
+const App = (props: Props) => {
   const { isThemeDark } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Switch>
         <Route exact={true} path="/" component={Home} />
@@ -28,7 +28,7 @@ const App = (props: IProps) => {
           component={RecoverPassword}
         />
       </Switch>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 

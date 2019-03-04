@@ -1,1 +1,2 @@
-export { default as ToggleTheme } from './ToggleTheme';
+export { default as ThemeToggle } from "./ThemeToggle";
+export { default as Authentication } from "./Authentication";

@@ -1,13 +1,13 @@
-import { Button } from '@material-ui/core';
-import React from 'react';
-import { connect } from 'react-redux';
-import { actions as themeActions } from '../../store/reducers/theme.reducer';
+import { Button } from "@material-ui/core";
+import React from "react";
+import { connect } from "react-redux";
+import { actions as themeActions } from "../../store/reducers/theme.reducer";
 
-interface IProps {
+interface Props {
   toggleTheme: typeof themeActions.toggleTheme;
 }
 
-const ToggleTheme = (props: IProps) => {
+const ToggleTheme = (props: Props) => {
   const { toggleTheme } = props;
 
   return (

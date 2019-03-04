@@ -4,10 +4,10 @@ import React from 'react';
 
 const useStyles = makeStyles({
   button: {
-    marginTop: '20px'
+    marginTop: "20px"
   },
   form: {
-    alignItems: 'center'
+    alignItems: "center"
   }
 });
 
@@ -16,19 +16,14 @@ const SignupForm = () => {
 
   return (
     <FormControl className={classes.form}>
-      <TextField label="Username" type="text" name="username" required={true} />
-      <TextField label="Email" type="email" name="email" required={true} />
-      <TextField
-        label="Password"
-        type="password"
-        name="password"
-        required={true}
-      />
+      <TextField label="Username" type="text" name="username" required />
+      <TextField label="Email" type="email" name="email" required />
+      <TextField label="Password" type="password" name="password" required />
       <TextField
         label="Repeat password"
         type="password"
         name="repeat-password"
-        required={true}
+        required
       />
 
       <Link href="/forgotpassword">Forgot password</Link>

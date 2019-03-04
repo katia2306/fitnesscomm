@@ -11,7 +11,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.tslint": true
   },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "files.autoSave": "off",
   "search.exclude": {
@@ -44,5 +44,6 @@
   },
   "material-icon-theme.files.associations": {
     "package.json": "npm"
-  }
+  },
+  "gitlens.codeLens.enabled": true
 }
