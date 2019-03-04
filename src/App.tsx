@@ -3,7 +3,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
-import { Home, Login, Signup } from './pages';
+import { Home, Login, RecoverPassword, Signup } from './pages';
 import IReduxModel from './store/redux.model';
 import { darkTheme, lightTheme } from './themes';
 
@@ -22,6 +22,11 @@ const App = (props: IProps) => {
         <Route exact={true} path="/" component={Home} />
         <Route exact={true} path="/login" component={Login} />
         <Route exact={true} path="/signup" component={Signup} />
+        <Route
+          exact={true}
+          path="/forgotpassword"
+          component={RecoverPassword}
+        />
       </Switch>
     </MuiThemeProvider>
   );
