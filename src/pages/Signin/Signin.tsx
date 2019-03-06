@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexBasis: "40%",
     padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px`
   },
-  subtitle: {
+  body: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 3
   }
@@ -29,11 +29,11 @@ const Signin = (props: Props) => {
   return (
     <Grid container alignItems="stretch">
       <Grid item className={classes.formContainer}>
-        <Typography component="h1" variant="h3">
+        <Typography component="h1" variant="h4">
           Sign in
         </Typography>
 
-        <Typography component="h1" variant="h4">
+        <Typography component="h1" variant="h5">
           to Fitnesscomm
         </Typography>
 
@@ -44,8 +44,10 @@ const Signin = (props: Props) => {
         <Typography component="h1" variant="h4">
           Hello, Friend!
         </Typography>
-        <Typography variant="subtitle1" className={classes.subtitle}>
-          Enter your account information and join us.
+        <Typography variant="body1" className={classes.body}>
+          Don't have an account?
+          <br />
+          Click the sign up button below and join us.
         </Typography>
         <Button variant="outlined" size="large" onClick={handleSignupButton}>
           SIGN UP

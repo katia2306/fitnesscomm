@@ -3,7 +3,9 @@ import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
+import ToggleTheme from "./components/ThemeToggle";
 import { Home, Signin, Signup } from "./pages";
+import { themeSelector } from "./store/reducers/theme.reducer";
 import IReduxModel from "./store/redux.model";
 import { darkTheme, lightTheme } from "./themes";
 
@@ -23,12 +25,13 @@ const App = (props: Props) => {
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
       </Switch>
+      <ToggleTheme />
     </ThemeProvider>
   );
 };
 
 const mapStateToProps = (state: IReduxModel) => ({
-  isThemeDark: state.theme.isThemeDark
+  isThemeDark: themeSelector(state)
 });
 
 export default connect(mapStateToProps)(App);

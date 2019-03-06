@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexBasis: "40%",
     padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px`
   },
-  subtitle: {
+  body: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 3
   }
@@ -32,8 +32,8 @@ const Signup = (props: Props) => {
         <Typography component="h1" variant="h4">
           Welcome Back!
         </Typography>
-        <Typography variant="subtitle1" className={classes.subtitle}>
-          To keep connected with us please login using your account.
+        <Typography variant="body1" className={classes.body}>
+          To keep connected with us please login using your account information.
         </Typography>
         <Button variant="outlined" size="large" onClick={handleSigninButton}>
           SIGN IN
@@ -41,7 +41,7 @@ const Signup = (props: Props) => {
       </Grid>
 
       <Grid item className={classes.formContainer}>
-        <Typography component="h1" variant="h3">
+        <Typography component="h1" variant="h4">
           Create Account
         </Typography>
 

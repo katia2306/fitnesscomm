@@ -23,21 +23,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Authentication = () => {
   const classes = useStyles();
-  const [slideSignin, setSlideSignin] = useState(true);
-  const [slideSignup, setSlideSignup] = useState(false);
+  const [showSignin, setShowSignin] = useState(true);
+  const [showSignup, setShowSignup] = useState(false);
 
   const toggleSigninForm = () => {
-    setSlideSignin(!slideSignin);
+    setShowSignin(!showSignin);
   };
 
   const toggleSignupForm = () => {
-    setSlideSignup(!slideSignup);
+    setShowSignup(!showSignup);
   };
 
   return (
     <React.Fragment>
       <Zoom
-        in={slideSignin}
+        in={showSignin}
         unmountOnExit
         onExited={toggleSignupForm}
         timeout={timeout}
@@ -48,7 +48,7 @@ const Authentication = () => {
       </Zoom>
 
       <Zoom
-        in={slideSignup}
+        in={showSignup}
         unmountOnExit
         onExited={toggleSigninForm}
         timeout={timeout}
