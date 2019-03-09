@@ -3,10 +3,10 @@ import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
-import ToggleTheme from "./components/ThemeToggle";
-import { Home, Signin, Signup } from "./pages";
-import { themeSelector } from "./store/reducers/theme.reducer";
+import { AppNavigation } from "./components";
+import { Home } from "./pages";
 import IReduxModel from "./store/redux.model";
+import { getTheme } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 
 interface Props {
@@ -20,18 +20,16 @@ const App = (props: Props) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <AppNavigation />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/signup" component={Signup} />
       </Switch>
-      <ToggleTheme />
     </ThemeProvider>
   );
 };
 
 const mapStateToProps = (state: IReduxModel) => ({
-  isThemeDark: themeSelector(state)
+  isThemeDark: getTheme(state)
 });
 
 export default connect(mapStateToProps)(App);

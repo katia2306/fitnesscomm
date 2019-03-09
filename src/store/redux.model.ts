@@ -1,4 +1,4 @@
-import { Theme, types as themeTypes } from "./reducers/theme.reducer";
+import { Theme, themeTypes } from "./theme.reducer";
 
 /* Union of every action types */
 type ActionTypes = themeTypes;

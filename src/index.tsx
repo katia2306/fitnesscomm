@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { Route, Router } from "react-router-dom";
 import App from "./App";
 import browserHistory from "./browserHistory";
+import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import store from "./store/redux.store";
 

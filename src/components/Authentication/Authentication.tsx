@@ -1,63 +1,66 @@
-import { Paper, Theme, Zoom } from "@material-ui/core";
+import { Dialog, IconButton, Theme } from "@material-ui/core";
+// tslint:disable-next-line: import-blacklist
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
+import { Close } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React, { useState } from "react";
-import { Signin, Signup } from "../../pages";
+import React from "react";
+import { LoginForm, SignupForm } from "../../forms";
 
-const timeout = 300;
+interface Props {
+  dialogOpen: boolean;
+  authForm: string;
+  onDialogClose: () => void;
+  changeAuthenticationForm: (form: string) => void;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    maxWidth: "768px",
-    textAlign: "center",
-    overflow: "hidden"
+  root: {
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    textAlign: "center"
   },
-  formContainer: {
-    flex: 1,
-    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 10}px`
-  },
-  welcomeMessage: {
-    flexBasis: "40%",
-    padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px`
+  closeButton: {
+    marginTop: theme.spacing.unit,
+    marginLeft: -theme.spacing.unit,
+    marginRight: "auto"
   }
 }));
 
-const Authentication = () => {
+const Authentication = (props: Props) => {
+  const {
+    dialogOpen,
+    authForm,
+    onDialogClose,
+    changeAuthenticationForm
+  } = props;
   const classes = useStyles();
-  const [showSignin, setShowSignin] = useState(true);
-  const [showSignup, setShowSignup] = useState(false);
+  const matchesMediaQuery = useMediaQuery("(max-width:600px)");
 
-  const toggleSigninForm = () => {
-    setShowSignin(!showSignin);
+  const setToLoginForm = () => {
+    changeAuthenticationForm("login");
   };
 
-  const toggleSignupForm = () => {
-    setShowSignup(!showSignup);
+  const setToSignupForm = () => {
+    changeAuthenticationForm("signup");
   };
 
   return (
-    <React.Fragment>
-      <Zoom
-        in={showSignin}
-        unmountOnExit
-        onExited={toggleSignupForm}
-        timeout={timeout}
-      >
-        <Paper className={classes.paper} elevation={4}>
-          <Signin handleSignupButton={toggleSigninForm} />
-        </Paper>
-      </Zoom>
-
-      <Zoom
-        in={showSignup}
-        unmountOnExit
-        onExited={toggleSigninForm}
-        timeout={timeout}
-      >
-        <Paper className={classes.paper} elevation={4}>
-          <Signup handleSigninButton={toggleSignupForm} />
-        </Paper>
-      </Zoom>
-    </React.Fragment>
+    <Dialog
+      open={dialogOpen}
+      onClose={onDialogClose}
+      scroll="body"
+      fullScreen={matchesMediaQuery}
+      PaperProps={{ elevation: 4, className: classes.root }}
+    >
+      <IconButton onClick={onDialogClose} className={classes.closeButton}>
+        <Close />
+      </IconButton>
+      {authForm === "login" ? (
+        <LoginForm onSignupButtonClick={setToSignupForm} />
+      ) : (
+        <SignupForm onLoginButtonClick={setToLoginForm} />
+      )}
+    </Dialog>
   );
 };
 

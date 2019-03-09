@@ -1,11 +1,8 @@
 import { put, select } from "redux-saga/effects";
-import {
-  actions as themeActions,
-  themeSelector
-} from "../store/reducers/theme.reducer";
+import { getTheme, themeActions } from "../store/theme.reducer";
 
 export function* toggleTheme() {
-  const isThemeDark = !(yield select(themeSelector));
+  const isThemeDark = !(yield select(getTheme));
   yield put(themeActions.toggleThemeSuccess({ isThemeDark }));
 
   localStorage.isThemeDark = isThemeDark;

@@ -1,42 +1,34 @@
 import ReduxModel, { Action, ActionPayload } from "../redux.model";
+import { initialState, Theme } from "./theme.model";
 
-export interface Theme {
-  readonly isThemeDark: boolean;
-}
-
-export enum types {
+export enum themeTypes {
   TOGGLE_THEME_REQUEST = "@@THEME/TOGGLE_THEME_REQUEST",
   TOGGLE_THEME_SUCCESS = "@@THEME/TOGGLE_THEME_SUCCESS"
 }
 
-const initState: Theme = {
-  isThemeDark: localStorage.isThemeDark === "true"
-};
-
 export default (
-  state: Theme = initState,
+  state: Theme = initialState,
   action: ActionPayload<Theme>
 ): Theme => {
   const { type } = action;
 
   switch (type) {
-    case types.TOGGLE_THEME_SUCCESS: {
+    case themeTypes.TOGGLE_THEME_SUCCESS:
       return { ...state, ...action.payload };
-    }
 
     default:
       return state;
   }
 };
 
-export const actions = {
+export const themeActions = {
   toggleThemeRequest: (): Action => ({
-    type: types.TOGGLE_THEME_REQUEST
+    type: themeTypes.TOGGLE_THEME_REQUEST
   }),
   toggleThemeSuccess: (payload: Theme): ActionPayload<Theme> => ({
-    type: types.TOGGLE_THEME_SUCCESS,
+    type: themeTypes.TOGGLE_THEME_SUCCESS,
     payload
   })
 };
 
-export const themeSelector = (state: ReduxModel) => state.theme.isThemeDark;
+export const getTheme = (state: ReduxModel) => state.theme.isThemeDark;
