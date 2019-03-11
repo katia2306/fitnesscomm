@@ -2,6 +2,10 @@ import { Button, FormControl, Link, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
+interface Props {
+  onLoginButtonClick: () => void;
+}
+
 const useStyles = makeStyles({
   button: {
     marginTop: "20px"
@@ -11,20 +15,22 @@ const useStyles = makeStyles({
   }
 });
 
-const SignupForm = () => {
+const SignupForm = (props: Props) => {
+  const { onLoginButtonClick } = props;
   const classes = useStyles();
 
   return (
-    <FormControl className={classes.form}>
-      <TextField label="Username" type="text" name="username" required />
-      <TextField label="Email" type="email" name="email" required />
-      <TextField label="Password" type="password" name="password" required />
-      <TextField
-        label="Repeat password"
-        type="password"
-        name="repeat-password"
-        required
-      />
+    <form noValidate>
+      <FormControl className={classes.form}>
+        <TextField label="Username" type="text" name="username" required />
+        <TextField label="Email" type="email" name="email" required />
+        <TextField label="Password" type="password" name="password" required />
+        <TextField
+          label="Repeat password"
+          type="password"
+          name="repeat-password"
+          required
+        />
 
       <Link href="/forgotpassword">Forgot password</Link>
 
@@ -32,6 +38,19 @@ const SignupForm = () => {
         Submit
       </Button>
     </FormControl>
+        <Button variant="contained" color="primary" className={classes.button}>
+          Submit
+        </Button>
+      </FormControl>
+      <Link
+        onClick={onLoginButtonClick}
+        component="button"
+        variant="body1"
+        type="button"
+      >
+        Sign in
+      </Link>
+    </form>
   );
 };
 

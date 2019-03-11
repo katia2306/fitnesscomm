@@ -1,10 +1,10 @@
 import { Button } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { actions as themeActions } from "../../store/reducers/theme.reducer";
+import { themeActions } from "../../store/theme.reducer";
 
 interface Props {
-  toggleTheme: typeof themeActions.toggleTheme;
+  toggleTheme: typeof themeActions.toggleThemeRequest;
 }
 
 const ToggleTheme = (props: Props) => {
@@ -18,7 +18,7 @@ const ToggleTheme = (props: Props) => {
 };
 
 const mapDispatchToProps = {
-  toggleTheme: themeActions.toggleTheme
+  toggleTheme: themeActions.toggleThemeRequest
 };
 
 export default connect(

@@ -18,9 +18,14 @@ If **material-icon-theme** extension is installed then add this configuration to
 ```json
 "material-icon-theme.activeIconPack": "react_redux",
 "material-icon-theme.folders.associations": {
-  "forms": "messages"
+  "forms": "messages",
+  "sagas": "redux-actions",
+  "reducer": "redux-reducer"
 },
 "material-icon-theme.files.associations": {
-  "package.json": "npm"
+  "package.json": "npm",
+  "package-lock.json": "npm",
+  "*.saga.ts": "redux-action",
+  "*.model.ts": "typescript-def"
 }
 ```
