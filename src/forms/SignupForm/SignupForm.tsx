@@ -37,10 +37,9 @@ const SignupForm = (props: Props) => {
       <Button variant="contained" color="primary" className={classes.button}>
         Submit
       </Button>
-    </FormControl>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Submit
-        </Button>
+      <Button variant="contained" color="primary" className={classes.button}>
+        Submit
+      </Button>
       </FormControl>
       <Link
         onClick={onLoginButtonClick}
