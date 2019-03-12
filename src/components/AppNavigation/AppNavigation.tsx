@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  textButton: {
+    lineHeight: "normal"
   }
 }));
 
@@ -58,8 +61,18 @@ const AppNavigation = () => {
             <ToggleTheme />
           </div>
         </Tooltip>
-        <Button onClick={authDialogActions.showLoginForm}>Sign in</Button>
-        <Button onClick={authDialogActions.showSignupForm}>Sign up</Button>
+        <Button
+          classes={{ root: classes.textButton }}
+          onClick={authDialogActions.showLoginForm}
+        >
+          Sign in
+        </Button>
+        <Button
+          classes={{ root: classes.textButton }}
+          onClick={authDialogActions.showSignupForm}
+        >
+          Sign up
+        </Button>
       </Toolbar>
       <Authentication
         dialogOpen={dialogOpen}
