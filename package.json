@@ -13,25 +13,29 @@
     "react-redux": "6.0.1",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "2.1.8",
     "redux": "4.0.1",
     "redux-devtools-extension": "2.13.8",
     "redux-saga": "1.0.2"
   },
   "devDependencies": {
-    "@types/jest": "24.0.9",
-    "@types/node": "11.10.4",
-    "@types/react": "16.8.6",
+    "@types/jest": "24.0.11",
+    "@types/node": "11.11.1",
+    "@types/react": "16.8.7",
     "@types/react-dom": "16.8.2",
-    "@types/react-redux": "7.0.1",
-    "@types/react-router": "4.4.4",
+    "@types/react-redux": "7.0.3",
+    "@types/react-router": "4.4.5",
     "@types/react-router-dom": "4.3.1",
+    "@typescript-eslint/eslint-plugin": "1.4.2",
+    "@typescript-eslint/parser": "1.4.2",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react": "7.12.4",
+    "eslint-plugin-react-hooks": "1.5.0",
     "prettier": "1.16.4",
-    "tslint": "5.13.1",
-    "tslint-config-prettier": "1.18.0",
-    "tslint-eslint-rules": "5.4.0",
-    "tslint-plugin-prettier": "2.0.1",
-    "tslint-react": "3.6.0",
     "typescript": "3.3.3333"
   },
   "scripts": {
@@ -40,7 +44,7 @@
     "test": "react-scripts test",
     "analyze": "source-map-explorer build/static/js/main.*",
     "update": "ncu -u",
-    "lint": "tslint -c tslint.json -p tsconfig.json && tslint-config-prettier-check ./tslint.json"
+    "lint": "eslint --ext .ts --ext .tsx src/"
   },
   "eslintConfig": {
     "extends": "react-app"

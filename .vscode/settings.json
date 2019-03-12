@@ -1,49 +1,70 @@
 {
+  /* Global editor options */
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.renderWhitespace": "boundary",
+  "editor.snippetSuggestions": "top",
+  "editor.rulers": [80],
   "editor.quickSuggestions": {
     "other": true,
     "comments": true,
     "strings": true
   },
-  "editor.rulers": [80],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true
-  },
-  "editor.formatOnSave": false,
+  /* Workbench options */
   "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.iconTheme": "material-icon-theme",
+  /* ESLint options */
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ],
+  /* Files and search options */
   "files.autoSave": "off",
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
     "package-lock.json": true
   },
-  "files.eol": "\n",
-  "diffEditor.ignoreTrimWhitespace": true,
-  "breadcrumbs.enabled": true,
-  "bracketPairColorizer.showBracketsInGutter": true,
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "typescript": "typescriptreact"
-  },
-  "emmet.showSuggestionsAsSnippets": true,
-  "emmet.triggerExpansionOnTab": true,
+  "advancedNewFile.showInformationMessages": true,
+  "advancedNewFile.convenienceOptions": ["last", "current", "root"],
   "advancedNewFile.exclude": {
     "node_modules": true,
     "node_modules_electron": true,
     "dev": true,
     "dist": true
   },
-  "advancedNewFile.showInformationMessages": true,
-  "advancedNewFile.convenienceOptions": ["last", "current", "root"],
+  "files.eol": "\n",
+  "breadcrumbs.enabled": true,
   "path-intellisense.autoSlashAfterDirectory": true,
+  /* Git options */
+  "diffEditor.ignoreTrimWhitespace": true,
+  "gitlens.codeLens.enabled": true,
+  "git.confirmSync": true,
+  /* Emmet options */
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": true,
+  /* Material Icon Theme options */
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.folders.associations": {
-    "forms": "messages"
+    "forms": "messages",
+    "sagas": "redux-actions",
+    "reducer": "redux-reducer"
   },
   "material-icon-theme.files.associations": {
-    "package.json": "npm"
+    "package.json": "npm",
+    "package-lock.json": "npm",
+    "*.saga.ts": "redux-action",
+    "*.model.ts": "typescript-def"
   },
-  "gitlens.codeLens.enabled": true
+  /* Other options */
+  "bracketPairColorizer.showBracketsInGutter": true,
+  "extensions.ignoreRecommendations": false
 }

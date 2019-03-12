@@ -119,7 +119,7 @@ const LoginForm = (props: Props) => {
       <Divider />
       <div className={classes.signupContainer}>
         <Typography variant="body1" component="span" inline>
-          Don't have an account?
+          Don&apos;t have an account?
         </Typography>
         <Link
           onClick={onSignupButtonClick}

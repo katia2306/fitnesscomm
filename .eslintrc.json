@@ -1,0 +1,73 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "tabWidth": 2,
+        "endOfLine": "lf",
+        "singleQuote": false,
+        "jsxSingleQuote": false
+      }
+    ],
+
+    "import/prefer-default-export": "off",
+
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to", "component"]
+      }
+    ],
+
+    "@typescript-eslint/explicit-function-return-type": "off",
+
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "@material-ui/core/*",
+          "!@material-ui/core/styles",
+          "!@material-ui/core/NoSsr",
+          "!@material-ui/core/CssBaseline",
+          "!@material-ui/core/useMediaQuery"
+        ]
+      }
+    ]
+  }
+}
