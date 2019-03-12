@@ -1,6 +1,6 @@
-import { Button, FormControl, Link, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import React from "react";
+import { Button, FormControl, Link, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import React from 'react';
 
 interface Props {
   onLoginButtonClick: () => void;
@@ -32,9 +32,14 @@ const SignupForm = (props: Props) => {
           required
         />
 
-        <Button variant="contained" color="primary" className={classes.button}>
-          Submit
-        </Button>
+      <Link href="/forgotpassword">Forgot password</Link>
+
+      <Button variant="contained" color="primary" className={classes.button}>
+        Submit
+      </Button>
+      <Button variant="contained" color="primary" className={classes.button}>
+        Submit
+      </Button>
       </FormControl>
       <Link
         onClick={onLoginButtonClick}
