@@ -7,7 +7,6 @@ import {
   InputAdornment,
   Link,
   TextField,
-  Theme,
   Typography
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
@@ -18,7 +17,7 @@ interface Props {
   onSignupButtonClick: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   loginContainer: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit

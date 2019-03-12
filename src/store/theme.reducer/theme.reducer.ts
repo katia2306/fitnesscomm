@@ -22,8 +22,9 @@ export default (
 };
 
 export const themeActions = {
-  toggleThemeRequest: (): Action => ({
-    type: themeTypes.TOGGLE_THEME_REQUEST
+  toggleThemeRequest: (payload: Theme): ActionPayload<Theme> => ({
+    type: themeTypes.TOGGLE_THEME_REQUEST,
+    payload
   }),
   toggleThemeSuccess: (payload: Theme): ActionPayload<Theme> => ({
     type: themeTypes.TOGGLE_THEME_SUCCESS,

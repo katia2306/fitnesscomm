@@ -1,4 +1,4 @@
-import { Dialog, IconButton, Theme } from "@material-ui/core";
+import { Dialog, IconButton } from "@material-ui/core";
 // tslint:disable-next-line: import-blacklist
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 import { Close } from "@material-ui/icons";
@@ -9,11 +9,14 @@ import { LoginForm, SignupForm } from "../../forms";
 interface Props {
   dialogOpen: boolean;
   authForm: string;
-  onDialogClose: () => void;
-  changeAuthenticationForm: (form: string) => void;
+  authDialogActions: {
+    showLoginForm: () => void;
+    showSignupForm: () => void;
+    closeAuthDialog: () => void;
+  };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
@@ -27,38 +30,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Authentication = (props: Props) => {
-  const {
-    dialogOpen,
-    authForm,
-    onDialogClose,
-    changeAuthenticationForm
-  } = props;
+  const { dialogOpen, authForm, authDialogActions } = props;
   const classes = useStyles();
   const matchesMediaQuery = useMediaQuery("(max-width:600px)");
-
-  const setToLoginForm = () => {
-    changeAuthenticationForm("login");
-  };
-
-  const setToSignupForm = () => {
-    changeAuthenticationForm("signup");
-  };
 
   return (
     <Dialog
       open={dialogOpen}
-      onClose={onDialogClose}
+      onClose={authDialogActions.closeAuthDialog}
       scroll="body"
       fullScreen={matchesMediaQuery}
       PaperProps={{ elevation: 4, className: classes.root }}
     >
-      <IconButton onClick={onDialogClose} className={classes.closeButton}>
+      <IconButton
+        onClick={authDialogActions.closeAuthDialog}
+        className={classes.closeButton}
+      >
         <Close />
       </IconButton>
       {authForm === "login" ? (
-        <LoginForm onSignupButtonClick={setToSignupForm} />
+        <LoginForm onSignupButtonClick={authDialogActions.showSignupForm} />
       ) : (
-        <SignupForm onLoginButtonClick={setToLoginForm} />
+        <SignupForm onLoginButtonClick={authDialogActions.showLoginForm} />
       )}
     </Dialog>
   );
