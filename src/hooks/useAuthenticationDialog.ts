@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 
 interface AuthenticationDialog {
   dialogOpen: boolean;
@@ -44,17 +44,17 @@ const initialState: AuthenticationDialog = {
 const useAuthenticationDialog = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const showLoginForm = () => {
+  const showLoginForm = useCallback(() => {
     dispatch({ type: types.SHOW_LOGIN_FORM });
-  };
+  }, [dispatch]);
 
-  const showSignupForm = () => {
+  const showSignupForm = useCallback(() => {
     dispatch({ type: types.SHOW_SIGNUP_FORM });
-  };
+  }, [dispatch]);
 
-  const closeAuthDialog = () => {
+  const closeAuthDialog = useCallback(() => {
     dispatch({ type: types.CLOSE_AUTH_DIALOG });
-  };
+  }, [dispatch]);
 
   return {
     authDialogState: state,

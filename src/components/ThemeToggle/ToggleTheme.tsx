@@ -1,5 +1,5 @@
 import { IconButton } from "@material-ui/core";
-import { Brightness2, Brightness2Outlined } from "@material-ui/icons";
+import { Brightness4, Brightness4Outlined } from "@material-ui/icons";
 import React from "react";
 import { connect } from "react-redux";
 import IReduxModel from "../../store/redux.model";
@@ -19,7 +19,7 @@ const ToggleTheme = (props: Props) => {
 
   return (
     <IconButton onClick={handleThemeClick}>
-      {isThemeDark ? <Brightness2 /> : <Brightness2Outlined />}
+      {isThemeDark ? <Brightness4 /> : <Brightness4Outlined />}
     </IconButton>
   );
 };
