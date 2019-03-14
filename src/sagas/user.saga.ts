@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
-import { User, userActions, GuestUser } from "../store/user.reducer";
+import { userActions, GuestUser } from "../store/user.reducer";
 import firebase from "../firebase/firebase";
 
 const onAuthStateChanged = () => {

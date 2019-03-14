@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AppBar,
   Button,
@@ -8,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
 import useAuthenticationDialog from "../../hooks/useAuthenticationDialog";
 import Authentication from "../Authentication";
 import ToggleTheme from "../ThemeToggle";

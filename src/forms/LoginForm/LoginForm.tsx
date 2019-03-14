@@ -1,3 +1,5 @@
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   Checkbox,
@@ -11,8 +13,6 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React, { FormEvent, useState, ChangeEvent } from "react";
-import { connect } from "react-redux";
 import { userActions } from "../../store/user.reducer";
 
 interface Props {

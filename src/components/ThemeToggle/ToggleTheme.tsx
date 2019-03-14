@@ -1,7 +1,7 @@
-import { IconButton } from "@material-ui/core";
-import { Brightness4, Brightness4Outlined } from "@material-ui/icons";
 import React from "react";
 import { connect } from "react-redux";
+import { IconButton } from "@material-ui/core";
+import { Brightness4, Brightness4Outlined } from "@material-ui/icons";
 import IReduxModel from "../../store/redux.model";
 import { getTheme, themeActions } from "../../store/theme.reducer";
 

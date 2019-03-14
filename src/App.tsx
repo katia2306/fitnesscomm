@@ -1,8 +1,8 @@
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
+import { ThemeProvider } from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { AppNavigation } from "./components";
 import { Home } from "./pages";
 import IReduxModel from "./store/redux.model";

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Link,
@@ -6,7 +7,6 @@ import {
   Divider
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
 
 interface Props {
   onLoginButtonClick: () => void;

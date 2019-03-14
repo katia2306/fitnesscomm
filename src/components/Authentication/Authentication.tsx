@@ -1,8 +1,8 @@
+import React from "react";
 import { Dialog, IconButton } from "@material-ui/core";
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 import { Close } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
 import { LoginForm, SignupForm } from "../../forms";
 
 interface Props {
