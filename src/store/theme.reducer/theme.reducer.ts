@@ -10,11 +10,11 @@ export default (
   state: Theme = initialState,
   action: ActionPayload<Theme>
 ): Theme => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case themeTypes.TOGGLE_THEME_SUCCESS:
-      return { ...state, ...action.payload };
+      return { ...state, ...payload };
 
     default:
       return state;

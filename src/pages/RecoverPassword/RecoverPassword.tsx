@@ -1,5 +1,5 @@
-import React from 'react';
-import { RecoverPasswordForm } from '../../forms';
+import React from "react";
+import { RecoverPasswordForm } from "../../forms";
 
 const RecoverPassword = () => {
   return (

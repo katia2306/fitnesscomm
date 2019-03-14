@@ -43,7 +43,6 @@
   /* Git options */
   "diffEditor.ignoreTrimWhitespace": true,
   "gitlens.codeLens.enabled": true,
-  "git.confirmSync": true,
   /* Emmet options */
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",

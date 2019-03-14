@@ -11,9 +11,12 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, ChangeEvent } from "react";
+import { connect } from "react-redux";
+import { userActions } from "../../store/user.reducer";
 
 interface Props {
+  handleLoginRequest: typeof userActions.userLoginRequest;
   onSignupButtonClick: () => void;
 }
 
@@ -40,22 +43,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const initialFormData = {
+  email: "",
+  password: "",
+  rememberMe: false
+};
+
 const LoginForm = (props: Props) => {
-  const { onSignupButtonClick } = props;
+  const { handleLoginRequest, onSignupButtonClick } = props;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const toggleRememberMe = () => {
-    setRememberMe(!rememberMe);
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleLoginRequest(formData);
+  };
+
+  const handleTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.checked });
   };
 
   return (
@@ -69,11 +83,14 @@ const LoginForm = (props: Props) => {
         margin="dense"
         variant="outlined"
         fullWidth
+        onChange={handleTextFieldChange}
+        value={formData.email}
       />
       <TextField
         id="login-password"
         label="Password"
         type={showPassword ? "text" : "password"}
+        name="password"
         autoComplete="current-password"
         margin="dense"
         variant="outlined"
@@ -90,13 +107,16 @@ const LoginForm = (props: Props) => {
             </InputAdornment>
           )
         }}
+        onChange={handleTextFieldChange}
+        value={formData.password}
       />
       <div className={classes.rememberMeContainer}>
         <FormControlLabel
           control={
             <Checkbox
-              checked={rememberMe}
-              onChange={toggleRememberMe}
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleCheckboxChange}
               color="primary"
             />
           }
@@ -104,7 +124,13 @@ const LoginForm = (props: Props) => {
         />
       </div>
       <div className={classes.loginContainer}>
-        <Button variant="contained" color="primary" size="large" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth
+        >
           Log in
         </Button>
         <Link
@@ -135,4 +161,11 @@ const LoginForm = (props: Props) => {
   );
 };
 
-export default LoginForm;
+const mapDispatchToProps = {
+  handleLoginRequest: userActions.userLoginRequest
+};
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(LoginForm);

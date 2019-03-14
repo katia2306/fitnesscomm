@@ -42,7 +42,7 @@ const AppNavigation = () => {
   const { dialogOpen, authForm } = authDialogState;
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="default">
       <Toolbar>
         <IconButton aria-label="Menu" className={classes.menuButton}>
           <MenuIcon />
@@ -65,7 +65,7 @@ const AppNavigation = () => {
           classes={{ root: classes.textButton }}
           onClick={authDialogActions.showLoginForm}
         >
-          Sign in
+          Log in
         </Button>
         <Button
           classes={{ root: classes.textButton }}

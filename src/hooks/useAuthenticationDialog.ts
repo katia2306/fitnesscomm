@@ -23,10 +23,10 @@ const reducer = (
 
   switch (type) {
     case "SHOW_LOGIN_FORM":
-      return { dialogOpen: true, authForm: "login" };
+      return { ...state, dialogOpen: true, authForm: "login" };
 
     case "SHOW_SIGNUP_FORM":
-      return { dialogOpen: true, authForm: "signup" };
+      return { ...state, dialogOpen: true, authForm: "signup" };
 
     case "CLOSE_AUTH_DIALOG":
       return { ...state, dialogOpen: false };

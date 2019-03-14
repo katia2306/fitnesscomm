@@ -1,1 +1,1 @@
-export { default } from './RecoverPasswordForm';
+export { default } from "./RecoverPasswordForm";

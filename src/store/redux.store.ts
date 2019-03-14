@@ -3,8 +3,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import indexSaga from "../sagas/index.saga";
 import theme from "./theme.reducer";
+import user, { userActions } from "./user.reducer";
 
-const rootReducer = combineReducers({ theme });
+const rootReducer = combineReducers({ theme, user });
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -12,5 +13,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 sagaMiddleware.run(indexSaga);
+
+store.dispatch(userActions.fetchCurrentUserRequest());
 
 export default store;

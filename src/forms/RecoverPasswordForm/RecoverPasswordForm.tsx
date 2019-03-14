@@ -1,16 +1,16 @@
-import { Button, FormControl, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import React from 'react';
+import { Button, FormControl, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import React from "react";
 
 const useStyles = makeStyles({
   button: {
-    marginTop: '20px'
+    marginTop: "20px"
   },
   form: {
-    alignItems: 'center'
+    alignItems: "center"
   },
   span: {
-    color: '#ffffff'
+    color: "#ffffff"
   }
 });
 
@@ -21,7 +21,7 @@ const RecoverPasswordForm = () => {
       <span className={classes.span}>Help with password</span>
 
       <FormControl className={classes.form}>
-        <TextField label="Email" type="text" name="email" required={true} />
+        <TextField label="Email" type="text" name="email" required />
         <Button variant="contained" color="primary" className={classes.button}>
           Continue
         </Button>
