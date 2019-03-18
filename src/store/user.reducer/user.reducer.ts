@@ -1,5 +1,5 @@
-import { ActionPayload, Action } from "../redux.model";
-import { initialState, User, GuestUser } from "./user.model";
+import ReduxModel, { ActionPayload, Action } from "../redux.model";
+import { initialState, User } from "./user.model";
 
 export enum userTypes {
   USER_LOGIN_REQUEST = "@@USER/USER_LOGIN_REQUEST",
@@ -23,7 +23,7 @@ export default (
 };
 
 export const userActions = {
-  userLoginRequest: (payload: GuestUser): ActionPayload<GuestUser> => ({
+  userLoginRequest: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_LOGIN_REQUEST,
     payload
   }),
@@ -35,3 +35,5 @@ export const userActions = {
     type: userTypes.FETCH_CURRENT_USER_REQUEST
   })
 };
+
+export const isUserAuthenticated = (state: ReduxModel) => !!state.user.uid;

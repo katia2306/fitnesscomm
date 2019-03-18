@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
-import { userActions, GuestUser } from "../store/user.reducer";
+import { userActions, User } from "../store/user.reducer";
 import firebase from "../firebase/firebase";
 
 const onAuthStateChanged = () => {
@@ -32,7 +32,7 @@ export function* fetchCurrentUser() {
   }
 }
 
-export function* userLogin(action: ActionPayload<GuestUser>) {
+export function* userLogin(action: ActionPayload<User>) {
   const { email, password = "" } = action.payload;
   const auth = firebase.auth();
 

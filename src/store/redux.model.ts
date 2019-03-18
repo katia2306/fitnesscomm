@@ -8,11 +8,10 @@ export interface Action {
   readonly type: ActionTypes;
 }
 
-export interface ActionPayload<T> {
-  readonly type: ActionTypes;
+export interface ActionPayload<T> extends Action {
   readonly payload: T;
 }
 export default interface ReduxModel {
-  theme: Theme;
-  user: User;
+  readonly theme: Theme;
+  readonly user: User;
 }

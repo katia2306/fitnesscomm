@@ -1,14 +1,12 @@
-export interface LoggedUser {
-  uid: string;
-  email: string;
-  emailVerified: boolean;
+export interface User {
+  readonly uid: string;
+  readonly email: string;
+  readonly emailVerified: boolean;
+  readonly password?: string;
 }
 
-export interface GuestUser {
-  email: string;
-  password?: string;
-}
-
-export type User = LoggedUser | GuestUser | {};
-
-export const initialState: User = {};
+export const initialState: User = {
+  uid: "",
+  email: "",
+  emailVerified: false
+};
