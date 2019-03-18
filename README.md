@@ -13,7 +13,7 @@ npm install -g source-map-explorer npm-check-updates
 
 > See `.vscode/extensions.json` to check for recommended extensions.
 
-If **material-icon-theme** extension is installed then add this configuration to **VSCode User Settings**. This is because the extension does not feature **Workspace Settings** yet.
+If **material-icon-theme** extension is installed then you can add this configuration to **VSCode User Settings**. This until the material icons extension allows **Workspace Settings**. See [#208](https://github.com/PKief/vscode-material-icon-theme/issues/208).
 
 ```json
 "material-icon-theme.activeIconPack": "react_redux",
