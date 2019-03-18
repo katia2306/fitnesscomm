@@ -2,6 +2,7 @@ export interface User {
   readonly uid: string;
   readonly email: string;
   readonly emailVerified: boolean;
+  readonly rememberMe?: boolean;
   readonly password?: string;
 }
 
