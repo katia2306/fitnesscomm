@@ -12,4 +12,5 @@ export default function* indexSaga() {
     userTypes.FETCH_CURRENT_USER_REQUEST,
     userSagas.fetchCurrentUser
   );
+  yield takeLatest(userTypes.USER_LOGOUT_REQUEST, userSagas.userLogout);
 }

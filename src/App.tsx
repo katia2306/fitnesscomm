@@ -5,12 +5,12 @@ import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { AppNavigation } from "./components";
 import { Home } from "./pages";
-import IReduxModel from "./store/redux.model";
+import ReduxModel from "./store/redux.model";
 import { getTheme } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 
 interface Props {
-  isThemeDark: IReduxModel["theme"]["isThemeDark"];
+  isThemeDark: ReduxModel["theme"]["isThemeDark"];
 }
 
 const App = (props: Props) => {
@@ -28,7 +28,7 @@ const App = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: IReduxModel) => ({
+const mapStateToProps = (state: ReduxModel) => ({
   isThemeDark: getTheme(state)
 });
 

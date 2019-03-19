@@ -20,12 +20,15 @@ If **material-icon-theme** extension is installed then you can add this configur
 "material-icon-theme.folders.associations": {
   "forms": "messages",
   "sagas": "redux-actions",
-  "reducer": "redux-reducer"
+  "reducer": "redux-reducer",
+  "firebase": "serverless",
+  ".firebase": "serverless"
 },
 "material-icon-theme.files.associations": {
   "package.json": "npm",
   "package-lock.json": "npm",
   "*.saga.ts": "redux-action",
-  "*.model.ts": "typescript-def"
+  "*.model.ts": "typescript-def",
+  "firebase.ts": "firebase",
 }
 ```

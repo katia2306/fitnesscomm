@@ -34,16 +34,27 @@ export function* fetchCurrentUser() {
 
 export function* userLogin(action: ActionPayload<User>) {
   const { email, password = "", rememberMe } = action.payload;
-  const auth = firebase.auth();
+  const persistence = rememberMe
+    ? firebase.auth.Auth.Persistence.LOCAL
+    : firebase.auth.Auth.Persistence.SESSION;
 
   try {
-    const persistence = rememberMe
-      ? firebase.auth.Auth.Persistence.LOCAL
-      : firebase.auth.Auth.Persistence.SESSION;
+    const auth = firebase.auth();
 
     yield call([auth, auth.setPersistence], persistence);
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* userLogout() {
+  try {
+    const auth = firebase.auth();
+
+    yield call([auth, auth.signOut]);
+    yield put(userActions.userLogoutSuccess());
   } catch (error) {
     console.log(error);
   }
