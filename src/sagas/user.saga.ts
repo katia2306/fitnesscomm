@@ -45,7 +45,11 @@ export function* userLogin(action: ActionPayload<User>) {
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
   } catch (error) {
-    console.log(error);
+    const loginError = {
+      code: error.code,
+      message: error.message
+    };
+    yield put(userActions.userLoginFailure({ loginError }));
   }
 }
 

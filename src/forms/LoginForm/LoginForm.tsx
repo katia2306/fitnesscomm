@@ -1,5 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, FormEvent, useEffect } from "react";
 import {
   Button,
   Checkbox,
@@ -13,17 +12,23 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import { userActions } from "../../store/user.reducer";
+import { connect } from "react-redux";
+import { User, userActions } from "../../store/user.reducer";
+import useFormData from "../../hooks/useFormData";
+import ReduxModel from "../../store/redux.model";
 
 interface Props {
-  handleLoginRequest: typeof userActions.userLoginRequest;
   onSignupButtonClick: () => void;
+  userLogin: typeof userActions.userLoginRequest;
+  loginFormReset: typeof userActions.loginFormReset;
+  loginError: User["loginError"];
 }
 
 const useStyles = makeStyles(theme => ({
   loginContainer: {
     marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit,
+    textAlign: "center"
   },
   rememberMeContainer: {
     textAlign: "left",
@@ -34,9 +39,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing.unit
   },
   signupContainer: {
-    display: "inline-flex",
     marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
+    textAlign: "center"
   },
   signupButton: {
     marginLeft: theme.spacing.unit
@@ -50,10 +55,10 @@ const initialFormData = {
 };
 
 const LoginForm = (props: Props) => {
-  const { handleLoginRequest, onSignupButtonClick } = props;
+  const { onSignupButtonClick, userLogin, loginFormReset, loginError } = props;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState(initialFormData);
+  const { formData, formDataActions } = useFormData(initialFormData);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -61,16 +66,21 @@ const LoginForm = (props: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleLoginRequest(formData);
+    userLogin(formData);
   };
 
-  const handleTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    if (loginError) {
+      /** TODO: Add error component to handle this error */
+      console.log("Ops there is an error: ", loginError);
+    }
+  }, [loginError]);
 
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.checked });
-  };
+  useEffect(() => {
+    return () => {
+      loginFormReset();
+    };
+  }, [loginFormReset]);
 
   return (
     <form noValidate onSubmit={handleSubmit}>
@@ -83,7 +93,7 @@ const LoginForm = (props: Props) => {
         margin="dense"
         variant="outlined"
         fullWidth
-        onChange={handleTextFieldChange}
+        onChange={formDataActions.handleTextFieldChange}
         value={formData.email}
       />
       <TextField
@@ -107,7 +117,7 @@ const LoginForm = (props: Props) => {
             </InputAdornment>
           )
         }}
-        onChange={handleTextFieldChange}
+        onChange={formDataActions.handleTextFieldChange}
         value={formData.password}
       />
       <div className={classes.rememberMeContainer}>
@@ -116,7 +126,7 @@ const LoginForm = (props: Props) => {
             <Checkbox
               name="rememberMe"
               checked={formData.rememberMe}
-              onChange={handleCheckboxChange}
+              onChange={formDataActions.handleCheckboxChange}
               color="primary"
             />
           }
@@ -161,11 +171,16 @@ const LoginForm = (props: Props) => {
   );
 };
 
+const mapStateToProps = (state: ReduxModel) => ({
+  loginError: state.user.loginError
+});
+
 const mapDispatchToProps = {
-  handleLoginRequest: userActions.userLoginRequest
+  userLogin: userActions.userLoginRequest,
+  loginFormReset: userActions.loginFormReset
 };
 
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginForm);

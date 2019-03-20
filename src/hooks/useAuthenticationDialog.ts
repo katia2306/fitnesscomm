@@ -17,18 +17,18 @@ interface Action {
 
 const reducer = (
   state: AuthenticationDialog,
-  payload: Action
+  action: Action
 ): AuthenticationDialog => {
-  const { type } = payload;
+  const { type } = action;
 
   switch (type) {
-    case "SHOW_LOGIN_FORM":
+    case types.SHOW_LOGIN_FORM:
       return { ...state, dialogOpen: true, authForm: "login" };
 
-    case "SHOW_SIGNUP_FORM":
+    case types.SHOW_SIGNUP_FORM:
       return { ...state, dialogOpen: true, authForm: "signup" };
 
-    case "CLOSE_AUTH_DIALOG":
+    case types.CLOSE_AUTH_DIALOG:
       return { ...state, dialogOpen: false };
 
     default:

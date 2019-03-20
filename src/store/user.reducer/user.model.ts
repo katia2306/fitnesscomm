@@ -1,9 +1,16 @@
+interface Error {
+  readonly code: string;
+  readonly message: string;
+}
+
 export interface User {
   readonly uid: string;
   readonly email: string;
   readonly emailVerified: boolean;
+  readonly loaded?: boolean;
   readonly rememberMe?: boolean;
   readonly password?: string;
+  readonly loginError?: Error;
 }
 
 export const initialState: User = {

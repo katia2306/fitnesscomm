@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Button,
@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
     color: "#fff",
     backgroundColor: indigo[400],
     marginLeft: theme.spacing.unit * 2,
+    cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
       marginLeft: theme.spacing.unit
     }
@@ -63,12 +64,14 @@ const leaveDelay = 200;
 const AppNavigation = (props: Props) => {
   const { email, isAuthenticated, userLogout } = props;
   const classes = useStyles();
-  const { authDialogState, authDialogActions } = useAuthenticationDialog();
+
+  const {
+    authDialogState: { dialogOpen, authForm },
+    authDialogActions: { closeAuthDialog, showLoginForm, showSignupForm }
+  } = useAuthenticationDialog();
 
   const [avatarEl, setAvatarEl] = useState<HTMLElement | undefined>(undefined);
   const accountMenuOpen = !!avatarEl;
-
-  const { dialogOpen, authForm } = authDialogState;
 
   const handleAccountMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAvatarEl(event.currentTarget);
@@ -82,6 +85,12 @@ const AppNavigation = (props: Props) => {
     handleAccountMenuClose();
     userLogout();
   };
+
+  useEffect(() => {
+    if (isAuthenticated && dialogOpen) {
+      closeAuthDialog();
+    }
+  }, [closeAuthDialog, dialogOpen, isAuthenticated]);
 
   return (
     <AppBar position="static">
@@ -126,7 +135,7 @@ const AppNavigation = (props: Props) => {
             <Button
               color="inherit"
               classes={{ root: classes.textButton }}
-              onClick={authDialogActions.showLoginForm}
+              onClick={showLoginForm}
             >
               Log in
             </Button>
@@ -134,7 +143,7 @@ const AppNavigation = (props: Props) => {
               color="inherit"
               classes={{ root: classes.textButton }}
               className={classes.signupButton}
-              onClick={authDialogActions.showSignupForm}
+              onClick={showSignupForm}
             >
               Sign up
             </Button>
@@ -144,7 +153,9 @@ const AppNavigation = (props: Props) => {
       <Authentication
         dialogOpen={dialogOpen}
         authForm={authForm}
-        authDialogActions={authDialogActions}
+        showLoginForm={showLoginForm}
+        showSignupForm={showSignupForm}
+        closeAuthDialog={closeAuthDialog}
       />
     </AppBar>
   );

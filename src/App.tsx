@@ -23,6 +23,7 @@ const App = (props: Props) => {
       <AppNavigation />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route component={undefined} />
       </Switch>
     </ThemeProvider>
   );
