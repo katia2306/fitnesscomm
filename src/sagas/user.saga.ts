@@ -58,7 +58,7 @@ export function* userLogout() {
 
     yield call([auth, auth.signOut]);
     yield put(userActions.userLogoutSuccess());
-  } catch (error) {
-    console.log(error);
+  } catch {
+    yield put(userActions.userLogoutFailure());
   }
 }

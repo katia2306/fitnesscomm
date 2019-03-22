@@ -5,10 +5,14 @@ export enum userTypes {
   USER_LOGIN_REQUEST = "@@USER/USER_LOGIN_REQUEST",
   USER_LOGIN_SUCCESS = "@@USER/USER_LOGIN_SUCCESS",
   USER_LOGIN_FAILURE = "@@USER/USER_LOGIN_FAILURE",
+
   FETCH_CURRENT_USER_REQUEST = "@@USER/FETCH_CURRENT_USER_REQUEST",
   FETCH_CURRENT_USER_FAILURE = "@@USER/FETCH_CURRENT_USER_FAILURE",
+
   USER_LOGOUT_REQUEST = "@@USER/USER_LOGOUT_REQUEST",
   USER_LOGOUT_SUCCESS = "@@USER/USER_LOGOUT_SUCCESS",
+  USER_LOGOUT_FAILURE = "@@USER/USER_LOGOUT_FAILURE",
+
   LOGIN_FORM_RESET = "@@USER/LOGIN_FORM_RESET"
 }
 
@@ -34,6 +38,7 @@ export default (
     case userTypes.USER_LOGOUT_SUCCESS:
       return { ...initialState, loaded: true };
 
+    case userTypes.USER_LOGOUT_FAILURE:
     default:
       return state;
   }
@@ -52,18 +57,24 @@ export const userActions = {
     type: userTypes.USER_LOGIN_FAILURE,
     payload
   }),
+
   fetchCurrentUserRequest: (): Action => ({
     type: userTypes.FETCH_CURRENT_USER_REQUEST
   }),
   fetchCurrentUserFailure: (): Action => ({
     type: userTypes.FETCH_CURRENT_USER_FAILURE
   }),
+
   userLogoutRequest: (): Action => ({
     type: userTypes.USER_LOGOUT_REQUEST
   }),
   userLogoutSuccess: (): Action => ({
     type: userTypes.USER_LOGOUT_SUCCESS
   }),
+  userLogoutFailure: (): Action => ({
+    type: userTypes.USER_LOGOUT_FAILURE
+  }),
+
   loginFormReset: (): Action => ({
     type: userTypes.LOGIN_FORM_RESET
   })
