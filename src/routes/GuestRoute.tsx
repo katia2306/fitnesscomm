@@ -10,11 +10,11 @@ interface Props {
 }
 
 const UserRoute = (props: Props) => {
-  const { isAuthenticated, component: Component, ...restProps } = props;
+  const { isAuthenticated, component: Component, ...other } = props;
 
   return (
     <Route
-      {...restProps}
+      {...other}
       render={renderProps =>
         !isAuthenticated ? <Component {...renderProps} /> : <Redirect to="/" />
       }

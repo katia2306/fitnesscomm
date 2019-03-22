@@ -8,12 +8,15 @@ import {
   Typography,
   Avatar,
   MenuItem,
-  Menu
+  Menu,
+  ListItemIcon,
+  ListItemText,
+  ListItemAvatar,
+  Theme
 } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { Menu as MenuIcon, AccountBox, ExitToApp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import indigo from "@material-ui/core/colors/indigo";
 import useAuthenticationDialog from "../../hooks/useAuthenticationDialog";
 import Authentication from "../Authentication";
 import ToggleTheme from "../ThemeToggle";
@@ -26,22 +29,25 @@ interface Props {
   userLogout: typeof userActions.userLogoutRequest;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    "& $signupButton, & $title": {
+      [theme.breakpoints.down("sm")]: {
+        display: "none"
+      }
+    }
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
   },
-  title: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
-  },
+  title: {},
   grow: {
     flexGrow: 1
   },
   avatar: {
     color: "#fff",
-    backgroundColor: indigo[400],
+    backgroundColor: theme.palette.secondary[theme.palette.type],
     marginLeft: theme.spacing.unit * 2,
     cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
@@ -51,10 +57,25 @@ const useStyles = makeStyles(theme => ({
   textButton: {
     lineHeight: "normal"
   },
-  signupButton: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
+  signupButton: {},
+  accountMenu: {
+    maxWidth: "300px",
+    width: "300px",
+    paddingTop: 0
+  },
+  accountMenuHeader: {
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit,
+    "&, &:hover, &:focus": {
+      backgroundColor: `${theme.palette.action.hover} !important`
     }
+  },
+  menuAvatar: {
+    width: "45px",
+    height: "45px",
+    color: "#fff",
+    backgroundColor: theme.palette.secondary[theme.palette.type]
   }
 }));
 
@@ -93,16 +114,12 @@ const AppNavigation = (props: Props) => {
   }, [closeAuthDialog, dialogOpen, isAuthenticated]);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root} color="inherit">
       <Toolbar>
-        <IconButton
-          aria-label="Menu"
-          color="inherit"
-          className={classes.menuButton}
-        >
+        <IconButton aria-label="Menu" className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" color="inherit" className={classes.title}>
+        <Typography variant="h6" className={classes.title}>
           Fitnesscomm
         </Typography>
         <div className={classes.grow} />
@@ -113,7 +130,7 @@ const AppNavigation = (props: Props) => {
           interactive
         >
           <div>
-            <ToggleTheme color="inherit" />
+            <ToggleTheme />
           </div>
         </Tooltip>
         {isAuthenticated ? (
@@ -125,22 +142,43 @@ const AppNavigation = (props: Props) => {
               anchorEl={avatarEl}
               open={accountMenuOpen}
               onClose={handleAccountMenuClose}
+              MenuListProps={{ className: classes.accountMenu }}
+              PaperProps={{ component: "nav" }}
             >
-              <MenuItem onClick={handleAccountMenuClose}>My account</MenuItem>
-              <MenuItem onClick={handleLogoutClick}>Log out</MenuItem>
+              <MenuItem className={classes.accountMenuHeader} selected>
+                <ListItemAvatar>
+                  <Avatar className={classes.menuAvatar}>
+                    {email[0].toUpperCase()}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={email}
+                  primaryTypographyProps={{ noWrap: true }}
+                />
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon>
+                  <AccountBox />
+                </ListItemIcon>
+                <ListItemText primary="My Account" />
+              </MenuItem>
+              <MenuItem onClick={handleLogoutClick}>
+                <ListItemIcon>
+                  <ExitToApp />
+                </ListItemIcon>
+                <ListItemText primary="Log out" />
+              </MenuItem>
             </Menu>
           </div>
         ) : (
           <div>
             <Button
-              color="inherit"
               classes={{ root: classes.textButton }}
               onClick={showLoginForm}
             >
               Log in
             </Button>
             <Button
-              color="inherit"
               classes={{ root: classes.textButton }}
               className={classes.signupButton}
               onClick={showSignupForm}

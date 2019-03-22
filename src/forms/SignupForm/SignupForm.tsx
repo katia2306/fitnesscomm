@@ -4,7 +4,8 @@ import {
   Link,
   TextField,
   Typography,
-  Divider
+  Divider,
+  Theme
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
@@ -12,7 +13,7 @@ interface Props {
   onLoginButtonClick: () => void;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginTop: "20px"
   },

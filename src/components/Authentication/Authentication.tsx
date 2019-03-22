@@ -1,5 +1,5 @@
 import React from "react";
-import { Dialog, IconButton } from "@material-ui/core";
+import { Dialog, IconButton, Theme } from "@material-ui/core";
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 import { Close } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
@@ -13,7 +13,7 @@ interface Props {
   closeAuthDialog: () => void;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2

@@ -8,7 +8,8 @@ import {
   InputAdornment,
   Link,
   TextField,
-  Typography
+  Typography,
+  Theme
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
@@ -24,7 +25,7 @@ interface Props {
   loginError: User["loginError"];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   loginContainer: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
@@ -58,7 +59,11 @@ const LoginForm = (props: Props) => {
   const { onSignupButtonClick, userLogin, loginFormReset, loginError } = props;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const { formData, formDataActions } = useFormData(initialFormData);
+  const {
+    formData,
+    formDataActions: { handleTextFieldChange, handleCheckboxChange }
+  } = useFormData(initialFormData);
+  const { email, password, rememberMe } = formData;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -93,8 +98,8 @@ const LoginForm = (props: Props) => {
         margin="dense"
         variant="outlined"
         fullWidth
-        onChange={formDataActions.handleTextFieldChange}
-        value={formData.email}
+        onChange={handleTextFieldChange}
+        value={email}
       />
       <TextField
         id="login-password"
@@ -117,16 +122,16 @@ const LoginForm = (props: Props) => {
             </InputAdornment>
           )
         }}
-        onChange={formDataActions.handleTextFieldChange}
-        value={formData.password}
+        onChange={handleTextFieldChange}
+        value={password}
       />
       <div className={classes.rememberMeContainer}>
         <FormControlLabel
           control={
             <Checkbox
               name="rememberMe"
-              checked={formData.rememberMe}
-              onChange={formDataActions.handleCheckboxChange}
+              checked={rememberMe}
+              onChange={handleCheckboxChange}
               color="primary"
             />
           }

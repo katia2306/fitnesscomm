@@ -12,14 +12,14 @@ interface Props extends IconButtonProps {
 }
 
 const ToggleTheme = (props: Props) => {
-  const { isThemeDark, toggleTheme, ...restProps } = props;
+  const { isThemeDark, toggleTheme, ...other } = props;
 
   const handleThemeClick = () => {
     toggleTheme({ isThemeDark: !isThemeDark });
   };
 
   return (
-    <IconButton onClick={handleThemeClick} {...restProps}>
+    <IconButton onClick={handleThemeClick} {...other}>
       {isThemeDark ? <Brightness4 /> : <Brightness4Outlined />}
     </IconButton>
   );

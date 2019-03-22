@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
@@ -10,7 +9,7 @@ const onAuthStateChanged = () => {
       if (user) {
         resolve(user);
       } else {
-        reject(new Error("No user :("));
+        reject(new Error("There is no current user logged in"));
       }
     });
   });
@@ -27,8 +26,8 @@ export function* fetchCurrentUser() {
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
-  } catch (error) {
-    console.log(error);
+  } catch {
+    yield put(userActions.fetchCurrentUserFailure());
   }
 }
 

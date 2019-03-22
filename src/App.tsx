@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { AppNavigation } from "./components";
@@ -10,12 +10,17 @@ import { getTheme } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 
 interface Props {
+  loaded?: boolean;
   isThemeDark: ReduxModel["theme"]["isThemeDark"];
 }
 
 const App = (props: Props) => {
-  const { isThemeDark } = props;
+  const { isThemeDark, loaded = false } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
+
+  if (!loaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -30,7 +35,8 @@ const App = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  isThemeDark: getTheme(state)
+  isThemeDark: getTheme(state),
+  loaded: state.user.loaded
 });
 
 export default connect(mapStateToProps)(App);
