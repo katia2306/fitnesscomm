@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
@@ -26,27 +26,29 @@ const App = (props: Props) => {
   }
 
   const AppWrapper = (
-    <ThemeProvider theme={theme}>
+    <Fragment>
       <CssBaseline />
       <AppNavigation />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route component={undefined} />
       </Switch>
-    </ThemeProvider>
+    </Fragment>
   );
 
   return (
-    <SnackbarProvider
-      maxSnack={3}
-      action={[
-        <Button key={0} color="inherit" size="small">
-          {"Dismiss"}
-        </Button>
-      ]}
-    >
-      {AppWrapper}
-    </SnackbarProvider>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider
+        maxSnack={3}
+        action={[
+          <Button key={0} color="inherit" size="small">
+            {"Dismiss"}
+          </Button>
+        ]}
+      >
+        {AppWrapper}
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 };
 
