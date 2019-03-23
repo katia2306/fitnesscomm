@@ -20,7 +20,7 @@ import { connect } from "react-redux";
 import useAuthenticationDialog from "../../hooks/useAuthenticationDialog";
 import Authentication from "../Authentication";
 import ToggleTheme from "../ThemeToggle";
-import { isUserAuthenticated, userActions } from "../../store/user.reducer";
+import { userSelectors, userActions } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
 
 interface Props {
@@ -200,8 +200,8 @@ const AppNavigation = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  email: state.user.email,
-  isAuthenticated: isUserAuthenticated(state)
+  email: userSelectors.getEmail(state),
+  isAuthenticated: userSelectors.isUserAuthenticated(state)
 });
 
 const mapDispatchToProps = {

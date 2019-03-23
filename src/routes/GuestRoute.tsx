@@ -2,7 +2,7 @@ import React, { ComponentType } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect, RouteComponentProps } from "react-router-dom";
 import ReduxModel from "../store/redux.model";
-import { isUserAuthenticated } from "../store/user.reducer";
+import { userSelectors } from "../store/user.reducer";
 
 interface Props {
   isAuthenticated: boolean;
@@ -24,7 +24,7 @@ const UserRoute = (props: Props) => {
 
 function mapStateToProps(state: ReduxModel) {
   return {
-    isAuthenticated: isUserAuthenticated(state)
+    isAuthenticated: userSelectors.isUserAuthenticated(state)
   };
 }
 

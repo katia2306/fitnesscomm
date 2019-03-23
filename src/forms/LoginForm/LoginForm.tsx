@@ -14,15 +14,16 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { User, userActions } from "../../store/user.reducer";
+import { withSnackbar, withSnackbarProps } from "notistack";
+import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import ReduxModel from "../../store/redux.model";
 
-interface Props {
+interface Props extends withSnackbarProps {
   onSignupButtonClick: () => void;
   userLogin: typeof userActions.userLoginRequest;
   loginFormReset: typeof userActions.loginFormReset;
-  loginError: User["loginError"];
+  loginError: ReduxModel["user"]["loginError"];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,7 +57,13 @@ const initialFormData = {
 };
 
 const LoginForm = (props: Props) => {
-  const { onSignupButtonClick, userLogin, loginFormReset, loginError } = props;
+  const {
+    onSignupButtonClick,
+    userLogin,
+    loginFormReset,
+    loginError,
+    enqueueSnackbar
+  } = props;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const {
@@ -76,10 +83,9 @@ const LoginForm = (props: Props) => {
 
   useEffect(() => {
     if (loginError) {
-      /** TODO: Add error component to handle this error */
-      console.log("Ops there is an error: ", loginError);
+      enqueueSnackbar(loginError.message, { variant: "error" });
     }
-  }, [loginError]);
+  }, [enqueueSnackbar, loginError]);
 
   useEffect(() => {
     return () => {
@@ -177,7 +183,7 @@ const LoginForm = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  loginError: state.user.loginError
+  loginError: userSelectors.getLoginError(state)
 });
 
 const mapDispatchToProps = {
@@ -188,4 +194,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginForm);
+)(withSnackbar(LoginForm));

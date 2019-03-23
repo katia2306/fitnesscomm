@@ -32,4 +32,6 @@ export const themeActions = {
   })
 };
 
-export const getTheme = (state: ReduxModel) => state.theme.isThemeDark;
+export const themeSelectors = {
+  getTheme: (state: ReduxModel) => state.theme.isThemeDark
+};

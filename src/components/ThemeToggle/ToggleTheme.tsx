@@ -4,7 +4,7 @@ import { Brightness4, Brightness4Outlined } from "@material-ui/icons";
 // eslint-disable-next-line no-restricted-imports
 import IconButton, { IconButtonProps } from "@material-ui/core/IconButton";
 import ReduxModel from "../../store/redux.model";
-import { getTheme, themeActions } from "../../store/theme.reducer";
+import { themeSelectors, themeActions } from "../../store/theme.reducer";
 
 interface Props extends IconButtonProps {
   isThemeDark: ReduxModel["theme"]["isThemeDark"];
@@ -26,7 +26,7 @@ const ToggleTheme = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  isThemeDark: getTheme(state)
+  isThemeDark: themeSelectors.getTheme(state)
 });
 
 const mapDispatchToProps = {
