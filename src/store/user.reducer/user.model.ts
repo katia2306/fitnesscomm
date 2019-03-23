@@ -7,6 +7,8 @@ export interface User {
   readonly uid: string;
   readonly email: string;
   readonly emailVerified: boolean;
+  readonly firstname: string;
+  readonly lastname: string;
   readonly loaded?: boolean;
   readonly rememberMe?: boolean;
   readonly password?: string;
@@ -16,5 +18,7 @@ export interface User {
 export const initialState: User = {
   uid: "",
   email: "",
-  emailVerified: false
+  emailVerified: false,
+  firstname: "",
+  lastname: ""
 };

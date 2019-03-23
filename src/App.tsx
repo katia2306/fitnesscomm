@@ -17,6 +17,17 @@ interface Props {
   isThemeDark: ReduxModel["theme"]["isThemeDark"];
 }
 
+const AppContent = (
+  <Fragment>
+    <CssBaseline />
+    <AppNavigation />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route component={undefined} />
+    </Switch>
+  </Fragment>
+);
+
 const App = (props: Props) => {
   const { isThemeDark, loaded } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
@@ -24,17 +35,6 @@ const App = (props: Props) => {
   if (!loaded) {
     return <div>Loading...</div>;
   }
-
-  const AppWrapper = (
-    <Fragment>
-      <CssBaseline />
-      <AppNavigation />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route component={undefined} />
-      </Switch>
-    </Fragment>
-  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -46,7 +46,7 @@ const App = (props: Props) => {
           </Button>
         ]}
       >
-        {AppWrapper}
+        {AppContent}
       </SnackbarProvider>
     </ThemeProvider>
   );

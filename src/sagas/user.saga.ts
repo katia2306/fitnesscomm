@@ -1,7 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
-import firebase from "../firebase/firebase";
+import firebase, { db } from "../firebase/firebase";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -19,14 +19,24 @@ export function* fetchCurrentUser() {
   try {
     const user: firebase.User = yield call(onAuthStateChanged);
 
+    const userRef = db.collection("users").doc(user.uid);
+    const userDoc = yield call([userRef, userRef.get]);
+
+    const userFetched: User = userDoc.data();
+
+    console.log(userFetched);
+
     const currentUser = {
       uid: user.uid,
       email: user.email || "",
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      firstname: userFetched.firstname,
+      lastname: userFetched.lastname
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
-  } catch {
+  } catch (error) {
+    console.log(error);
     yield put(userActions.fetchCurrentUserFailure());
   }
 }
