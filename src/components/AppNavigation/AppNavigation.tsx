@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   AppBar,
   Button,
@@ -6,27 +6,20 @@ import {
   Toolbar,
   Tooltip,
   Typography,
-  Avatar,
-  MenuItem,
-  Menu,
-  ListItemIcon,
-  ListItemText,
-  ListItemAvatar,
   Theme
 } from "@material-ui/core";
-import { Menu as MenuIcon, AccountBox, ExitToApp } from "@material-ui/icons";
+import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 import useAuthenticationDialog from "../../hooks/useAuthenticationDialog";
 import Authentication from "../Authentication";
 import ToggleTheme from "../ThemeToggle";
-import { userSelectors, userActions } from "../../store/user.reducer";
+import { userSelectors } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
+import AccountMenu from "./AccountMenu";
 
 interface Props {
-  email: ReduxModel["user"]["email"];
   isAuthenticated: boolean;
-  userLogout: typeof userActions.userLogoutRequest;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,67 +38,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   grow: {
     flexGrow: 1
   },
-  avatar: {
-    color: "#fff",
-    backgroundColor: theme.palette.secondary[theme.palette.type],
-    marginLeft: theme.spacing.unit * 2,
-    cursor: "pointer",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: theme.spacing.unit
-    }
-  },
   textButton: {
     lineHeight: "normal"
   },
-  signupButton: {},
-  accountMenu: {
-    maxWidth: "300px",
-    width: "300px",
-    paddingTop: 0
-  },
-  accountMenuHeader: {
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit,
-    "&, &:hover, &:focus": {
-      backgroundColor: `${theme.palette.action.hover} !important`
-    }
-  },
-  menuAvatar: {
-    width: "45px",
-    height: "45px",
-    color: "#fff",
-    backgroundColor: theme.palette.secondary[theme.palette.type]
-  }
+  signupButton: {}
 }));
 
 const enterDelay = 500;
 const leaveDelay = 200;
 
 const AppNavigation = (props: Props) => {
-  const { email, isAuthenticated, userLogout } = props;
+  const { isAuthenticated } = props;
   const classes = useStyles();
 
   const {
     authDialogState: { dialogOpen, authForm },
     authDialogActions: { closeAuthDialog, showLoginForm, showSignupForm }
   } = useAuthenticationDialog();
-
-  const [avatarEl, setAvatarEl] = useState<HTMLElement | undefined>(undefined);
-  const accountMenuOpen = !!avatarEl;
-
-  const handleAccountMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAvatarEl(event.currentTarget);
-  };
-
-  const handleAccountMenuClose = () => {
-    setAvatarEl(undefined);
-  };
-
-  const handleLogoutClick = () => {
-    handleAccountMenuClose();
-    userLogout();
-  };
 
   useEffect(() => {
     if (isAuthenticated && dialogOpen) {
@@ -134,42 +83,7 @@ const AppNavigation = (props: Props) => {
           </div>
         </Tooltip>
         {isAuthenticated ? (
-          <div>
-            <Avatar className={classes.avatar} onClick={handleAccountMenuOpen}>
-              {email[0].toUpperCase()}
-            </Avatar>
-            <Menu
-              anchorEl={avatarEl}
-              open={accountMenuOpen}
-              onClose={handleAccountMenuClose}
-              MenuListProps={{ className: classes.accountMenu }}
-              PaperProps={{ component: "nav" }}
-            >
-              <MenuItem className={classes.accountMenuHeader} selected>
-                <ListItemAvatar>
-                  <Avatar className={classes.menuAvatar}>
-                    {email[0].toUpperCase()}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={email}
-                  primaryTypographyProps={{ noWrap: true }}
-                />
-              </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
-                  <AccountBox />
-                </ListItemIcon>
-                <ListItemText primary="My Account" />
-              </MenuItem>
-              <MenuItem onClick={handleLogoutClick}>
-                <ListItemIcon>
-                  <ExitToApp />
-                </ListItemIcon>
-                <ListItemText primary="Log out" />
-              </MenuItem>
-            </Menu>
-          </div>
+          <AccountMenu />
         ) : (
           <div>
             <Button
@@ -200,15 +114,7 @@ const AppNavigation = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  email: userSelectors.getEmail(state),
   isAuthenticated: userSelectors.isUserAuthenticated(state)
 });
 
-const mapDispatchToProps = {
-  userLogout: userActions.userLogoutRequest
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AppNavigation);
+export default connect(mapStateToProps)(AppNavigation);
