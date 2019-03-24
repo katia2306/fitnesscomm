@@ -9,7 +9,7 @@ const onAuthStateChanged = () => {
       if (user) {
         resolve(user);
       } else {
-        reject(new Error("There is no current user logged in"));
+        reject(new Error("No current user logged in"));
       }
     });
   });
@@ -20,23 +20,23 @@ export function* fetchCurrentUser() {
     const user: firebase.User = yield call(onAuthStateChanged);
 
     const userRef = db.collection("users").doc(user.uid);
-    const userDoc = yield call([userRef, userRef.get]);
+    const userFetched = yield call([userRef, userRef.get]);
 
-    const userFetched: User = userDoc.data();
-
-    console.log(userFetched);
+    if (!userFetched.exists) {
+      throw new Error("User does't exist");
+    }
+    const userData: User = userFetched.data();
 
     const currentUser = {
       uid: user.uid,
       email: user.email || "",
       emailVerified: user.emailVerified,
-      firstname: userFetched.firstname,
-      lastname: userFetched.lastname
+      firstname: userData.firstname,
+      lastname: userData.lastname
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
   } catch (error) {
-    console.log(error);
     yield put(userActions.fetchCurrentUserFailure());
   }
 }
