@@ -66,6 +66,8 @@ const LoginForm = (props: Props) => {
   } = props;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const {
     formData,
     formDataActions: { handleTextFieldChange, handleCheckboxChange }
@@ -78,6 +80,7 @@ const LoginForm = (props: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     userLogin(formData);
   };
 
@@ -85,6 +88,7 @@ const LoginForm = (props: Props) => {
     if (loginError) {
       enqueueSnackbar(loginError.message, { variant: "error" });
     }
+    setLoading(false);
   }, [enqueueSnackbar, loginError]);
 
   useEffect(() => {
@@ -151,6 +155,7 @@ const LoginForm = (props: Props) => {
           color="primary"
           size="large"
           fullWidth
+          disabled={loading}
         >
           Log in
         </Button>
