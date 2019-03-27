@@ -6,6 +6,10 @@ export enum userTypes {
   USER_LOGIN_SUCCESS = "@@USER/USER_LOGIN_SUCCESS",
   USER_LOGIN_FAILURE = "@@USER/USER_LOGIN_FAILURE",
 
+  USER_SIGNUP_REQUEST = "@@USER/USER_SIGNUP_REQUEST",
+  USER_SIGNUP_SUCCESS = "@@USER/USER_SIGNUP_SUCCESS",
+  USER_SIGNUP_FAILURE = "@@USER/USER_SIGNUP_FAILURE",
+
   FETCH_CURRENT_USER_REQUEST = "@@USER/FETCH_CURRENT_USER_REQUEST",
   FETCH_CURRENT_USER_FAILURE = "@@USER/FETCH_CURRENT_USER_FAILURE",
 
@@ -27,6 +31,12 @@ export default (
       return { ...state, ...payload, loaded: true, loginError: undefined };
 
     case userTypes.USER_LOGIN_FAILURE:
+      return { ...state, ...payload };
+
+    case userTypes.USER_SIGNUP_FAILURE:
+      return { ...state, ...payload, loaded: true, loginError: undefined };
+
+    case userTypes.USER_SIGNUP_FAILURE:
       return { ...state, ...payload };
 
     case userTypes.LOGIN_FORM_RESET:
@@ -55,6 +65,21 @@ export const userActions = {
   }),
   userLoginFailure: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_LOGIN_FAILURE,
+    payload
+  }),
+
+  userSignupRequest: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+    type: userTypes.USER_SIGNUP_FAILURE,
+    payload
+  }),
+
+  userSignupSuccess: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+    type: userTypes.USER_SIGNUP_FAILURE,
+    payload
+  }),
+
+  userSignupFailure: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+    type: userTypes.USER_SIGNUP_FAILURE,
     payload
   }),
 
