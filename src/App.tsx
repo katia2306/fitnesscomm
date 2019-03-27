@@ -6,14 +6,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { SnackbarProvider } from "notistack";
 import { Button } from "@material-ui/core";
 import { AppNavigation } from "./components";
-import { Home } from "./pages";
+import { Home, Profile } from "./pages";
 import ReduxModel from "./store/redux.model";
 import { themeSelectors } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 import { userSelectors } from "./store/user.reducer";
 
 interface Props {
-  loaded: ReduxModel["user"]["loaded"];
+  userLoaded: ReduxModel["user"]["loaded"];
   isThemeDark: ReduxModel["theme"]["isThemeDark"];
 }
 
@@ -23,16 +23,17 @@ const AppContent = (
     <AppNavigation />
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/profile" component={Profile} />
       <Route component={undefined} />
     </Switch>
   </Fragment>
 );
 
 const App = (props: Props) => {
-  const { isThemeDark, loaded } = props;
+  const { isThemeDark, userLoaded } = props;
   const theme = isThemeDark ? darkTheme : lightTheme;
 
-  if (!loaded) {
+  if (!userLoaded) {
     return <div>Loading...</div>;
   }
 
@@ -54,7 +55,7 @@ const App = (props: Props) => {
 
 const mapStateToProps = (state: ReduxModel) => ({
   isThemeDark: themeSelectors.getTheme(state),
-  loaded: userSelectors.isUserLoaded(state)
+  userLoaded: userSelectors.isUserLoaded(state)
 });
 
 export default connect(mapStateToProps)(App);

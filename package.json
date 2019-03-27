@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/jest": "24.0.11",
-    "@types/node": "11.11.6",
+    "@types/node": "11.12.0",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.3",
     "@types/react-redux": "7.0.5",
@@ -45,7 +45,8 @@
     "test": "react-scripts test",
     "analyze": "source-map-explorer build/static/js/main.*",
     "update": "ncu -u",
-    "lint": "eslint --ext .ts --ext .tsx src/"
+    "lint": "eslint --ext .ts --ext .tsx src/",
+    "deploy": "npm run lint && npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"

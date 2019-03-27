@@ -82,7 +82,6 @@ export const userActions = {
 
 export const userSelectors = {
   isUserAuthenticated: (state: ReduxModel) => !!state.user.uid,
-  getEmail: (state: ReduxModel) => state.user.email,
   isUserLoaded: (state: ReduxModel) => state.user.loaded,
   getLoginError: (state: ReduxModel) => state.user.loginError
 };

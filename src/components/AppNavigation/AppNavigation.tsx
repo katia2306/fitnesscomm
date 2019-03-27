@@ -4,7 +4,6 @@ import {
   Button,
   IconButton,
   Toolbar,
-  Tooltip,
   Typography,
   Theme
 } from "@material-ui/core";
@@ -44,9 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   signupButton: {}
 }));
 
-const enterDelay = 500;
-const leaveDelay = 200;
-
 const AppNavigation = (props: Props) => {
   const { isAuthenticated } = props;
   const classes = useStyles();
@@ -72,16 +68,7 @@ const AppNavigation = (props: Props) => {
           Fitnesscomm
         </Typography>
         <div className={classes.grow} />
-        <Tooltip
-          title="Toggle light/dark theme"
-          enterDelay={enterDelay}
-          leaveDelay={leaveDelay}
-          interactive
-        >
-          <div>
-            <ToggleTheme />
-          </div>
-        </Tooltip>
+        <ToggleTheme />
         {isAuthenticated ? (
           <AccountMenu />
         ) : (

@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   menuAvatar: {
-    width: "45px",
-    height: "45px",
+    width: theme.spacing.unit * 6,
+    height: theme.spacing.unit * 6,
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type]
   }
@@ -54,8 +54,7 @@ const AccountMenu = (props: Props) => {
   const { user, userLogout } = props;
   const classes = useStyles();
 
-  const { email, firstname, lastname } = user;
-  const displayName = `${firstname} ${lastname}`;
+  const { email, displayName, shortName } = user;
 
   const [avatarEl, setAvatarEl] = useState<HTMLElement | undefined>(undefined);
   const accountMenuOpen = !!avatarEl;
@@ -76,7 +75,7 @@ const AccountMenu = (props: Props) => {
   return (
     <Fragment>
       <Avatar className={classes.avatar} onClick={handleAccountMenuOpen}>
-        {firstname[0].toUpperCase()}
+        {shortName}
       </Avatar>
       <Menu
         anchorEl={avatarEl}
@@ -87,9 +86,7 @@ const AccountMenu = (props: Props) => {
       >
         <MenuItem className={classes.accountMenuHeader} selected>
           <ListItemAvatar>
-            <Avatar className={classes.menuAvatar}>
-              {firstname[0].toUpperCase()}
-            </Avatar>
+            <Avatar className={classes.menuAvatar}>{shortName}</Avatar>
           </ListItemAvatar>
           <ListItemText
             primary={displayName}
@@ -102,7 +99,7 @@ const AccountMenu = (props: Props) => {
           <ListItemIcon>
             <AccountBox />
           </ListItemIcon>
-          <ListItemText primary="My Account" />
+          <ListItemText primary="My Profile" />
         </MenuItem>
         <MenuItem onClick={handleLogoutClick}>
           <ListItemIcon>

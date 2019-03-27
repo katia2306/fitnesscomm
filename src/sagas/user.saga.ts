@@ -26,13 +26,16 @@ export function* fetchCurrentUser() {
       throw new Error("User does't exist");
     }
     const userData: User = userFetched.data();
+    const { firstname, lastname } = userData;
 
     const currentUser = {
       uid: user.uid,
       email: user.email || "",
       emailVerified: user.emailVerified,
-      firstname: userData.firstname,
-      lastname: userData.lastname
+      firstname,
+      lastname,
+      displayName: `${firstname} ${lastname}`,
+      shortName: `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}`
     };
 
     yield put(userActions.userLoginSuccess(currentUser));

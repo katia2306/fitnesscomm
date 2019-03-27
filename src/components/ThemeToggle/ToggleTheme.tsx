@@ -19,7 +19,11 @@ const ToggleTheme = (props: Props) => {
   };
 
   return (
-    <IconButton onClick={handleThemeClick} {...other}>
+    <IconButton
+      onClick={handleThemeClick}
+      {...other}
+      title="Toggle light/dark theme"
+    >
       {isThemeDark ? <Brightness4 /> : <Brightness4Outlined />}
     </IconButton>
   );
