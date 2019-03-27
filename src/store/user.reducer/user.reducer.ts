@@ -36,9 +36,6 @@ export default (
     case userTypes.USER_SIGNUP_FAILURE:
       return { ...state, ...payload, loaded: true, loginError: undefined };
 
-    case userTypes.USER_SIGNUP_FAILURE:
-      return { ...state, ...payload };
-
     case userTypes.LOGIN_FORM_RESET:
       return { ...state, loginError: undefined };
 
@@ -63,22 +60,29 @@ export const userActions = {
     type: userTypes.USER_LOGIN_SUCCESS,
     payload
   }),
+
   userLoginFailure: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_LOGIN_FAILURE,
     payload
   }),
 
-  userSignupRequest: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+  userSignupRequest: (
+    payload: Partial<User>
+  ): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_SIGNUP_FAILURE,
     payload
   }),
 
-  userSignupSuccess: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+  userSignupSuccess: (
+    payload: Partial<User>
+  ): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_SIGNUP_FAILURE,
     payload
   }),
 
-  userSignupFailure: (payload: Partial<User>): ActionPayload<Partial<User>> => ({
+  userSignupFailure: (
+    payload: Partial<User>
+  ): ActionPayload<Partial<User>> => ({
     type: userTypes.USER_SIGNUP_FAILURE,
     payload
   }),

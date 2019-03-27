@@ -48,14 +48,14 @@ const SignupForm = (props: Props) => {
   const { onLoginButtonClick, userSignup } = props;
   const {
     formData,
-    formDataActions: { handleTextFieldChange, handleCheckboxChange }
+    formDataActions: { handleTextFieldChange }
   } = useFormData(initialFormData);
   const classes = useStyles();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     userSignup(formData);
-  }
+  };
 
   return (
     <form noValidate onSubmit={handleSubmit}>
@@ -133,7 +133,7 @@ const mapStateToProps = (state: ReduxModel) => ({
 });
 
 const mapDispatchToProps = {
-  userSignup: userActions.userSignupRequest,
+  userSignup: userActions.userSignupRequest
 };
 
 export default connect(
