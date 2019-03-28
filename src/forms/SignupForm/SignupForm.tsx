@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import ReduxModel from "../../store/redux.model";
+import { withSnackbar, withSnackbarProps } from "notistack";
 
 interface Props {
   onLoginButtonClick: () => void;
@@ -40,7 +41,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const initialFormData = {
   email: "",
   name: "",
-  lastName: "",
+  firstname: "",
+  lastname: "",
   password: ""
 };
 
@@ -56,7 +58,6 @@ const SignupForm = (props: Props) => {
     e.preventDefault();
     userSignup(formData);
   };
-
   return (
     <form noValidate onSubmit={handleSubmit}>
       <TextField
@@ -74,7 +75,7 @@ const SignupForm = (props: Props) => {
         id="signup-name"
         label="Name"
         type="text"
-        name="name"
+        name="firstname"
         variant="outlined"
         className={classes.textField}
         onChange={handleTextFieldChange}
@@ -129,7 +130,7 @@ const SignupForm = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  loginError: userSelectors.getLoginError(state)
+  signupError: userSelectors.getSignupError(state)
 });
 
 const mapDispatchToProps = {

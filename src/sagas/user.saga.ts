@@ -74,6 +74,7 @@ export function* userLogout() {
 }
 
 export function* userSignup(action: ActionPayload<User>) {
+  debugger
   const { email, firstname, lastname, password = "" } = action.payload;
 
   try {
@@ -82,10 +83,10 @@ export function* userSignup(action: ActionPayload<User>) {
     yield call([auth, auth.createUserWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
   } catch (error) {
-    const loginError = {
+    const signupError = {
       code: error.code,
       message: error.message
     };
-    yield put(userActions.userSignupFailure({ loginError }));
+    yield put(userActions.userSignupFailure({ signupError }));
   }
 }

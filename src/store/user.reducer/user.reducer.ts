@@ -33,8 +33,11 @@ export default (
     case userTypes.USER_LOGIN_FAILURE:
       return { ...state, ...payload };
 
-    case userTypes.USER_SIGNUP_FAILURE:
+    case userTypes.USER_SIGNUP_SUCCESS:
       return { ...state, ...payload, loaded: true, loginError: undefined };
+
+    case userTypes.USER_SIGNUP_FAILURE:
+      return { ...state, ...payload };
 
     case userTypes.LOGIN_FORM_RESET:
       return { ...state, loginError: undefined };
@@ -69,14 +72,14 @@ export const userActions = {
   userSignupRequest: (
     payload: Partial<User>
   ): ActionPayload<Partial<User>> => ({
-    type: userTypes.USER_SIGNUP_FAILURE,
+    type: userTypes.USER_SIGNUP_REQUEST,
     payload
   }),
 
   userSignupSuccess: (
     payload: Partial<User>
   ): ActionPayload<Partial<User>> => ({
-    type: userTypes.USER_SIGNUP_FAILURE,
+    type: userTypes.USER_SIGNUP_SUCCESS,
     payload
   }),
 
@@ -113,5 +116,6 @@ export const userSelectors = {
   isUserAuthenticated: (state: ReduxModel) => !!state.user.uid,
   getEmail: (state: ReduxModel) => state.user.email,
   isUserLoaded: (state: ReduxModel) => state.user.loaded,
-  getLoginError: (state: ReduxModel) => state.user.loginError
+  getLoginError: (state: ReduxModel) => state.user.loginError,
+  getSignupError: (state: ReduxModel) => state.user.signupError
 };

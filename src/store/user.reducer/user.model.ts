@@ -13,6 +13,7 @@ export interface User {
   readonly rememberMe?: boolean;
   readonly password?: string;
   readonly loginError?: Error;
+  readonly signupError?: Error;
 }
 
 export const initialState: User = {
