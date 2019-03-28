@@ -74,8 +74,7 @@ export function* userLogout() {
 }
 
 export function* userSignup(action: ActionPayload<User>) {
-  debugger
-  const { email, firstname, lastname, password = "" } = action.payload;
+  const { email, password = "" } = action.payload;
 
   try {
     const auth = firebase.auth();
