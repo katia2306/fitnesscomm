@@ -13,13 +13,13 @@ import * as serviceWorker from "./serviceWorker";
 import store from "./store/redux.store";
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Provider store={store}>
-      <NoSsr>
+  <NoSsr>
+    <Router history={browserHistory}>
+      <Provider store={store}>
         <Route component={App} />
-      </NoSsr>
-    </Provider>
-  </Router>,
+      </Provider>
+    </Router>
+  </NoSsr>,
   document.getElementById("root")
 );
 

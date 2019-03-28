@@ -4,9 +4,8 @@ import {
   Button,
   IconButton,
   Toolbar,
-  Tooltip,
-  Typography,
-  Theme
+  Theme,
+  Link
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
@@ -17,6 +16,7 @@ import ToggleTheme from "../ThemeToggle";
 import { userSelectors } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
 import AccountMenu from "./AccountMenu";
+import RouterLink from "../RouterLink";
 
 interface Props {
   isAuthenticated: boolean;
@@ -44,9 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   signupButton: {}
 }));
 
-const enterDelay = 500;
-const leaveDelay = 200;
-
 const AppNavigation = (props: Props) => {
   const { isAuthenticated } = props;
   const classes = useStyles();
@@ -68,20 +65,18 @@ const AppNavigation = (props: Props) => {
         <IconButton aria-label="Menu" className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          Fitnesscomm
-        </Typography>
-        <div className={classes.grow} />
-        <Tooltip
-          title="Toggle light/dark theme"
-          enterDelay={enterDelay}
-          leaveDelay={leaveDelay}
-          interactive
+        <RouterLink
+          to="/"
+          component={Link}
+          variant="h6"
+          underline="none"
+          color="textPrimary"
+          className={classes.title}
         >
-          <div>
-            <ToggleTheme />
-          </div>
-        </Tooltip>
+          Fitnesscomm
+        </RouterLink>
+        <div className={classes.grow} />
+        <ToggleTheme />
         {isAuthenticated ? (
           <AccountMenu />
         ) : (

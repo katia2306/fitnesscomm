@@ -13,6 +13,7 @@ import {
 import { AccountBox, ExitToApp } from "@material-ui/icons";
 import ReduxModel from "../../store/redux.model";
 import { userActions } from "../../store/user.reducer";
+import RouterLink from "../RouterLink";
 
 interface Props {
   user: ReduxModel["user"];
@@ -43,8 +44,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   menuAvatar: {
-    width: "45px",
-    height: "45px",
+    width: theme.spacing.unit * 6,
+    height: theme.spacing.unit * 6,
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type]
   }
@@ -54,8 +55,7 @@ const AccountMenu = (props: Props) => {
   const { user, userLogout } = props;
   const classes = useStyles();
 
-  const { email, firstname, lastname } = user;
-  const displayName = `${firstname} ${lastname}`;
+  const { email, displayName, shortName } = user;
 
   const [avatarEl, setAvatarEl] = useState<HTMLElement | undefined>(undefined);
   const accountMenuOpen = !!avatarEl;
@@ -76,20 +76,24 @@ const AccountMenu = (props: Props) => {
   return (
     <Fragment>
       <Avatar className={classes.avatar} onClick={handleAccountMenuOpen}>
-        {firstname[0].toUpperCase()}
+        {shortName}
       </Avatar>
       <Menu
         anchorEl={avatarEl}
         open={accountMenuOpen}
         onClose={handleAccountMenuClose}
-        MenuListProps={{ className: classes.accountMenu }}
-        PaperProps={{ component: "nav" }}
+        MenuListProps={{ component: "nav", className: classes.accountMenu }}
+        disableAutoFocusItem
       >
-        <MenuItem className={classes.accountMenuHeader} selected>
+        <RouterLink
+          to="/profile"
+          component={MenuItem}
+          onClick={handleAccountMenuClose}
+          className={classes.accountMenuHeader}
+          selected
+        >
           <ListItemAvatar>
-            <Avatar className={classes.menuAvatar}>
-              {firstname[0].toUpperCase()}
-            </Avatar>
+            <Avatar className={classes.menuAvatar}>{shortName}</Avatar>
           </ListItemAvatar>
           <ListItemText
             primary={displayName}
@@ -97,14 +101,18 @@ const AccountMenu = (props: Props) => {
             secondary={email}
             secondaryTypographyProps={{ noWrap: true }}
           />
-        </MenuItem>
-        <MenuItem>
+        </RouterLink>
+        <RouterLink
+          to="/profile"
+          component={MenuItem}
+          onClick={handleAccountMenuClose}
+        >
           <ListItemIcon>
             <AccountBox />
           </ListItemIcon>
-          <ListItemText primary="My Account" />
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
+          <ListItemText primary="My Profile" />
+        </RouterLink>
+        <MenuItem component="div" onClick={handleLogoutClick}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>

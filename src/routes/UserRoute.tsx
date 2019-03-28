@@ -1,12 +1,13 @@
-import React, { ComponentType } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Route, Redirect, RouteComponentProps } from "react-router-dom";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import ReduxModel from "../store/redux.model";
 import { userSelectors } from "../store/user.reducer";
 
-interface Props {
+interface Props extends RouteProps {
   isAuthenticated: boolean;
-  component: ComponentType<RouteComponentProps>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: React.ComponentType<any>;
 }
 
 const UserRoute = (props: Props) => {
