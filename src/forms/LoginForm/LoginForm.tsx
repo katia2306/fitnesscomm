@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Checkbox,
@@ -78,7 +78,7 @@ const LoginForm = (props: Props) => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     userLogin(formData);

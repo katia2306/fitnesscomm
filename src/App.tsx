@@ -11,6 +11,7 @@ import ReduxModel from "./store/redux.model";
 import { themeSelectors } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 import { userSelectors } from "./store/user.reducer";
+import UserRoute from "./routes/UserRoute";
 
 interface Props {
   userLoaded: ReduxModel["user"]["loaded"];
@@ -23,7 +24,7 @@ const AppContent = (
     <AppNavigation />
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/profile" component={Profile} />
+      <UserRoute exact path="/profile" component={Profile} />
       <Route component={undefined} />
     </Switch>
   </Fragment>

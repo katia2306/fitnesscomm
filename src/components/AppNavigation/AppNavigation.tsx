@@ -4,8 +4,8 @@ import {
   Button,
   IconButton,
   Toolbar,
-  Typography,
-  Theme
+  Theme,
+  Link
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
@@ -16,6 +16,7 @@ import ToggleTheme from "../ThemeToggle";
 import { userSelectors } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
 import AccountMenu from "./AccountMenu";
+import RouterLink from "../RouterLink";
 
 interface Props {
   isAuthenticated: boolean;
@@ -64,9 +65,16 @@ const AppNavigation = (props: Props) => {
         <IconButton aria-label="Menu" className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
+        <RouterLink
+          to="/"
+          component={Link}
+          variant="h6"
+          underline="none"
+          color="textPrimary"
+          className={classes.title}
+        >
           Fitnesscomm
-        </Typography>
+        </RouterLink>
         <div className={classes.grow} />
         <ToggleTheme />
         {isAuthenticated ? (

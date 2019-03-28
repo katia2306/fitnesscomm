@@ -29,7 +29,7 @@ const Profile = () => {
 
   return (
     <Grid container justify="center" className={classes.root} component="main">
-      <Grid item xs md={6} className={classes.headerContainer}>
+      <Grid item xs md={8} lg={6} className={classes.headerContainer}>
         <ProfileHeader />
       </Grid>
     </Grid>

@@ -2,6 +2,7 @@ import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
 import firebase, { db } from "../firebase/firebase";
+import browserHistory from "../browserHistory";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -39,6 +40,7 @@ export function* fetchCurrentUser() {
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
+    browserHistory.push("/");
   } catch (error) {
     yield put(userActions.fetchCurrentUserFailure());
   }
@@ -71,6 +73,7 @@ export function* userLogout() {
 
     yield call([auth, auth.signOut]);
     yield put(userActions.userLogoutSuccess());
+    browserHistory.push("/");
   } catch {
     yield put(userActions.userLogoutFailure());
   }

@@ -13,6 +13,7 @@ import {
 import { AccountBox, ExitToApp } from "@material-ui/icons";
 import ReduxModel from "../../store/redux.model";
 import { userActions } from "../../store/user.reducer";
+import RouterLink from "../RouterLink";
 
 interface Props {
   user: ReduxModel["user"];
@@ -81,10 +82,16 @@ const AccountMenu = (props: Props) => {
         anchorEl={avatarEl}
         open={accountMenuOpen}
         onClose={handleAccountMenuClose}
-        MenuListProps={{ className: classes.accountMenu }}
-        PaperProps={{ component: "nav" }}
+        MenuListProps={{ component: "nav", className: classes.accountMenu }}
+        disableAutoFocusItem
       >
-        <MenuItem className={classes.accountMenuHeader} selected>
+        <RouterLink
+          to="/profile"
+          component={MenuItem}
+          onClick={handleAccountMenuClose}
+          className={classes.accountMenuHeader}
+          selected
+        >
           <ListItemAvatar>
             <Avatar className={classes.menuAvatar}>{shortName}</Avatar>
           </ListItemAvatar>
@@ -94,14 +101,18 @@ const AccountMenu = (props: Props) => {
             secondary={email}
             secondaryTypographyProps={{ noWrap: true }}
           />
-        </MenuItem>
-        <MenuItem>
+        </RouterLink>
+        <RouterLink
+          to="/profile"
+          component={MenuItem}
+          onClick={handleAccountMenuClose}
+        >
           <ListItemIcon>
             <AccountBox />
           </ListItemIcon>
           <ListItemText primary="My Profile" />
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
+        </RouterLink>
+        <MenuItem component="div" onClick={handleLogoutClick}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>

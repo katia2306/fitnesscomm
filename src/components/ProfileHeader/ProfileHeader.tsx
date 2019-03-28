@@ -9,59 +9,54 @@ interface Props {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.down("xs")]: {
-      "& $emailProfileHeader": {
-        display: "none"
-      }
-    },
-    [theme.breakpoints.down("sm")]: {
-      "& $profileContainer": {
-        marginLeft: theme.spacing.unit * 2
-      }
-    },
-    [theme.breakpoints.up("sm")]: {
-      "& $profileInfo": {
-        flexDirection: "row"
-      },
-      "& $editProfileButton": {
-        marginTop: 0,
-        marginLeft: theme.spacing.unit * 4
-      }
-    },
-    [theme.breakpoints.up("lg")]: {
-      "& $avatar": {
-        width: theme.spacing.unit * 12,
-        height: theme.spacing.unit * 12,
-        fontSize: theme.spacing.unit * 6
-      }
-    },
-    [theme.breakpoints.up("xl")]: {
-      "& $avatar": {
-        width: theme.spacing.unit * 19,
-        height: theme.spacing.unit * 19,
-        fontSize: theme.spacing.unit * 10
-      }
-    }
-  },
   avatar: {
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type],
     cursor: "pointer",
-    width: theme.spacing.unit * 9,
-    height: theme.spacing.unit * 9,
+    width: theme.spacing.unit * 10,
+    height: theme.spacing.unit * 10,
     fontSize: theme.spacing.unit * 4,
-    fontWeight: 300
+    fontWeight: 300,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing.unit * 16,
+      height: theme.spacing.unit * 16,
+      fontSize: theme.spacing.unit * 8
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: theme.spacing.unit * 18,
+      height: theme.spacing.unit * 18,
+      fontSize: theme.spacing.unit * 9
+    },
+    [theme.breakpoints.up("xl")]: {
+      width: theme.spacing.unit * 19,
+      height: theme.spacing.unit * 19,
+      fontSize: theme.spacing.unit * 10
+    }
   },
-  profileContainer: {},
+  profileContainer: {
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: theme.spacing.unit * 2
+    }
+  },
   profileInfo: {
     flexDirection: "column",
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit,
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
   },
   editProfileButton: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
+    [theme.breakpoints.up("sm")]: {
+      marginTop: 0,
+      marginLeft: theme.spacing.unit * 4
+    }
   },
-  emailProfileHeader: {}
+  emailProfileHeader: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  }
 }));
 
 const ProfileHeader = (props: Props) => {
@@ -71,8 +66,8 @@ const ProfileHeader = (props: Props) => {
   const { email, displayName, shortName } = user;
 
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={3} title="Change profile picture">
+    <Grid container>
+      <Grid item xs={4} title="Change profile picture">
         <Avatar className={classes.avatar}>{shortName}</Avatar>
       </Grid>
       <Grid item xs component="section" className={classes.profileContainer}>
