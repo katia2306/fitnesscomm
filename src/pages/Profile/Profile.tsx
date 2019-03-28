@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Theme } from "@material-ui/core";
+import { Grid, Theme, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
@@ -40,12 +40,15 @@ const Profile = (props: Props) => {
   return (
     <Grid container justify="center" className={classes.root} component="main">
       <Helmet title={displayName} />
-      <Grid item xs md={8} lg={6} className={classes.headerContainer}>
-        <ProfileHeader
-          email={email}
-          displayName={displayName}
-          shortName={shortName}
-        />
+      <Grid container item xs md={8} lg={6} direction="column">
+        <Grid item className={classes.headerContainer}>
+          <ProfileHeader
+            email={email}
+            displayName={displayName}
+            shortName={shortName}
+          />
+        </Grid>
+        <Divider />
       </Grid>
     </Grid>
   );

@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing.unit * 8
     },
     [theme.breakpoints.up("lg")]: {
-      width: theme.spacing.unit * 18,
-      height: theme.spacing.unit * 18,
+      width: theme.spacing.unit * 17,
+      height: theme.spacing.unit * 17,
       fontSize: theme.spacing.unit * 9
     },
     [theme.breakpoints.up("xl")]: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: "row"
     }
   },
-  editProfileButton: {
+  editProfileButtonContainer: {
     marginTop: theme.spacing.unit,
     [theme.breakpoints.up("sm")]: {
       marginTop: 0,
@@ -66,7 +66,7 @@ const ProfileHeader = (props: Props) => {
 
   return (
     <Grid container>
-      <Grid item xs={4} title="Change profile picture">
+      <Grid item xs={4} lg={3} title="Change profile picture">
         <Avatar className={classes.avatar}>{shortName}</Avatar>
       </Grid>
       <Grid item xs component="section" className={classes.profileContainer}>
@@ -76,13 +76,8 @@ const ProfileHeader = (props: Props) => {
               {displayName}
             </Typography>
           </Grid>
-          <Grid item>
-            <Button
-              className={classes.editProfileButton}
-              variant="outlined"
-              fullWidth
-              size="small"
-            >
+          <Grid item className={classes.editProfileButtonContainer}>
+            <Button variant="outlined" fullWidth size="small">
               Edit Profile
             </Button>
           </Grid>
