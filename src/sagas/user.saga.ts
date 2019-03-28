@@ -40,7 +40,6 @@ export function* fetchCurrentUser() {
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
-    browserHistory.push("/");
   } catch (error) {
     yield put(userActions.fetchCurrentUserFailure());
   }
@@ -58,6 +57,7 @@ export function* userLogin(action: ActionPayload<User>) {
     yield call([auth, auth.setPersistence], persistence);
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
+    browserHistory.push("/");
   } catch (error) {
     const loginError = {
       code: error.code,

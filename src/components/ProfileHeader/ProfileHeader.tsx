@@ -1,11 +1,12 @@
 import React from "react";
 import { Grid, Avatar, Typography, Button, Theme } from "@material-ui/core";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import ReduxModel from "../../store/redux.model";
 
 interface Props {
-  user: ReduxModel["user"];
+  email: ReduxModel["user"]["email"];
+  displayName: ReduxModel["user"]["displayName"];
+  shortName: ReduxModel["user"]["shortName"];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -60,10 +61,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ProfileHeader = (props: Props) => {
-  const { user } = props;
+  const { email, displayName, shortName } = props;
   const classes = useStyles();
-
-  const { email, displayName, shortName } = user;
 
   return (
     <Grid container>
@@ -98,8 +97,4 @@ const ProfileHeader = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: ReduxModel) => ({
-  user: state.user
-});
-
-export default connect(mapStateToProps)(ProfileHeader);
+export default ProfileHeader;

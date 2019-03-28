@@ -11,6 +11,7 @@
     "notistack": "0.5.1",
     "react": "16.8.5",
     "react-dom": "16.8.5",
+    "react-helmet": "5.2.0",
     "react-redux": "6.0.1",
     "react-router-dom": "5.0.0",
     "react-scripts": "2.1.8",
@@ -23,6 +24,7 @@
     "@types/node": "11.12.0",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.3",
+    "@types/react-helmet": "5.0.8",
     "@types/react-redux": "7.0.5",
     "@types/react-router-dom": "4.3.1",
     "@typescript-eslint/eslint-plugin": "1.5.0",
@@ -41,12 +43,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run lint && react-scripts build",
     "test": "react-scripts test",
     "analyze": "source-map-explorer build/static/js/main.*",
     "update": "ncu -u",
     "lint": "eslint --ext .ts --ext .tsx src/",
-    "deploy": "npm run lint && npm run build && firebase deploy"
+    "deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,7 +1,14 @@
 import React from "react";
 import { Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import Helmet from "react-helmet";
+import { connect } from "react-redux";
 import { ProfileHeader } from "../../components";
+import ReduxModel from "../../store/redux.model";
+
+interface Props {
+  user: ReduxModel["user"];
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,16 +31,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Profile = () => {
+const Profile = (props: Props) => {
+  const { user } = props;
   const classes = useStyles();
+
+  const { email, displayName, shortName } = user;
 
   return (
     <Grid container justify="center" className={classes.root} component="main">
+      <Helmet title={displayName} />
       <Grid item xs md={8} lg={6} className={classes.headerContainer}>
-        <ProfileHeader />
+        <ProfileHeader
+          email={email}
+          displayName={displayName}
+          shortName={shortName}
+        />
       </Grid>
     </Grid>
   );
 };
 
-export default Profile;
+const mapStateToProps = (state: ReduxModel) => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(Profile);
