@@ -19,30 +19,34 @@ const onAuthStateChanged = () => {
 export function* fetchCurrentUser() {
   try {
     const user: firebase.User = yield call(onAuthStateChanged);
+    const { uid, email, emailVerified, displayName } = user;
 
-    const userRef = db.collection("users").doc(user.uid);
+    const userRef = db.collection("users").doc(uid);
     const userFetched = yield call([userRef, userRef.get]);
 
-    if (!userFetched.exists) {
+    if (!userFetched.exists || !email || !displayName) {
       throw new Error("User does't exist");
     }
+
     const userData: User = userFetched.data();
     const { firstname, lastname } = userData;
 
     const currentUser = {
-      uid: user.uid,
-      email: user.email || "",
-      emailVerified: user.emailVerified,
+      uid,
+      email,
+      emailVerified,
+      displayName,
       firstname,
       lastname,
-      displayName: `${firstname} ${lastname}`,
-      shortName: `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}`
+      shortName: displayName[0].toUpperCase()
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
   } catch (error) {
     yield put(userActions.fetchCurrentUserFailure());
+    return error;
   }
+  return true;
 }
 
 export function* userLogin(action: ActionPayload<User>) {
@@ -56,7 +60,12 @@ export function* userLogin(action: ActionPayload<User>) {
 
     yield call([auth, auth.setPersistence], persistence);
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
-    yield call(fetchCurrentUser);
+
+    const error = yield call(fetchCurrentUser);
+    if (error instanceof Error) {
+      throw error;
+    }
+
     browserHistory.push("/");
   } catch (error) {
     const loginError = {
