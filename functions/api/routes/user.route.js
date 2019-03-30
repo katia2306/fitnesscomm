@@ -11,7 +11,7 @@ router.post("/signup", async (req, res) => {
       code: "app/invalid-user-data",
       message: "User data is not complete or invalid"
     };
-    console.log("Error creating new user:", error);
+    console.error("Error creating new user:", error);
     return res.status(400).json(error);
   }
 
@@ -20,7 +20,7 @@ router.post("/signup", async (req, res) => {
       code: "app/invalid-password-match",
       message: "Password and RepeatPassword must match"
     };
-    console.log("Error creating new user:", error);
+    console.error("Error creating new user:", error);
     return res.status(400).json(error);
   }
 
@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
     console.log("Successfully created new user:", user.uid);
     return res.json(user);
   } catch (error) {
-    console.log("Error creating new user:", error);
+    console.error("Error creating new user:", error);
     return res.status(400).json(error);
   }
 });

@@ -1,4 +1,4 @@
-const { admin, db } = require("../firebase.admin");
+const { admin, db } = require("../../firebase.admin");
 
 class User {
   static async signupUser(email, password, firstname, lastname) {

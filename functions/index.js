@@ -1,6 +1,6 @@
 const express = require("express");
 const functions = require("firebase-functions");
-const { userRoute } = require("./routes/user.route");
+const { userRoute } = require("./api/routes/user.route");
 
 const app = express();
 
