@@ -1,10 +1,10 @@
 const express = require("express");
 const functions = require("firebase-functions");
-const users = require("./routes/user.route");
+const { userRoute } = require("./routes/user.route");
 
 const app = express();
 
-app.use("/users", users.router);
+app.use("/users", userRoute);
 
 app.get("/*", (req, res) => {
   console.info("Route invalid: ", `${req.baseUrl}${req.originalUrl}`);

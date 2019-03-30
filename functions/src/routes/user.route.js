@@ -1,5 +1,5 @@
 const express = require("express");
-const { admin, db } = require("../firebase.admin");
+const { userModel } = require("../models/user.model");
 
 const router = express.Router();
 
@@ -25,21 +25,12 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json(error);
     }
 
-    const user = await admin.auth().createUser({
+    const user = await userModel.signupUser(
       email,
-      emailVerified: false,
       password,
-      displayName: `${firstname} ${lastname}`,
-      disabled: false
-    });
-
-    await db
-      .collection("users")
-      .doc(user.uid)
-      .set({
-        firstname,
-        lastname
-      });
+      firstname,
+      lastname
+    );
 
     console.log("Successfully created new user:", user.uid);
     return res.json(user);
@@ -50,5 +41,5 @@ router.post("/signup", async (req, res) => {
 });
 
 module.exports = {
-  router
+  userRoute: router
 };
