@@ -1,7 +1,12 @@
-const express = require("express");
-const { userModel } = require("../models/user.model");
+import express from "express";
+import userModel from "../models/user.model";
+import authenticate from "../middlewares/authenticate";
 
 const router = express.Router();
+
+router.get("/", authenticate, (req, res) => {
+  return res.json(req.user);
+});
 
 router.post("/signup", async (req, res) => {
   const { email, password, repeatPassword, firstname, lastname } = req.body;
@@ -40,6 +45,4 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-module.exports = {
-  userRoute: router
-};
+export default router;

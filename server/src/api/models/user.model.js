@@ -1,4 +1,4 @@
-const { admin, db } = require("../../firebase.admin");
+import { admin, db } from "../../firebase.admin";
 
 class User {
   static async signupUser(email, password, firstname, lastname) {
@@ -22,6 +22,4 @@ class User {
   }
 }
 
-module.exports = {
-  userModel: User
-};
+export default User;

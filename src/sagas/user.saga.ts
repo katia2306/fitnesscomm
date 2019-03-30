@@ -1,8 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
-import firebase, { db } from "../firebase/firebase";
+import firebase from "../firebase/firebase";
 import browserHistory from "../browserHistory";
+import userAPI from "../api/user.api";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -21,15 +22,12 @@ export function* fetchCurrentUser() {
     const user: firebase.User = yield call(onAuthStateChanged);
     const { uid, email, emailVerified, displayName } = user;
 
-    const userRef = db.collection("users").doc(uid);
-    const userFetched = yield call([userRef, userRef.get]);
+    const userFetched = yield call(userAPI.getUser);
+    const { firstname, lastname } = userFetched;
 
-    if (!userFetched.exists) {
-      throw new Error("User is disabled or not found");
-    }
-
-    const userData: User = userFetched.data();
-    const { firstname, lastname } = userData;
+    // if (false) {
+    //   throw new Error("User is disabled or not found");
+    // }
 
     const currentUser = {
       uid,
