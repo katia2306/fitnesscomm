@@ -4,27 +4,27 @@ const { userModel } = require("../models/user.model");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
+  const { email, password, repeatPassword, firstname, lastname } = req.body;
+
+  if (!email || !password || !firstname || !lastname) {
+    const error = {
+      code: "app/invalid-user-data",
+      message: "User data is not complete or invalid"
+    };
+    console.log("Error creating new user:", error);
+    return res.status(400).json(error);
+  }
+
+  if (password !== repeatPassword) {
+    const error = {
+      code: "app/invalid-password-match",
+      message: "Password and RepeatPassword must match"
+    };
+    console.log("Error creating new user:", error);
+    return res.status(400).json(error);
+  }
+
   try {
-    const { email, password, repeatPassword, firstname, lastname } = req.body;
-
-    if (!email || !password || !firstname || !lastname) {
-      const error = {
-        code: "app/invalid-user-data",
-        message: "User data is not complete or invalid"
-      };
-      console.log("Error creating new user:", error);
-      return res.status(400).json(error);
-    }
-
-    if (password !== repeatPassword) {
-      const error = {
-        code: "app/invalid-password-match",
-        message: "Password and RepeatPassword must match"
-      };
-      console.log("Error creating new user:", error);
-      return res.status(400).json(error);
-    }
-
     const user = await userModel.signupUser(
       email,
       password,
