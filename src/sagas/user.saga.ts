@@ -24,8 +24,8 @@ export function* fetchCurrentUser() {
     const userRef = db.collection("users").doc(uid);
     const userFetched = yield call([userRef, userRef.get]);
 
-    if (!userFetched.exists || !email || !displayName) {
-      throw new Error("User does't exist");
+    if (!userFetched.exists) {
+      throw new Error("User is disabled or not found");
     }
 
     const userData: User = userFetched.data();
@@ -33,20 +33,18 @@ export function* fetchCurrentUser() {
 
     const currentUser = {
       uid,
-      email,
+      email: email || "",
       emailVerified,
-      displayName,
+      displayName: displayName || "",
       firstname,
       lastname,
-      shortName: displayName[0].toUpperCase()
+      shortName: firstname && firstname[0] ? firstname[0].toUpperCase() : "F"
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
   } catch (error) {
     yield put(userActions.fetchCurrentUserFailure());
-    return error;
   }
-  return true;
 }
 
 export function* userLogin(action: ActionPayload<User>) {
@@ -60,11 +58,7 @@ export function* userLogin(action: ActionPayload<User>) {
 
     yield call([auth, auth.setPersistence], persistence);
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
-
-    const error = yield call(fetchCurrentUser);
-    if (error instanceof Error) {
-      throw error;
-    }
+    yield call(fetchCurrentUser);
 
     browserHistory.push("/");
   } catch (error) {
