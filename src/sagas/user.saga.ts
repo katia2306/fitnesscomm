@@ -4,6 +4,7 @@ import { userActions, User } from "../store/user.reducer";
 import firebase from "../firebase/firebase";
 import browserHistory from "../browserHistory";
 import userAPI from "../api/user.api";
+import { setAuthorizationHeader } from "../utils/api.utils";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -22,12 +23,15 @@ export function* fetchCurrentUser() {
     const user: firebase.User = yield call(onAuthStateChanged);
     const { uid, email, emailVerified, displayName } = user;
 
-    const userFetched = yield call(userAPI.getUser);
-    const { firstname, lastname } = userFetched;
+    const userIdToken = yield call([user, user.getIdToken]);
+    setAuthorizationHeader(userIdToken);
 
-    // if (false) {
-    //   throw new Error("User is disabled or not found");
-    // }
+    const userData = yield call(userAPI.getUser);
+    if (!userData) {
+      throw new Error("User is disabled or not found");
+    }
+
+    const { firstname, lastname } = userData;
 
     const currentUser = {
       uid,
@@ -36,7 +40,7 @@ export function* fetchCurrentUser() {
       displayName: displayName || "",
       firstname,
       lastname,
-      shortName: firstname && firstname[0] ? firstname[0].toUpperCase() : "F"
+      shortName: firstname[0].toUpperCase()
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
