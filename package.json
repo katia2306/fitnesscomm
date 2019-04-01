@@ -49,10 +49,7 @@
     "analyze": "source-map-explorer build/static/js/main.*",
     "update": "ncu -u",
     "lint": "eslint --ext .ts --ext .tsx src/",
-    "deploy:all": "firebase deploy",
-    "deploy:hosting": "firebase deploy --only hosting",
-    "deploy:rules": "firebase deploy --only firestore:rules",
-    "deploy:indexes": "firebase deploy --only firestore:indexes"
+    "deploy:hosting": "firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"
