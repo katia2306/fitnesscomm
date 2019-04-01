@@ -1,8 +1,10 @@
 import { call, put } from "redux-saga/effects";
 import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
-import firebase, { db } from "../firebase/firebase";
+import firebase from "../firebase/firebase";
 import browserHistory from "../browserHistory";
+import userAPI from "../api/user.api";
+import { setAuthorizationHeader } from "../utils/api.utils";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -19,24 +21,26 @@ const onAuthStateChanged = () => {
 export function* fetchCurrentUser() {
   try {
     const user: firebase.User = yield call(onAuthStateChanged);
+    const { uid, email, emailVerified, displayName } = user;
 
-    const userRef = db.collection("users").doc(user.uid);
-    const userFetched = yield call([userRef, userRef.get]);
+    const userIdToken = yield call([user, user.getIdToken]);
+    setAuthorizationHeader(userIdToken);
 
-    if (!userFetched.exists) {
-      throw new Error("User does't exist");
+    const userData = yield call(userAPI.getUser);
+    if (!userData) {
+      throw new Error("User is disabled or not found");
     }
-    const userData: User = userFetched.data();
+
     const { firstname, lastname } = userData;
 
     const currentUser = {
-      uid: user.uid,
-      email: user.email || "",
-      emailVerified: user.emailVerified,
+      uid,
+      email: email || "",
+      emailVerified,
+      displayName: displayName || "",
       firstname,
       lastname,
-      displayName: `${firstname} ${lastname}`,
-      shortName: `${firstname[0].toUpperCase()}${lastname[0].toUpperCase()}`
+      shortName: firstname[0].toUpperCase()
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
@@ -57,6 +61,7 @@ export function* userLogin(action: ActionPayload<User>) {
     yield call([auth, auth.setPersistence], persistence);
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
+
     browserHistory.push("/");
   } catch (error) {
     const loginError = {
