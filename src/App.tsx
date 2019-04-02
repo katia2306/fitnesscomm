@@ -12,6 +12,9 @@ import { themeSelectors } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 import { userSelectors } from "./store/user.reducer";
 import UserRoute from "./routes/UserRoute";
+import { setAPIUrl } from "./utils/api.utils";
+
+setAPIUrl();
 
 interface Props {
   userLoaded: ReduxModel["user"]["loaded"];
