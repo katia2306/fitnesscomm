@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { ProfileHeader } from "../../components";
 import ReduxModel from "../../store/redux.model";
+import { userSelectors } from "../../store/user.reducer";
 
 interface Props {
   user: ReduxModel["user"];
@@ -55,7 +56,7 @@ const Profile = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  user: state.user
+  user: userSelectors.getUser(state)
 });
 
 export default connect(mapStateToProps)(Profile);
