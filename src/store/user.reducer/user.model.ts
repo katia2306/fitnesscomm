@@ -14,6 +14,7 @@ export interface User {
   readonly loaded?: boolean;
   readonly rememberMe?: boolean;
   readonly password?: string;
+  readonly repeatPassword?: string;
   readonly loginError?: Error;
   readonly signupError?: Error;
 }

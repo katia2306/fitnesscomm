@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { AccountBox, ExitToApp } from "@material-ui/icons";
 import ReduxModel from "../../store/redux.model";
-import { userActions } from "../../store/user.reducer";
+import { userActions, userSelectors } from "../../store/user.reducer";
 import RouterLink from "../RouterLink";
 
 interface Props {
@@ -124,7 +124,7 @@ const AccountMenu = (props: Props) => {
 };
 
 const mapStateToProps = (state: ReduxModel) => ({
-  user: state.user
+  user: userSelectors.getUser(state)
 });
 
 const mapDispatchToProps = {

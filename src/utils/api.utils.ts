@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const getAPIUrl = (endpoint: string) => {
-  return `${process.env.REACT_APP_API_URL}/${endpoint}`;
+export const setAPIUrl = () => {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 };
 
-export const setAuthorizationHeader = (token = undefined) => {
+export const setAuthorizationHeader = (token?: string) => {
   if (token) {
     axios.defaults.headers.common.authorization = `Bearer ${token}`;
   } else {
