@@ -81,3 +81,20 @@ export function* userLogout() {
     yield put(userActions.userLogoutFailure());
   }
 }
+
+export function* userSignup(action: ActionPayload<User>) {
+  const { email, password = "" } = action.payload;
+
+  try {
+    const auth = firebase.auth();
+
+    yield call([auth, auth.createUserWithEmailAndPassword], email, password);
+    yield call(fetchCurrentUser);
+  } catch (error) {
+    const signupError = {
+      code: error.code,
+      message: error.message
+    };
+    yield put(userActions.userSignupFailure({ signupError }));
+  }
+}

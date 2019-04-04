@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import {
   Button,
   Link,
@@ -8,9 +8,14 @@ import {
   Theme
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { connect } from "react-redux";
+import { userActions, userSelectors } from "../../store/user.reducer";
+import useFormData from "../../hooks/useFormData";
+import ReduxModel from "../../store/redux.model";
 
 interface Props {
   onLoginButtonClick: () => void;
+  userSignup: typeof userActions.userSignupRequest;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -32,12 +37,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
+const initialFormData = {
+  email: "",
+  name: "",
+  firstname: "",
+  lastname: "",
+  password: ""
+};
+
 const SignupForm = (props: Props) => {
-  const { onLoginButtonClick } = props;
+  const { onLoginButtonClick, userSignup } = props;
+  const {
+    formData,
+    formDataActions: { handleTextFieldChange }
+  } = useFormData(initialFormData);
   const classes = useStyles();
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    userSignup(formData);
+  };
   return (
-    <form noValidate>
+    <form noValidate onSubmit={handleSubmit}>
       <TextField
         id="signup-email"
         label="Email"
@@ -46,15 +67,17 @@ const SignupForm = (props: Props) => {
         variant="outlined"
         margin="dense"
         className={classes.textField}
+        onChange={handleTextFieldChange}
         fullWidth
       />
       <TextField
         id="signup-name"
         label="Name"
         type="text"
-        name="name"
+        name="firstname"
         variant="outlined"
         className={classes.textField}
+        onChange={handleTextFieldChange}
         fullWidth
       />
       <TextField
@@ -64,6 +87,7 @@ const SignupForm = (props: Props) => {
         name="lastname"
         variant="outlined"
         className={classes.textField}
+        onChange={handleTextFieldChange}
         fullWidth
       />
       <TextField
@@ -73,30 +97,16 @@ const SignupForm = (props: Props) => {
         name="password"
         variant="outlined"
         className={classes.textField}
+        onChange={handleTextFieldChange}
         fullWidth
       />
-      <div className={classes.birthdayContainer}>
-        <Typography variant="h6" component="span" inline>
-          Birthday
-        </Typography>
-        <TextField
-          id="date"
-          label="Birthday"
-          type="date"
-          defaultValue="2017-05-24"
-          variant="outlined"
-          fullWidth
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-      </div>
 
       <Button
         variant="contained"
         color="primary"
         className={classes.button}
         fullWidth
+        type="submit"
       >
         Submit
       </Button>
@@ -118,4 +128,15 @@ const SignupForm = (props: Props) => {
   );
 };
 
-export default SignupForm;
+const mapStateToProps = (state: ReduxModel) => ({
+  signupError: userSelectors.getSignupError(state)
+});
+
+const mapDispatchToProps = {
+  userSignup: userActions.userSignupRequest
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignupForm);

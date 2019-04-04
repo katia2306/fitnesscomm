@@ -16,6 +16,7 @@ export interface User {
   readonly password?: string;
   readonly repeatPassword?: string;
   readonly loginError?: Error;
+  readonly signupError?: Error;
 }
 
 export const initialState: User = {
