@@ -12,14 +12,6 @@ interface Props {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing.unit * 6,
-      paddingBottom: theme.spacing.unit * 6
-    }
-  },
   headerContainer: {
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
@@ -39,18 +31,16 @@ const Profile = (props: Props) => {
   const { email, displayName, shortName } = user;
 
   return (
-    <Grid container justify="center" className={classes.root} component="main">
+    <Grid container item xs md={8} lg={6} direction="column">
       <Helmet title={displayName} />
-      <Grid container item xs md={8} lg={6} direction="column">
-        <Grid item className={classes.headerContainer}>
-          <ProfileHeader
-            email={email}
-            displayName={displayName}
-            shortName={shortName}
-          />
-        </Grid>
-        <Divider />
+      <Grid item className={classes.headerContainer}>
+        <ProfileHeader
+          email={email}
+          displayName={displayName}
+          shortName={shortName}
+        />
       </Grid>
+      <Divider />
     </Grid>
   );
 };
