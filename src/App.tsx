@@ -23,7 +23,10 @@ interface Props {
 
 const useStyles = makeStyles({
   root: {
-    padding: "16px"
+    padding: "16px",
+    "@media (min-width:600px)": {
+      padding: "24px"
+    }
   }
 });
 
