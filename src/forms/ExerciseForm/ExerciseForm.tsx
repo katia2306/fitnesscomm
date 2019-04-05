@@ -14,18 +14,16 @@ import {
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/styles";
 
-interface Props {
-
-}
+interface Props {}
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: '#2196f3',
-    color: "#ffff",
+    backgroundColor: "#2196f3",
+    color: "#ffff"
   },
   body: {
-    fontSize: 14,
-  },
+    fontSize: 14
+  }
 }))(TableCell);
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -48,9 +46,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: "10px"
   },
   row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: "#2196f3",
-    },
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#2196f3"
+    }
   }
 }));
 
@@ -76,17 +74,9 @@ const ExerciseForm = (props: Props) => {
         <Divider />
 
         <div className={classes.segments}>
-          <Typography variant="h5">
-            Cardiovascular
-          </Typography>
+          <Typography variant="h5">Cardiovascular</Typography>
           <Typography className={classes.links}>
-            <Link>
-              Añadir
-            </Link>
-            |
-            <Link>
-              Herramientas rápidas
-            </Link>
+            <Link>Añadir</Link>|<Link>Herramientas rápidas</Link>
           </Typography>
 
           <Table>
@@ -97,8 +87,7 @@ const ExerciseForm = (props: Props) => {
                 <CustomTableCell>Calorías quemadas</CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-            </TableBody>
+            <TableBody />
           </Table>
 
           <Table>
@@ -116,17 +105,9 @@ const ExerciseForm = (props: Props) => {
         </div>
         <Divider />
         <div className={classes.segments}>
-          <Typography variant="h5">
-            Entrenamiento
-          </Typography >
+          <Typography variant="h5">Entrenamiento</Typography>
           <Typography className={classes.links}>
-            <Link>
-              Añadir
-            </Link>
-            |
-            <Link>
-              Herramientas rápidas
-            </Link>
+            <Link>Añadir</Link>|<Link>Herramientas rápidas</Link>
           </Typography>
 
           <Table>
@@ -137,8 +118,7 @@ const ExerciseForm = (props: Props) => {
                 <CustomTableCell>Peso / series</CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-            </TableBody>
+            <TableBody />
           </Table>
         </div>
         <div>
@@ -154,16 +134,12 @@ const ExerciseForm = (props: Props) => {
             fullWidth
           />
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-        >
+        <Button variant="contained" color="primary">
           Ver informe Completo (Para imprimir)
         </Button>
       </form>
     </div>
   );
-
-}
+};
 
 export default ExerciseForm;
