@@ -40,8 +40,6 @@ const TotalCalories = (props: Props) => {
   let { height = 0, weight = 0 } = props;
   const classes = useStyles();
 
-  console.log(imperial);
-
   if (imperial) {
     height = feetToCentimeters(height);
     weight = poundsToKilograms(weight);
