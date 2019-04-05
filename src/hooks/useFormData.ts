@@ -1,9 +1,4 @@
-import { useReducer, useCallback, ChangeEvent } from "react";
-
-interface FormData {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
+import { useReducer, useCallback } from "react";
 
 enum types {
   TEXT_FIELD_CHANGE = "TEXT_FIELD_CHANGE",
@@ -12,10 +7,10 @@ enum types {
 
 interface Action {
   type: types;
-  payload: FormData;
+  payload: { [key: string]: string | number | boolean | undefined };
 }
 
-const reducer = (state: FormData, action: Action): FormData => {
+const reducer = <S>(state: S, action: Action): S => {
   const { type, payload } = action;
 
   switch (type) {
@@ -28,24 +23,31 @@ const reducer = (state: FormData, action: Action): FormData => {
   }
 };
 
-const useFormData = (initialState: FormData) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const useFormData = <S>(initialState: S) => {
+  const [state, dispatch] = useReducer<React.Reducer<S, Action>>(
+    reducer,
+    initialState
+  );
 
-  const handleTextFieldChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+
       dispatch({
         type: types.TEXT_FIELD_CHANGE,
-        payload: { [e.target.name]: e.target.value }
+        payload: { [name]: value }
       });
     },
     [dispatch]
   );
 
   const handleCheckboxChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, checked } = e.target;
+
       dispatch({
         type: types.CHECKBOX_CHANGE,
-        payload: { [e.target.name]: e.target.checked }
+        payload: { [name]: checked }
       });
     },
     [dispatch]
@@ -53,7 +55,7 @@ const useFormData = (initialState: FormData) => {
 
   return {
     formData: state,
-    formDataActions: { handleTextFieldChange, handleCheckboxChange }
+    formDataActions: { handleInputChange, handleCheckboxChange }
   };
 };
 

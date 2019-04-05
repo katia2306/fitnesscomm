@@ -49,7 +49,7 @@ const SignupForm = (props: Props) => {
   const { onLoginButtonClick, userSignup } = props;
   const {
     formData,
-    formDataActions: { handleTextFieldChange }
+    formDataActions: { handleInputChange }
   } = useFormData(initialFormData);
   const classes = useStyles();
 
@@ -67,7 +67,7 @@ const SignupForm = (props: Props) => {
         variant="outlined"
         margin="dense"
         className={classes.textField}
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         fullWidth
       />
       <TextField
@@ -77,7 +77,7 @@ const SignupForm = (props: Props) => {
         name="firstname"
         variant="outlined"
         className={classes.textField}
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         fullWidth
       />
       <TextField
@@ -87,7 +87,7 @@ const SignupForm = (props: Props) => {
         name="lastname"
         variant="outlined"
         className={classes.textField}
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         fullWidth
       />
       <TextField
@@ -97,7 +97,7 @@ const SignupForm = (props: Props) => {
         name="password"
         variant="outlined"
         className={classes.textField}
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         fullWidth
       />
 

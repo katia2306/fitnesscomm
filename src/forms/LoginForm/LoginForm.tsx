@@ -70,7 +70,7 @@ const LoginForm = (props: Props) => {
 
   const {
     formData,
-    formDataActions: { handleTextFieldChange, handleCheckboxChange }
+    formDataActions: { handleInputChange, handleCheckboxChange }
   } = useFormData(initialFormData);
   const { email, password, rememberMe } = formData;
 
@@ -108,7 +108,7 @@ const LoginForm = (props: Props) => {
         margin="dense"
         variant="outlined"
         fullWidth
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         value={email}
       />
       <TextField
@@ -132,7 +132,7 @@ const LoginForm = (props: Props) => {
             </InputAdornment>
           )
         }}
-        onChange={handleTextFieldChange}
+        onChange={handleInputChange}
         value={password}
       />
       <div className={classes.rememberMeContainer}>
@@ -142,7 +142,6 @@ const LoginForm = (props: Props) => {
               name="rememberMe"
               checked={rememberMe}
               onChange={handleCheckboxChange}
-              color="primary"
             />
           }
           label="Remember me"
