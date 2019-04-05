@@ -1,7 +1,6 @@
 import React, { FormEvent } from "react";
 import {
   Button,
-  Link,
   TextField,
   Typography,
   Divider,
@@ -12,6 +11,7 @@ import { connect } from "react-redux";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import ReduxModel from "../../store/redux.model";
+import { ButtonLink } from "../../components";
 
 interface Props {
   onLoginButtonClick: () => void;
@@ -115,14 +115,9 @@ const SignupForm = (props: Props) => {
         <Typography variant="body1" component="span" inline>
           Do you already have an account?
         </Typography>
-        <Link
-          onClick={onLoginButtonClick}
-          component="button"
-          variant="body1"
-          type="button"
-        >
+        <ButtonLink button onClick={onLoginButtonClick}>
           Sign in
-        </Link>
+        </ButtonLink>
       </div>
     </form>
   );

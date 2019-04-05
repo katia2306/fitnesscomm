@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  AppBar,
-  Button,
-  IconButton,
-  Toolbar,
-  Theme,
-  Link
-} from "@material-ui/core";
+import { AppBar, Button, IconButton, Toolbar, Theme } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
@@ -16,7 +9,7 @@ import ToggleTheme from "../ThemeToggle";
 import { userSelectors } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
 import AccountMenu from "./AccountMenu";
-import RouterLink from "../RouterLink";
+import { TextLink } from "..";
 
 interface Props {
   isAuthenticated: boolean;
@@ -65,16 +58,9 @@ const AppNavigation = (props: Props) => {
         <IconButton aria-label="Menu" className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <RouterLink
-          to="/"
-          component={Link}
-          variant="h6"
-          underline="none"
-          color="textPrimary"
-          className={classes.title}
-        >
+        <TextLink to="/" variant="h6" className={classes.title}>
           Fitnesscomm
-        </RouterLink>
+        </TextLink>
         <div className={classes.grow} />
         <ToggleTheme />
         {isAuthenticated ? (

@@ -6,7 +6,6 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
-  Link,
   TextField,
   Typography,
   Theme
@@ -18,6 +17,7 @@ import { withSnackbar, withSnackbarProps } from "notistack";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import ReduxModel from "../../store/redux.model";
+import { ButtonLink } from "../../components";
 
 interface Props extends withSnackbarProps {
   onSignupButtonClick: () => void;
@@ -158,29 +158,22 @@ const LoginForm = (props: Props) => {
         >
           Log in
         </Button>
-        <Link
-          className={classes.forgotPassword}
-          component="button"
-          variant="body2"
-          type="button"
-        >
+        <ButtonLink button className={classes.forgotPassword}>
           Forgot password?
-        </Link>
+        </ButtonLink>
       </div>
       <Divider />
       <div className={classes.signupContainer}>
         <Typography variant="body1" component="span" inline>
           Don&apos;t have an account?
         </Typography>
-        <Link
+        <ButtonLink
+          button
           onClick={onSignupButtonClick}
-          component="button"
-          variant="body1"
-          type="button"
           className={classes.signupButton}
         >
           Sign up
-        </Link>
+        </ButtonLink>
       </div>
     </form>
   );
