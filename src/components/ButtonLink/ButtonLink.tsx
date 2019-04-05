@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { LinkProps, Link } from "react-router-dom";
 import { History } from "history";
