@@ -1,10 +1,10 @@
 import {
-  WithButtonProps,
-  WithLinkProps
+  ButtonLinkProps,
+  WithButtonProps
 } from "../components/ButtonLink/ButtonLink";
 
-export const isLinkButton = (
-  props: WithButtonProps | WithLinkProps
-): props is WithLinkProps => {
-  return (props as WithLinkProps).to !== undefined;
+export const isNotLinkButton = (
+  props: ButtonLinkProps
+): props is WithButtonProps => {
+  return (props as WithButtonProps).button !== undefined;
 };
