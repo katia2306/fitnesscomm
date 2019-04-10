@@ -22,6 +22,7 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
+    textTransform: "uppercase",
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type],
     marginLeft: theme.spacing.unit * 2,
@@ -31,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   accountMenu: {
-    maxWidth: "300px",
-    width: "300px",
+    maxWidth: 300,
+    width: 300,
     paddingTop: 0
   },
   accountMenuHeader: {
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   menuAvatar: {
+    textTransform: "uppercase",
     width: theme.spacing.unit * 6,
     height: theme.spacing.unit * 6,
     color: "#fff",

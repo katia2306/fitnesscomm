@@ -38,7 +38,7 @@ export function* fetchCurrentUser() {
       displayName: displayName || "",
       firstname,
       lastname,
-      shortName: firstname[0].toUpperCase()
+      shortName: firstname[0] || "F"
     };
 
     yield put(userActions.userLoginSuccess(currentUser));
