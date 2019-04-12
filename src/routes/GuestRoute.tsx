@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 import ReduxModel from "../store/redux.model";
 import { userSelectors } from "../store/user.reducer";
+import { appRoutes } from "./app.routes";
 
 interface Props extends RouteProps {
   isAuthenticated: boolean;
@@ -17,7 +18,11 @@ const UserRoute = (props: Props) => {
     <Route
       {...other}
       render={renderProps =>
-        !isAuthenticated ? <Component {...renderProps} /> : <Redirect to="/" />
+        !isAuthenticated ? (
+          <Component {...renderProps} />
+        ) : (
+          <Redirect to={appRoutes.HOME} />
+        )
       }
     />
   );

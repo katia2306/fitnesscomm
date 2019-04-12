@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type],
     cursor: "pointer",
+    textTransform: "uppercase",
     width: theme.spacing.unit * 10,
     height: theme.spacing.unit * 10,
     fontSize: theme.spacing.unit * 4,
@@ -46,7 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: "row"
     }
   },
-  editProfileButtonContainer: {
+  editProfileButton: {
+    whiteSpace: "nowrap",
+    flexShrink: 0,
     marginTop: theme.spacing.unit,
     [theme.breakpoints.up("sm")]: {
       marginTop: 0,
@@ -57,6 +60,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
+  },
+  displayName: {
+    textTransform: "uppercase",
+    fontWeight: 300
   }
 }));
 
@@ -65,22 +72,34 @@ const ProfileHeader = (props: Props) => {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container wrap="nowrap">
       <Grid item xs={4} lg={3} title="Change profile picture">
         <Avatar className={classes.avatar}>{shortName}</Avatar>
       </Grid>
-      <Grid item xs component="section" className={classes.profileContainer}>
-        <Grid container className={classes.profileInfo}>
-          <Grid item>
-            <Typography component="h1" variant="h5" inline>
-              {displayName}
-            </Typography>
-          </Grid>
-          <Grid item className={classes.editProfileButtonContainer}>
-            <Button variant="outlined" fullWidth size="small">
-              Edit Profile
-            </Button>
-          </Grid>
+      <Grid
+        item
+        xs={8}
+        lg={9}
+        component="section"
+        className={classes.profileContainer}
+      >
+        <Grid container className={classes.profileInfo} wrap="nowrap">
+          <Typography
+            component="h1"
+            variant="h5"
+            inline
+            noWrap
+            className={classes.displayName}
+          >
+            {displayName}
+          </Typography>
+          <Button
+            variant="outlined"
+            size="small"
+            className={classes.editProfileButton}
+          >
+            Edit Profile
+          </Button>
         </Grid>
         <Grid container className={classes.emailProfileHeader}>
           <Typography component="h2" variant="body1">

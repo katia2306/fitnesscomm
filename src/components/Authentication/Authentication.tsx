@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, IconButton, Theme } from "@material-ui/core";
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
-import { Close } from "@material-ui/icons";
+import { Close as CloseIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { LoginForm, SignupForm } from "../../forms";
 
@@ -45,7 +45,7 @@ const Authentication = (props: Props) => {
       PaperProps={{ elevation: 4, className: classes.root }}
     >
       <IconButton onClick={closeAuthDialog} className={classes.closeButton}>
-        <Close />
+        <CloseIcon />
       </IconButton>
       {authForm === "login" ? (
         <LoginForm onSignupButtonClick={showSignupForm} />

@@ -14,6 +14,7 @@ import { AccountBox, ExitToApp } from "@material-ui/icons";
 import ReduxModel from "../../store/redux.model";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import { MenuItemLink } from "..";
+import { appRoutes } from "../../routes/app.routes";
 
 interface Props {
   user: ReduxModel["user"];
@@ -89,7 +90,7 @@ const AccountMenu = (props: Props) => {
         disableAutoFocusItem
       >
         <MenuItemLink
-          to="/profile"
+          to={appRoutes.USER_PROFILE}
           onClick={handleAccountMenuClose}
           className={classes.accountMenuHeader}
           selected
@@ -104,7 +105,10 @@ const AccountMenu = (props: Props) => {
             secondaryTypographyProps={{ noWrap: true }}
           />
         </MenuItemLink>
-        <MenuItemLink to="/profile" onClick={handleAccountMenuClose}>
+        <MenuItemLink
+          to={appRoutes.USER_PROFILE}
+          onClick={handleAccountMenuClose}
+        >
           <ListItemIcon>
             <AccountBox />
           </ListItemIcon>
