@@ -3,6 +3,7 @@ import { ActionPayload } from "../store/redux.model";
 import { userActions, User } from "../store/user.reducer";
 import firebase, { db } from "../firebase/firebase";
 import browserHistory from "../browserHistory";
+import { appRoutes } from "../routes/app.routes";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -60,7 +61,7 @@ export function* userLogin(action: ActionPayload<User>) {
     yield call([auth, auth.signInWithEmailAndPassword], email, password);
     yield call(fetchCurrentUser);
 
-    browserHistory.push("/");
+    browserHistory.push(appRoutes.HOME);
   } catch (error) {
     const loginError = {
       code: error.code,
@@ -76,7 +77,7 @@ export function* userLogout() {
 
     yield call([auth, auth.signOut]);
     yield put(userActions.userLogoutSuccess());
-    browserHistory.push("/");
+    browserHistory.push(appRoutes.HOME);
   } catch {
     yield put(userActions.userLogoutFailure());
   }

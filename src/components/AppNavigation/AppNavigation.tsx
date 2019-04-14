@@ -10,9 +10,11 @@ import { userSelectors } from "../../store/user.reducer";
 import ReduxModel from "../../store/redux.model";
 import AccountMenu from "./AccountMenu";
 import { TextLink } from "..";
+import { appRoutes } from "../../routes/app.routes";
 
 interface Props {
   isAuthenticated: boolean;
+  onDrawerOpen: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const AppNavigation = (props: Props) => {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, onDrawerOpen } = props;
   const classes = useStyles();
 
   const {
@@ -55,10 +57,14 @@ const AppNavigation = (props: Props) => {
   return (
     <AppBar position="static" className={classes.root} color="inherit">
       <Toolbar>
-        <IconButton aria-label="Menu" className={classes.menuButton}>
+        <IconButton
+          aria-label="Menu"
+          className={classes.menuButton}
+          onClick={onDrawerOpen}
+        >
           <MenuIcon />
         </IconButton>
-        <TextLink to="/" variant="h6" className={classes.title}>
+        <TextLink to={appRoutes.HOME} variant="h6" className={classes.title}>
           Fitnesscomm
         </TextLink>
         <div className={classes.grow} />
