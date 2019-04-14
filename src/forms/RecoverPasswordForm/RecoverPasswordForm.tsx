@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   button: {
-    marginTop: "20px"
+    marginTop: 20
   },
   form: {
     alignItems: "center"

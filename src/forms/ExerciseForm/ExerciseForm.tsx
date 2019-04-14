@@ -33,17 +33,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   exerciseDate: {
     display: "inline-flex",
-    padding: "10px"
+    padding: 10
   },
   datePicker: {
     paddingTop: "5%",
-    marginRight: "10px"
+    marginRight: 10
   },
   segments: {
     padding: "1%"
   },
   links: {
-    paddingBottom: "10px"
+    paddingBottom: 10
   },
   row: {
     "&:nth-of-type(odd)": {

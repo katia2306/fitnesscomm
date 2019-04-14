@@ -20,7 +20,7 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
-    marginTop: "20px"
+    marginTop: 20
   },
   form: {
     alignItems: "center"
