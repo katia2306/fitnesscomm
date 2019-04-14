@@ -27,7 +27,7 @@ const MacronutrientBox = (props: Props) => {
         {macro}
       </Typography>
       <Typography align="center" {...typographyProps}>
-        {Math.round(total)} g
+        {total} g
       </Typography>
     </Paper>
   );

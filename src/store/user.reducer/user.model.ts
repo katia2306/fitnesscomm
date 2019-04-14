@@ -1,7 +1,4 @@
-interface Error {
-  readonly code: string;
-  readonly message: string;
-}
+import { Error } from "../../utils/types.utils";
 
 export interface User {
   readonly uid: string;

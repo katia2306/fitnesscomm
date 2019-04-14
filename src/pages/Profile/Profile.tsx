@@ -13,13 +13,13 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   headerContainer: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.up("sm")]: {
       paddingLeft: theme.spacing.unit * 3,
       paddingRight: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 6
+      marginBottom: theme.spacing.unit * 4
     }
   }
 }));
@@ -33,7 +33,7 @@ const Profile = (props: Props) => {
   return (
     <Grid container item xs md={8} lg={6} direction="column">
       <Helmet title={displayName} />
-      <Grid item className={classes.headerContainer}>
+      <Grid item xs className={classes.headerContainer}>
         <ProfileHeader
           email={email}
           displayName={displayName}

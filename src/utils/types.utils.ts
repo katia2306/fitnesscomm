@@ -8,3 +8,8 @@ export const isNotLinkButton = (
 ): props is WithButtonProps => {
   return (props as WithButtonProps).button !== undefined;
 };
+
+export interface Error {
+  code: string;
+  message: string;
+}

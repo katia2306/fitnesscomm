@@ -7,7 +7,7 @@ import {
   calculateMacros
 } from "../../utils/macros.utils";
 import { MacronutrientBox } from "..";
-import { CaloriesCalculatorProps } from "./CaloriesCalculator";
+import { CaloriesCalculatorProps, Macros } from "./CaloriesCalculator";
 import {
   feetToCentimeters,
   poundsToKilograms
@@ -15,6 +15,7 @@ import {
 
 interface Props extends CaloriesCalculatorProps {
   handleReset: () => void;
+  onSubmit: (dailyCalories: number, macros: Macros) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,7 +37,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TotalCalories = (props: Props) => {
-  const { gender, age = 0, activity, goal, imperial, handleReset } = props;
+  const {
+    gender,
+    age = 0,
+    activity,
+    goal,
+    imperial,
+    handleReset,
+    onSubmit
+  } = props;
   let { height = 0, weight = 0 } = props;
   const classes = useStyles();
 
@@ -48,7 +57,14 @@ const TotalCalories = (props: Props) => {
   const bmr = calculateBMR(gender, weight, height, age);
   const dailyCalories = calculateDailyCalories(bmr, activity, goal);
 
-  const { protein, carbohydrate, fat } = calculateMacros(weight, dailyCalories);
+  const { protein, carbohydrate, fat, fiber } = calculateMacros(
+    weight,
+    dailyCalories
+  );
+
+  const handleSubmit = () => {
+    onSubmit(dailyCalories, { protein, carbohydrate, fat, fiber });
+  };
 
   return (
     <Paper square elevation={0} className={classes.resultContainer}>
@@ -63,7 +79,7 @@ const TotalCalories = (props: Props) => {
             component="h2"
             color="textSecondary"
           >
-            {Math.round(dailyCalories)}
+            {dailyCalories}
           </Typography>
           <Typography
             align="center"
@@ -95,11 +111,19 @@ const TotalCalories = (props: Props) => {
           <MacronutrientBox macro="Fat" total={fat} />
         </Grid>
         <Grid item xs>
-          <MacronutrientBox macro="Fiber" total={0} />
+          <MacronutrientBox macro="Fiber" total={fiber} />
         </Grid>
       </Grid>
       <Button onClick={handleReset} className={classes.button}>
         Reset
+      </Button>
+      <Button
+        onClick={handleSubmit}
+        color="primary"
+        variant="contained"
+        className={classes.button}
+      >
+        Save
       </Button>
     </Paper>
   );

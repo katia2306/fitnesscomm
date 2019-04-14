@@ -1,4 +1,7 @@
-import { CaloriesCalculatorProps } from "../components/CaloriesCalculator/CaloriesCalculator";
+import {
+  CaloriesCalculatorProps,
+  Macros
+} from "../components/CaloriesCalculator/CaloriesCalculator";
 
 const activitiesFactor = {
   none: 1.2,
@@ -19,7 +22,8 @@ const goalsFactor = {
 const macrosFactor = {
   protein: 4,
   carbohydrate: 4,
-  fat: 9
+  fat: 9,
+  fiber: 0.014
 };
 
 export const calculateBMR = (
@@ -36,19 +40,21 @@ export const calculateDailyCalories = (
   BMR: number,
   activity: CaloriesCalculatorProps["activity"],
   goal: CaloriesCalculatorProps["goal"]
-): number => BMR * activitiesFactor[activity] + goalsFactor[goal];
+): number => Math.round(BMR * activitiesFactor[activity] + goalsFactor[goal]);
 
 export const calculateMacros = (
   weight: number,
   dailyCalories: number
-): { protein: number; carbohydrate: number; fat: number } => {
+): Macros => {
   const protein = 1.8 * weight * macrosFactor.protein;
   const fat = 0.3 * dailyCalories;
   const carbohydrate = dailyCalories - protein - fat;
+  const fiber = dailyCalories * macrosFactor.fiber;
 
   return {
-    protein: protein / macrosFactor.protein,
-    carbohydrate: carbohydrate / macrosFactor.carbohydrate,
-    fat: fat / macrosFactor.fat
+    protein: Math.round(protein / macrosFactor.protein),
+    carbohydrate: Math.round(carbohydrate / macrosFactor.carbohydrate),
+    fat: Math.round(fat / macrosFactor.fat),
+    fiber: Math.round(fiber)
   };
 };

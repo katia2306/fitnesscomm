@@ -8,11 +8,17 @@ import {
   Stepper,
   StepLabel
 } from "@material-ui/core";
+import { connect } from "react-redux";
 import BasicInformation from "./BasicInformation";
 import Activity from "./Activity";
 import Goal from "./Goal";
 import TotalCalories from "./TotalCalories";
 import useFormData from "../../hooks/useFormData";
+import { profilesActions } from "../../store/profiles.reducer";
+
+interface Props {
+  createProfile: typeof profilesActions.createProfileRequest;
+}
 
 export interface CaloriesCalculatorProps {
   gender: "female" | "male";
@@ -29,7 +35,18 @@ export interface CaloriesCalculatorProps {
   imperial: boolean;
 }
 
+export interface Macros {
+  protein: number;
+  carbohydrate: number;
+  fat: number;
+  fiber: number;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    flex: 1,
+    overflowY: "auto"
+  },
   actionsContainer: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit
@@ -56,7 +73,8 @@ const initialFormData: CaloriesCalculatorProps = {
   imperial: false
 };
 
-const CaloriesCalculator = () => {
+const CaloriesCalculator = (props: Props) => {
+  const { createProfile } = props;
   const classes = useStyles();
 
   const [activeStep, setActiveStep] = useState(0);
@@ -77,8 +95,12 @@ const CaloriesCalculator = () => {
     setActiveStep(0);
   };
 
+  const handleSubmit = (dailyCalories: number, macros: Macros) => {
+    createProfile({ dailyCalories, ...macros });
+  };
+
   return (
-    <div>
+    <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map(({ id, stepLabel, StepComponent }) => (
           <Step key={id}>
@@ -113,10 +135,21 @@ const CaloriesCalculator = () => {
         ))}
       </Stepper>
       {activeStep === steps.length && (
-        <TotalCalories {...formData} handleReset={handleReset} />
+        <TotalCalories
+          {...formData}
+          handleReset={handleReset}
+          onSubmit={handleSubmit}
+        />
       )}
     </div>
   );
 };
 
-export default CaloriesCalculator;
+const mapDispatchToProps = {
+  createProfile: profilesActions.createProfileRequest
+};
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CaloriesCalculator);
