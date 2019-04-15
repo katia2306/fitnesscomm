@@ -2,6 +2,16 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme, Paper, Typography, Button, Grid } from "@material-ui/core";
 import { MacronutrientBox } from "..";
+import {
+  feetToCentimeters,
+  poundsToKilograms
+} from "../../utils/convert.utils";
+import {
+  calculateBMR,
+  calculateDailyCalories,
+  calculateMacros
+} from "../../utils/macros.utils";
+import { CaloriesCalculatorProps } from "./CaloriesCalculator";
 
 export interface Macros {
   protein: number;
@@ -11,10 +21,9 @@ export interface Macros {
 }
 
 interface Props {
+  onCreateProfile: (dailyCalories: number, macros: Macros) => void;
   handleReset: () => void;
   isLoading: boolean;
-  dailyCalories: number;
-  macros: Macros;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -35,10 +44,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const TotalCalories = (props: Props) => {
-  const { handleReset, isLoading, macros, dailyCalories } = props;
-  const { protein, carbohydrate, fat, fiber } = macros;
+const TotalCalories = (props: Props & CaloriesCalculatorProps) => {
+  const {
+    gender,
+    age = 0,
+    activity,
+    goal,
+    imperial,
+    handleReset,
+    onCreateProfile,
+    isLoading
+  } = props;
+  let { height = 0, weight = 0 } = props;
   const classes = useStyles();
+
+  if (imperial) {
+    height = feetToCentimeters(height);
+    weight = poundsToKilograms(weight);
+  }
+
+  const bmr = calculateBMR(gender, weight, height, age);
+  const dailyCalories = calculateDailyCalories(bmr, activity, goal);
+
+  const macros = calculateMacros(weight, dailyCalories);
+  const { protein, carbohydrate, fat, fiber } = macros;
+
+  const handleCreateProfile = () => {
+    onCreateProfile(dailyCalories, macros);
+  };
 
   return (
     <Paper square elevation={0} className={classes.resultContainer}>
@@ -96,11 +129,11 @@ const TotalCalories = (props: Props) => {
         Reset
       </Button>
       <Button
-        type="submit"
         color="primary"
         variant="contained"
         className={classes.button}
         disabled={isLoading}
+        onClick={handleCreateProfile}
       >
         Save
       </Button>

@@ -13,22 +13,13 @@ import { withSnackbar, withSnackbarProps } from "notistack";
 import BasicInformation from "./BasicInformation";
 import Activity from "./Activity";
 import Goal from "./Goal";
-import TotalCalories from "./TotalCalories";
+import TotalCalories, { Macros } from "./TotalCalories";
 import useFormData from "../../hooks/useFormData";
 import {
   profilesActions,
   profilesSelectors
 } from "../../store/profiles.reducer";
 import ReduxModel from "../../store/redux.model";
-import {
-  feetToCentimeters,
-  poundsToKilograms
-} from "../../utils/convert.utils";
-import {
-  calculateBMR,
-  calculateDailyCalories,
-  calculateMacros
-} from "../../utils/macros.utils";
 
 interface Props {
   createProfile: typeof profilesActions.createProfileRequest;
@@ -123,70 +114,54 @@ const CaloriesCalculator = (props: Props & withSnackbarProps) => {
     };
   }, [createProfilesFormReset]);
 
-  const { gender, age = 0, activity, goal, imperial } = formData;
-  let { weight = 0, height = 0 } = formData;
-
-  if (imperial) {
-    height = feetToCentimeters(height);
-    weight = poundsToKilograms(weight);
-  }
-
-  const bmr = calculateBMR(gender, weight, height, age);
-  const dailyCalories = calculateDailyCalories(bmr, activity, goal);
-
-  const macros = calculateMacros(weight, dailyCalories);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleCreateProfile = (dailyCalories: number, macros: Macros) => {
     setLoading(true);
     createProfile({ dailyCalories, ...macros });
   };
 
   return (
     <div className={classes.root}>
-      <form onSubmit={handleSubmit} noValidate>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map(({ id, stepLabel, StepComponent }) => (
-            <Step key={id}>
-              <StepLabel>{stepLabel}</StepLabel>
-              <StepContent>
-                <StepComponent
-                  formData={formData}
-                  onChange={handleInputChange}
-                  onImperialChange={handleCheckboxChange}
-                />
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBackStep}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNextStep}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                  </div>
+      <Stepper activeStep={activeStep} orientation="vertical">
+        {steps.map(({ id, stepLabel, StepComponent }) => (
+          <Step key={id}>
+            <StepLabel>{stepLabel}</StepLabel>
+            <StepContent>
+              <StepComponent
+                formData={formData}
+                onChange={handleInputChange}
+                onImperialChange={handleCheckboxChange}
+              />
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBackStep}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNextStep}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
                 </div>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {activeStep === steps.length && (
-          <TotalCalories
-            macros={macros}
-            dailyCalories={dailyCalories}
-            handleReset={handleReset}
-            isLoading={loading}
-          />
-        )}
-      </form>
+              </div>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === steps.length && (
+        <TotalCalories
+          onCreateProfile={handleCreateProfile}
+          handleReset={handleReset}
+          isLoading={loading}
+          {...formData}
+        />
+      )}
     </div>
   );
 };
