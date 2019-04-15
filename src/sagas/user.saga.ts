@@ -4,6 +4,7 @@ import { userActions, User } from "../store/user.reducer";
 import firebase, { db } from "../firebase/firebase";
 import browserHistory from "../browserHistory";
 import { appRoutes } from "../routes/app.routes";
+import userAPI from "../api/user.api";
 
 const onAuthStateChanged = () => {
   return new Promise((resolve, reject) => {
@@ -84,13 +85,12 @@ export function* userLogout() {
 }
 
 export function* userSignup(action: ActionPayload<User>) {
-  const { email, password = "" } = action.payload;
+  const { payload } = action;
 
   try {
-    const auth = firebase.auth();
-
-    yield call([auth, auth.createUserWithEmailAndPassword], email, password);
-    yield call(fetchCurrentUser);
+    yield call(userAPI.signupUser, payload);
+    yield put(userActions.userLoginRequest(payload));
+    yield put(userActions.userSignupSuccess(payload));
   } catch (error) {
     const signupError = {
       code: error.code,
