@@ -18,7 +18,10 @@ export function* createProfile(action: ActionPayload<Profiles>) {
       .collection("profiles")
       .doc();
 
-    yield call([profilesRef, profilesRef.set], action.payload);
+    yield call([profilesRef, profilesRef.set], {
+      ...action.payload,
+      createdAt: firebase.firestore.Timestamp.now()
+    });
     yield put(profilesActions.createProfileSuccess());
   } catch (error) {
     yield put(profilesActions.createProfileFailure(parseError(error)));

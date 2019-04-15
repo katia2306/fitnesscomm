@@ -1,7 +1,5 @@
-import {
-  CaloriesCalculatorProps,
-  Macros
-} from "../components/CaloriesCalculator/CaloriesCalculator";
+import { CaloriesCalculatorProps } from "../components/CaloriesCalculator/CaloriesCalculator";
+import { Macros } from "../components/CaloriesCalculator/TotalCalories";
 
 const activitiesFactor = {
   none: 1.2,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Theme,
@@ -9,15 +9,31 @@ import {
   StepLabel
 } from "@material-ui/core";
 import { connect } from "react-redux";
+import { withSnackbar, withSnackbarProps } from "notistack";
 import BasicInformation from "./BasicInformation";
 import Activity from "./Activity";
 import Goal from "./Goal";
 import TotalCalories from "./TotalCalories";
 import useFormData from "../../hooks/useFormData";
-import { profilesActions } from "../../store/profiles.reducer";
+import {
+  profilesActions,
+  profilesSelectors
+} from "../../store/profiles.reducer";
+import ReduxModel from "../../store/redux.model";
+import {
+  feetToCentimeters,
+  poundsToKilograms
+} from "../../utils/convert.utils";
+import {
+  calculateBMR,
+  calculateDailyCalories,
+  calculateMacros
+} from "../../utils/macros.utils";
 
 interface Props {
   createProfile: typeof profilesActions.createProfileRequest;
+  createProfileError: ReduxModel["profiles"]["createProfileError"];
+  createProfilesFormReset: typeof profilesActions.createProfilesFormReset;
 }
 
 export interface CaloriesCalculatorProps {
@@ -33,13 +49,6 @@ export interface CaloriesCalculatorProps {
     | "moderateGain"
     | "rapidGain";
   imperial: boolean;
-}
-
-export interface Macros {
-  protein: number;
-  carbohydrate: number;
-  fat: number;
-  fiber: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -73,10 +82,16 @@ const initialFormData: CaloriesCalculatorProps = {
   imperial: false
 };
 
-const CaloriesCalculator = (props: Props) => {
-  const { createProfile } = props;
+const CaloriesCalculator = (props: Props & withSnackbarProps) => {
+  const {
+    createProfile,
+    createProfileError,
+    enqueueSnackbar,
+    createProfilesFormReset
+  } = props;
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const {
     formData,
@@ -95,61 +110,97 @@ const CaloriesCalculator = (props: Props) => {
     setActiveStep(0);
   };
 
-  const handleSubmit = (dailyCalories: number, macros: Macros) => {
+  useEffect(() => {
+    if (createProfileError) {
+      enqueueSnackbar(createProfileError.message, { variant: "error" });
+    }
+    setLoading(false);
+  }, [enqueueSnackbar, createProfileError]);
+
+  useEffect(() => {
+    return () => {
+      createProfilesFormReset();
+    };
+  }, [createProfilesFormReset]);
+
+  const { gender, age = 0, activity, goal, imperial } = formData;
+  let { weight = 0, height = 0 } = formData;
+
+  if (imperial) {
+    height = feetToCentimeters(height);
+    weight = poundsToKilograms(weight);
+  }
+
+  const bmr = calculateBMR(gender, weight, height, age);
+  const dailyCalories = calculateDailyCalories(bmr, activity, goal);
+
+  const macros = calculateMacros(weight, dailyCalories);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
     createProfile({ dailyCalories, ...macros });
   };
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map(({ id, stepLabel, StepComponent }) => (
-          <Step key={id}>
-            <StepLabel>{stepLabel}</StepLabel>
-            <StepContent>
-              <StepComponent
-                formData={formData}
-                onChange={handleInputChange}
-                onImperialChange={handleCheckboxChange}
-              />
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBackStep}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNextStep}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
+      <form onSubmit={handleSubmit} noValidate>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map(({ id, stepLabel, StepComponent }) => (
+            <Step key={id}>
+              <StepLabel>{stepLabel}</StepLabel>
+              <StepContent>
+                <StepComponent
+                  formData={formData}
+                  onChange={handleInputChange}
+                  onImperialChange={handleCheckboxChange}
+                />
+                <div className={classes.actionsContainer}>
+                  <div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBackStep}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNextStep}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <TotalCalories
-          {...formData}
-          handleReset={handleReset}
-          onSubmit={handleSubmit}
-        />
-      )}
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <TotalCalories
+            macros={macros}
+            dailyCalories={dailyCalories}
+            handleReset={handleReset}
+            isLoading={loading}
+          />
+        )}
+      </form>
     </div>
   );
 };
 
+const mapStateToProps = (state: ReduxModel) => ({
+  createProfileError: profilesSelectors.getCreateProfileError(state)
+});
+
 const mapDispatchToProps = {
-  createProfile: profilesActions.createProfileRequest
+  createProfile: profilesActions.createProfileRequest,
+  createProfilesFormReset: profilesActions.createProfilesFormReset
 };
 
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps
-)(CaloriesCalculator);
+)(withSnackbar(CaloriesCalculator));

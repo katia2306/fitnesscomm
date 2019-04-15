@@ -1,21 +1,20 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme, Paper, Typography, Button, Grid } from "@material-ui/core";
-import {
-  calculateBMR,
-  calculateDailyCalories,
-  calculateMacros
-} from "../../utils/macros.utils";
 import { MacronutrientBox } from "..";
-import { CaloriesCalculatorProps, Macros } from "./CaloriesCalculator";
-import {
-  feetToCentimeters,
-  poundsToKilograms
-} from "../../utils/convert.utils";
 
-interface Props extends CaloriesCalculatorProps {
+export interface Macros {
+  protein: number;
+  carbohydrate: number;
+  fat: number;
+  fiber: number;
+}
+
+interface Props {
   handleReset: () => void;
-  onSubmit: (dailyCalories: number, macros: Macros) => void;
+  isLoading: boolean;
+  dailyCalories: number;
+  macros: Macros;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,34 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TotalCalories = (props: Props) => {
-  const {
-    gender,
-    age = 0,
-    activity,
-    goal,
-    imperial,
-    handleReset,
-    onSubmit
-  } = props;
-  let { height = 0, weight = 0 } = props;
+  const { handleReset, isLoading, macros, dailyCalories } = props;
+  const { protein, carbohydrate, fat, fiber } = macros;
   const classes = useStyles();
-
-  if (imperial) {
-    height = feetToCentimeters(height);
-    weight = poundsToKilograms(weight);
-  }
-
-  const bmr = calculateBMR(gender, weight, height, age);
-  const dailyCalories = calculateDailyCalories(bmr, activity, goal);
-
-  const { protein, carbohydrate, fat, fiber } = calculateMacros(
-    weight,
-    dailyCalories
-  );
-
-  const handleSubmit = () => {
-    onSubmit(dailyCalories, { protein, carbohydrate, fat, fiber });
-  };
 
   return (
     <Paper square elevation={0} className={classes.resultContainer}>
@@ -114,14 +88,19 @@ const TotalCalories = (props: Props) => {
           <MacronutrientBox macro="Fiber" total={fiber} />
         </Grid>
       </Grid>
-      <Button onClick={handleReset} className={classes.button}>
+      <Button
+        onClick={handleReset}
+        className={classes.button}
+        disabled={isLoading}
+      >
         Reset
       </Button>
       <Button
-        onClick={handleSubmit}
+        type="submit"
         color="primary"
         variant="contained"
         className={classes.button}
+        disabled={isLoading}
       >
         Save
       </Button>
