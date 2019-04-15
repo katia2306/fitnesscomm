@@ -3,7 +3,6 @@ import {
   Typography,
   TextField,
   Divider,
-  Link,
   Theme,
   Table,
   TableHead,
@@ -14,11 +13,9 @@ import {
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/styles";
 
-interface Props {}
-
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: "#2196f3",
+    backgroundColor: theme.palette.secondary[theme.palette.type],
     color: "#ffff"
   },
   body: {
@@ -47,12 +44,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   row: {
     "&:nth-of-type(odd)": {
-      backgroundColor: "#2196f3"
+      backgroundColor: theme.palette.background.default
     }
   }
 }));
 
-const ExerciseForm = (props: Props) => {
+const ExerciseForm = () => {
   const classes = useStyles();
 
   return (
@@ -76,7 +73,7 @@ const ExerciseForm = (props: Props) => {
         <div className={classes.segments}>
           <Typography variant="h5">Cardiovascular</Typography>
           <Typography className={classes.links}>
-            <Link>Añadir</Link>|<Link>Herramientas rápidas</Link>
+            <div>Añadir</div>|<div>Herramientas rápidas</div>
           </Typography>
 
           <Table>
@@ -91,23 +88,25 @@ const ExerciseForm = (props: Props) => {
           </Table>
 
           <Table>
-            <TableRow>
-              <CustomTableCell>Total diario / Objetivo</CustomTableCell>
-              <CustomTableCell>0/70</CustomTableCell>
-              <CustomTableCell>0/503</CustomTableCell>
-            </TableRow>
-            <TableRow>
-              <CustomTableCell>Total semanal / Objetivo</CustomTableCell>
-              <CustomTableCell>0/280</CustomTableCell>
-              <CustomTableCell>0/2.010</CustomTableCell>
-            </TableRow>
+            <TableBody>
+              <TableRow>
+                <CustomTableCell>Total diario / Objetivo</CustomTableCell>
+                <CustomTableCell>0/70</CustomTableCell>
+                <CustomTableCell>0/503</CustomTableCell>
+              </TableRow>
+              <TableRow>
+                <CustomTableCell>Total semanal / Objetivo</CustomTableCell>
+                <CustomTableCell>0/280</CustomTableCell>
+                <CustomTableCell>0/2.010</CustomTableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </div>
         <Divider />
         <div className={classes.segments}>
           <Typography variant="h5">Entrenamiento</Typography>
           <Typography className={classes.links}>
-            <Link>Añadir</Link>|<Link>Herramientas rápidas</Link>
+            <div>Añadir</div>|<div>Herramientas rápidas</div>
           </Typography>
 
           <Table>
