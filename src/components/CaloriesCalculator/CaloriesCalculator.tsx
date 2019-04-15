@@ -9,7 +9,7 @@ import {
   StepLabel
 } from "@material-ui/core";
 import { connect } from "react-redux";
-import { withSnackbar, withSnackbarProps } from "notistack";
+import { useSnackbar } from "notistack";
 import BasicInformation from "./BasicInformation";
 import Activity from "./Activity";
 import Goal from "./Goal";
@@ -73,14 +73,10 @@ const initialFormData: CaloriesCalculatorProps = {
   imperial: false
 };
 
-const CaloriesCalculator = (props: Props & withSnackbarProps) => {
-  const {
-    createProfile,
-    createProfileError,
-    enqueueSnackbar,
-    createProfilesFormReset
-  } = props;
+const CaloriesCalculator = (props: Props) => {
+  const { createProfile, createProfileError, createProfilesFormReset } = props;
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -178,4 +174,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSnackbar(CaloriesCalculator));
+)(CaloriesCalculator);

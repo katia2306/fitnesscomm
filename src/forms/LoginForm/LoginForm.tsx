@@ -13,13 +13,13 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { withSnackbar, withSnackbarProps } from "notistack";
+import { useSnackbar } from "notistack";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import ReduxModel from "../../store/redux.model";
 import { ButtonLink } from "../../components";
 
-interface Props extends withSnackbarProps {
+interface Props {
   onSignupButtonClick: () => void;
   userLogin: typeof userActions.userLoginRequest;
   loginFormReset: typeof userActions.loginFormReset;
@@ -57,14 +57,9 @@ const initialFormData = {
 };
 
 const LoginForm = (props: Props) => {
-  const {
-    onSignupButtonClick,
-    userLogin,
-    loginFormReset,
-    loginError,
-    enqueueSnackbar
-  } = props;
+  const { onSignupButtonClick, userLogin, loginFormReset, loginError } = props;
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -191,4 +186,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSnackbar(LoginForm));
+)(LoginForm);

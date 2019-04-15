@@ -79,6 +79,7 @@ const App = (props: Props) => {
     <ThemeProvider theme={theme}>
       <SnackbarProvider
         maxSnack={3}
+        preventDuplicate
         action={[
           <Button key={0} color="inherit" size="small">
             {"Dismiss"}
