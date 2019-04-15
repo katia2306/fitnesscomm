@@ -1,11 +1,13 @@
-import React, { FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import {
   Button,
   TextField,
   Typography,
   Divider,
-  Theme
+  Theme,
+  IconButton
 } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 import { userActions, userSelectors } from "../../store/user.reducer";
@@ -34,6 +36,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   signupContainer: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 4
+  },
+  passwordContainer: {
+    display: "inline"
+  },
+  passwordInput: {
+    width: "40%",
+    marginRight: 10,
+    marginBottom: theme.spacing.unit
   }
 }));
 
@@ -42,7 +52,8 @@ const initialFormData = {
   name: "",
   firstname: "",
   lastname: "",
-  password: ""
+  password: "",
+  repeatPassword: ""
 };
 
 const SignupForm = (props: Props) => {
@@ -51,12 +62,18 @@ const SignupForm = (props: Props) => {
     formData,
     formDataActions: { handleInputChange }
   } = useFormData(initialFormData);
+  const [showPassword, setShowPassword] = useState(false);
   const classes = useStyles();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     userSignup(formData);
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form noValidate onSubmit={handleSubmit}>
       <TextField
@@ -90,16 +107,35 @@ const SignupForm = (props: Props) => {
         onChange={handleInputChange}
         fullWidth
       />
-      <TextField
-        id="signup-password"
-        label="Create a password"
-        type="password"
-        name="password"
-        variant="outlined"
-        className={classes.textField}
-        onChange={handleInputChange}
-        fullWidth
-      />
+      <div className={classes.passwordContainer}>
+        <TextField
+          id="signup-password"
+          label="Create a password"
+          type={showPassword ? "text" : "password"}
+          name="password"
+          variant="outlined"
+          className={classes.passwordInput}
+          onChange={handleInputChange}
+          fullWidth
+        />
+        <TextField
+          id="signup-repeat-password"
+          label="Confirm password"
+          type={showPassword ? "text" : "password"}
+          name="repeatPassword"
+          variant="outlined"
+          className={classes.passwordInput}
+          onChange={handleInputChange}
+          fullWidth
+        />
+        <IconButton onClick={togglePasswordVisibility}>
+          {showPassword ? (
+            <VisibilityOff fontSize="large" />
+          ) : (
+            <Visibility fontSize="large" />
+          )}
+        </IconButton>
+      </div>
 
       <Button
         variant="contained"
