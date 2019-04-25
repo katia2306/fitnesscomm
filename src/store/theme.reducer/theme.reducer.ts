@@ -1,5 +1,6 @@
 import ReduxModel, { ActionPayload } from "../redux.model";
 import { initialState, Theme } from "./theme.model";
+import { ReduxSelectors } from "../../utils/types.utils";
 
 export enum themeTypes {
   TOGGLE_THEME_REQUEST = "@@THEME/TOGGLE_THEME_REQUEST",
@@ -32,6 +33,6 @@ export const themeActions = {
   })
 };
 
-export const themeSelectors = {
-  getTheme: (state: ReduxModel) => state.theme.isThemeDark
+export const themeSelectors: ReduxSelectors = {
+  getTheme: state => state.theme.isThemeDark
 };

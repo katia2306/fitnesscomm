@@ -1,5 +1,6 @@
 import ReduxModel, { ActionPayload, Action } from "../redux.model";
 import { initialState, User } from "./user.model";
+import { ReduxSelectors } from "../../utils/types.utils";
 
 export enum userTypes {
   USER_LOGIN_REQUEST = "@@USER/USER_LOGIN_REQUEST",
@@ -112,10 +113,10 @@ export const userActions = {
   })
 };
 
-export const userSelectors = {
-  getUser: (state: ReduxModel) => state.user,
-  isUserAuthenticated: (state: ReduxModel) => !!state.user.uid,
-  isUserLoaded: (state: ReduxModel) => state.user.loaded,
-  getLoginError: (state: ReduxModel) => state.user.loginError,
-  getSignupError: (state: ReduxModel) => state.user.signupError
+export const userSelectors: ReduxSelectors = {
+  getUser: state => state.user,
+  isUserAuthenticated: state => !!state.user.uid,
+  isUserLoaded: state => state.user.loaded,
+  getLoginError: state => state.user.loginError,
+  getSignupError: state => state.user.signupError
 };
