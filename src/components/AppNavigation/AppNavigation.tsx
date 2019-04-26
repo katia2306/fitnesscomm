@@ -55,7 +55,7 @@ const AppNavigation = (props: Props) => {
   }, [closeAuthDialog, dialogOpen, isAuthenticated]);
 
   return (
-    <AppBar position="static" className={classes.root} color="inherit">
+    <AppBar className={classes.root} color="inherit">
       <Toolbar>
         <IconButton
           aria-label="Menu"

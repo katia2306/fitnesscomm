@@ -21,4 +21,8 @@ export default function* indexSaga() {
     profilesTypes.CREATE_PROFILE_REQUEST,
     profilesSagas.createProfile
   );
+  yield takeLatest(
+    profilesTypes.FETCH_PROFILES_REQUEST,
+    profilesSagas.fetchProfiles
+  );
 }

@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   root: {
     flex: 1,
     padding: 8,
+    marginTop: 56,
     "@media (min-width:600px)": {
       padding: 16
     }

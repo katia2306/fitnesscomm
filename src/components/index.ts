@@ -10,3 +10,4 @@ export { default as CaloriesCalculator } from "./CaloriesCalculator";
 export { default as MacronutrientBox } from "./MacronutrientBox";
 export { default as ButtonLink } from "./ButtonLink";
 export { default as TextLink } from "./TextLink";
+export { default as ProfilesCard } from "./ProfilesCard";
