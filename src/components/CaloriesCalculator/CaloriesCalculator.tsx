@@ -112,7 +112,7 @@ const CaloriesCalculator = (props: Props) => {
 
   const handleCreateProfile = (dailyCalories: number, macros: Macros) => {
     setLoading(true);
-    createProfile({ dailyCalories, ...macros });
+    createProfile({ title: "Test Title", dailyCalories, ...macros });
   };
 
   return (

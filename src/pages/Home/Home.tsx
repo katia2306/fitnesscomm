@@ -1,12 +1,12 @@
 import React from "react";
 import Helmet from "react-helmet";
-import Exercise from "../Exercise";
+// import { Exercise } from "..";
 
 const Home = () => {
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%", overflow: "auto" }}>
       <Helmet title="Fitnesscomm" />
-      <Exercise />
+      {/* <Exercise /> */}
     </div>
   );
 };

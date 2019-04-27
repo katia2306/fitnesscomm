@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Add as AddIcon } from "@material-ui/icons";
-import { Theme } from "@material-ui/core";
+import { Theme, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { ButtonLink, ProfilesCard } from "../../components";
+import { ButtonLink, ProfilesCard, PageWrapper } from "../../components";
 import { appRoutes } from "../../routes/app.routes";
 import ReduxModel from "../../store/redux.model";
 import {
@@ -20,10 +20,6 @@ interface MainPageProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flex: 1,
-    overflowY: "auto"
-  },
   fab: {
     position: "absolute",
     bottom: theme.spacing.unit,
@@ -41,11 +37,22 @@ const ProfilesMainPage = (props: MainPageProps) => {
     }
   }, [fetchProfiles, profilesLoaded]);
 
+  let profilesList;
+  if (profilesLoaded && profiles) {
+    profilesList = (
+      <Grid container spacing={8}>
+        {profiles.map(id => (
+          <Grid item xs={12} sm={2} key={id}>
+            <ProfilesCard id={id} />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+
   return (
-    <div className={classes.root}>
-      {profiles.map(id => (
-        <ProfilesCard key={id} id={id} />
-      ))}
+    <PageWrapper scroll>
+      {profilesList}
       <ButtonLink
         to={appRoutes.PROFILES_NEW}
         fab
@@ -55,7 +62,7 @@ const ProfilesMainPage = (props: MainPageProps) => {
       >
         <AddIcon />
       </ButtonLink>
-    </div>
+    </PageWrapper>
   );
 };
 

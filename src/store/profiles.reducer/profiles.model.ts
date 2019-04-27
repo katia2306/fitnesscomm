@@ -2,6 +2,7 @@ import { Error } from "../../utils/types.utils";
 
 export interface ProfilesData {
   readonly id: string;
+  readonly title: string;
   readonly dailyCalories: number;
   readonly protein: number;
   readonly carbohydrate: number;

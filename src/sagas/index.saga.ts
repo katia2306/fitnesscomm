@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga/effects";
+import { takeLatest, takeLeading } from "redux-saga/effects/";
 import { themeTypes } from "../store/theme.reducer";
 import { userTypes } from "../store/user.reducer";
 import { profilesTypes } from "../store/profiles.reducer";
@@ -24,5 +24,9 @@ export default function* indexSaga() {
   yield takeLatest(
     profilesTypes.FETCH_PROFILES_REQUEST,
     profilesSagas.fetchProfiles
+  );
+  yield takeLeading(
+    profilesTypes.DELETE_PROFILE_REQUEST,
+    profilesSagas.deleteProfile
   );
 }

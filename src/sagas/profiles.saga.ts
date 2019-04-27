@@ -64,7 +64,29 @@ export function* fetchProfiles() {
     );
     yield put(profilesActions.fetchProfilesSuccess(profiles));
   } catch (error) {
-    console.log(error);
-    // yield put(profilesActions.createProfileFailure(parseError(error)));
+    yield put(profilesActions.fetchProfilesFailure());
+  }
+}
+
+export function* deleteProfile(action: ActionPayload<ProfilesData["id"]>) {
+  try {
+    const { currentUser } = firebase.auth();
+    if (!currentUser) {
+      throw new Error("User is not logged in");
+    }
+
+    const { uid } = currentUser;
+    const { payload } = action;
+
+    const profileRef = db
+      .collection("users")
+      .doc(uid)
+      .collection("profiles")
+      .doc(payload);
+
+    yield call([profileRef, profileRef.delete]);
+    yield put(profilesActions.deleteProfileSuccess(payload));
+  } catch (error) {
+    yield put(profilesActions.deleteProfileFailure());
   }
 }
