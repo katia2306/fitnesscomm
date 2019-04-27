@@ -1,4 +1,4 @@
-import ReduxModel, { ActionPayload } from "../redux.model";
+import { ActionPayload } from "../redux.model";
 import { initialState, Theme } from "./theme.model";
 import { ReduxSelectors } from "../../utils/types.utils";
 
