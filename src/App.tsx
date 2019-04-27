@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -53,29 +53,6 @@ const App = (props: Props) => {
     setDrawerOpen(false);
   };
 
-  const AppContent = (
-    <Fragment>
-      <CssBaseline />
-      <AppNavigation onDrawerOpen={handleDrawerOpen} />
-      <AppDrawer drawerOpen={drawerOpen} onDrawerClose={handleDrawerClose} />
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        className={classes.root}
-        component="main"
-        spacing={8}
-      >
-        <Switch>
-          <Route exact path={appRoutes.HOME} component={Home} />
-          <UserRoute path={appRoutes.USER_PROFILE} component={Profile} />
-          <UserRoute path={appRoutes.PROFILES} component={Profiles} />
-          <Route exact component={undefined} />
-        </Switch>
-      </Grid>
-    </Fragment>
-  );
-
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider
@@ -87,7 +64,24 @@ const App = (props: Props) => {
           </Button>
         ]}
       >
-        {AppContent}
+        <CssBaseline />
+        <AppNavigation onDrawerOpen={handleDrawerOpen} />
+        <AppDrawer drawerOpen={drawerOpen} onDrawerClose={handleDrawerClose} />
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          className={classes.root}
+          component="main"
+          spacing={8}
+        >
+          <Switch>
+            <Route exact path={appRoutes.HOME} component={Home} />
+            <UserRoute path={appRoutes.USER_PROFILE} component={Profile} />
+            <UserRoute path={appRoutes.PROFILES} component={Profiles} />
+            <Route exact component={undefined} />
+          </Switch>
+        </Grid>
       </SnackbarProvider>
     </ThemeProvider>
   );
