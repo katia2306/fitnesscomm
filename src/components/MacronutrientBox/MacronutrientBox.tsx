@@ -8,7 +8,8 @@ interface Props {
   macro: string;
   total: number;
   paperProps?: PaperProps;
-  typographyProps?: TypographyProps;
+  textPrimaryProps?: TypographyProps;
+  textSecondaryProps?: TypographyProps;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,15 +19,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const MacronutrientBox = (props: Props) => {
-  const { macro, total, paperProps, typographyProps } = props;
+  const {
+    macro,
+    total,
+    paperProps,
+    textPrimaryProps,
+    textSecondaryProps
+  } = props;
   const classes = useStyles();
 
   return (
     <Paper className={classes.root} {...paperProps}>
-      <Typography align="center" {...typographyProps}>
+      <Typography align="center" {...textPrimaryProps}>
         {macro}
       </Typography>
-      <Typography align="center" {...typographyProps}>
+      <Typography align="center" color="textSecondary" {...textSecondaryProps}>
         {total} g
       </Typography>
     </Paper>
