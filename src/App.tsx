@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { SnackbarProvider } from "notistack";
 import { Button, Grid } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
+import loadable from "@loadable/component";
 import { AppNavigation, AppDrawer } from "./components";
 import ReduxModel from "./store/redux.model";
 import { themeSelectors } from "./store/theme.reducer";
@@ -12,10 +13,17 @@ import { darkTheme, lightTheme } from "./themes";
 import { userSelectors } from "./store/user.reducer";
 import { setAPIUrl } from "./utils/api.utils";
 import UserRoute from "./routes/UserRoute";
-import { Home, Profile, Profiles } from "./pages";
 import { appRoutes } from "./routes/app.routes";
 
 setAPIUrl();
+
+const loadableOptions = {
+  fallback: <div>Loading...</div>
+};
+
+const Home = loadable(() => import("./pages/Home"), loadableOptions);
+const Profile = loadable(() => import("./pages/Profile"), loadableOptions);
+const Profiles = loadable(() => import("./pages/Profiles"), loadableOptions);
 
 interface Props {
   userLoaded: ReduxModel["user"]["loaded"];
