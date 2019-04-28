@@ -53,7 +53,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "analyze": "source-map-explorer build/static/js/main.*",
+    "analyze": "source-map-explorer build/static/js/*.js",
     "update": "ncu -u",
     "lint": "eslint --fix --ext .ts --ext .tsx src/",
     "deploy:hosting": "firebase deploy --only hosting",
