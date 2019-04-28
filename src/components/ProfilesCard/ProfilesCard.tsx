@@ -26,6 +26,9 @@ interface ProfilesCardProps {
 }
 
 const useStyles = makeStyles({
+  cardHeader: {
+    paddingBottom: 0
+  },
   cardActions: {
     display: "flex",
     justifyContent: "flex-end"
@@ -62,6 +65,7 @@ const ProfilesCard = (props: ProfilesCardProps) => {
         subheader={DateTime.fromJSDate(createdAt.toDate()).toLocaleString(
           DateTime.DATE_HUGE
         )}
+        className={classes.cardHeader}
       />
       <CardContent>
         <Grid container>
