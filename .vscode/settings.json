@@ -10,18 +10,15 @@
     "comments": true,
     "strings": true
   },
+
   /* Workbench options */
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "material-icon-theme",
+
   /* ESLint options */
   "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    { "language": "typescript", "autoFix": true },
-    { "language": "typescriptreact", "autoFix": true }
-  ],
+
   /* Files and search options */
   "files.autoSave": "off",
   "search.exclude": {
@@ -40,29 +37,34 @@
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
   "path-intellisense.autoSlashAfterDirectory": true,
+
   /* Git options */
   "diffEditor.ignoreTrimWhitespace": true,
   "gitlens.codeLens.enabled": true,
+
   /* Emmet options */
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "typescript": "typescriptreact"
+    "javascript": "javascriptreact"
   },
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": true,
+
   /* Material Icon Theme options */
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.folders.associations": {
     "forms": "messages",
     "sagas": "redux-actions",
-    "reducer": "redux-reducer"
+    "reducer": "redux-reducer",
+    "firebase": "serverless",
+    ".firebase": "serverless"
   },
   "material-icon-theme.files.associations": {
     "package.json": "npm",
     "package-lock.json": "npm",
     "*.saga.ts": "redux-action",
-    "*.model.ts": "typescript-def"
+    "firebase.ts": "firebase"
   },
+
   /* Other options */
   "bracketPairColorizer.showBracketsInGutter": true,
   "extensions.ignoreRecommendations": false
