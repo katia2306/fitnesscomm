@@ -25,18 +25,6 @@
     "reselect": "4.0.0"
   },
   "devDependencies": {
-    "@types/classnames": "2.2.7",
-    "@types/jest": "24.0.11",
-    "@types/loadable__component": "5.6.0",
-    "@types/luxon": "1.12.0",
-    "@types/node": "11.13.8",
-    "@types/react": "16.8.14",
-    "@types/react-dom": "16.8.4",
-    "@types/react-helmet": "5.0.8",
-    "@types/react-redux": "7.0.8",
-    "@types/react-router-dom": "4.3.2",
-    "@typescript-eslint/eslint-plugin": "1.7.0",
-    "@typescript-eslint/parser": "1.7.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "4.2.0",
     "eslint-plugin-import": "2.17.2",
@@ -46,8 +34,7 @@
     "eslint-plugin-react": "7.12.4",
     "eslint-plugin-react-hooks": "1.6.0",
     "husky": "2.1.0",
-    "prettier": "1.17.0",
-    "typescript": "3.4.5"
+    "prettier": "1.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,7 +42,7 @@
     "test": "react-scripts test",
     "analyze": "source-map-explorer build/static/js/*.js",
     "update": "ncu -u",
-    "lint": "eslint --fix --ext .ts --ext .tsx src/",
+    "lint": "eslint --fix --ext .js --ext .jsx src/",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:rules": "firebase deploy --only firestore:rules",
     "deploy:indexes": "firebase deploy --only firestore:indexes"
@@ -63,12 +50,18 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-push": "npm run lint"
