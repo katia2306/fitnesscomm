@@ -6,8 +6,9 @@ import {
   Radio,
   RadioGroup
 } from "@material-ui/core";
+import PropTypes from "prop-types";
 
-const Activity = ({ formData: { goal }, onChange }) => {
+const Goal = ({ formData: { goal }, onChange }) => {
   return (
     <Grid container spacing={8}>
       <Grid item>
@@ -45,4 +46,17 @@ const Activity = ({ formData: { goal }, onChange }) => {
   );
 };
 
-export default Activity;
+Goal.propTypes = {
+  formData: PropTypes.shape({
+    goal: PropTypes.oneOf([
+      "maintenance",
+      "moderateLoss",
+      "rapidLoss",
+      "moderateGain",
+      "rapidGain"
+    ]).isRequired
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+export default Goal;

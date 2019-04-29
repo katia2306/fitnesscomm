@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Avatar, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -101,6 +102,12 @@ const ProfileHeader = ({ email, displayName, shortName }) => {
       </Grid>
     </Grid>
   );
+};
+
+ProfileHeader.propTypes = {
+  email: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
+  shortName: PropTypes.string.isRequired
 };
 
 export default ProfileHeader;

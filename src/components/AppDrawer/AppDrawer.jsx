@@ -3,6 +3,7 @@ import { Drawer, ListItemText, List, ListItemIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { AssignmentInd } from "@material-ui/icons";
 import { ListItemLink } from "..";
+import PropTypes from "prop-types";
 import { appRoutes } from "../../routes/app.routes";
 
 const useStyles = makeStyles({
@@ -46,6 +47,11 @@ const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
       </div>
     </Drawer>
   );
+};
+
+AppDrawer.propTypes = {
+  drawerOpen: PropTypes.bool.isRequired,
+  onDrawerClose: PropTypes.func.isRequired
 };
 
 export default AppDrawer;

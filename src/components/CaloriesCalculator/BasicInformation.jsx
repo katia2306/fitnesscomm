@@ -9,6 +9,7 @@ import {
   InputAdornment,
   Checkbox
 } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const BasicInformation = ({
   formData: { gender, age = "", height = "", weight = "", imperial },
@@ -95,6 +96,18 @@ const BasicInformation = ({
       </Grid>
     </Grid>
   );
+};
+
+BasicInformation.propTypes = {
+  formData: {
+    gender: PropTypes.oneOf(["female", "male"]).isRequired,
+    age: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    weight: PropTypes.number.isRequired,
+    imperial: PropTypes.bool.isRequired
+  }.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onImperialChange: PropTypes.func.isRequired
 };
 
 export default BasicInformation;

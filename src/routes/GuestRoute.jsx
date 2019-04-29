@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 import { userSelectors } from "../store/user.reducer";
 import { appRoutes } from "./app.routes";
 
-const UserRoute = ({ isAuthenticated, component: Component, ...other }) => {
+const GuestRoute = ({ isAuthenticated, component: Component, ...other }) => {
   return (
     <Route
       {...other}
@@ -19,10 +20,15 @@ const UserRoute = ({ isAuthenticated, component: Component, ...other }) => {
   );
 };
 
+GuestRoute.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  component: PropTypes.node.isRequired
+};
+
 function mapStateToProps(state) {
   return {
     isAuthenticated: userSelectors.isUserAuthenticated(state)
   };
 }
 
-export default connect(mapStateToProps)(UserRoute);
+export default connect(mapStateToProps)(GuestRoute);

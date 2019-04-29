@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 import { userSelectors } from "../store/user.reducer";
 import { appRoutes } from "./app.routes";
 
@@ -17,6 +18,11 @@ const UserRoute = ({ isAuthenticated, component: Component, ...other }) => {
       }
     />
   );
+};
+
+UserRoute.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  component: PropTypes.node.isRequired
 };
 
 function mapStateToProps(state) {

@@ -6,6 +6,7 @@ import {
   Radio,
   RadioGroup
 } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const Activity = ({ formData: { activity }, onChange }) => {
   return (
@@ -43,6 +44,19 @@ const Activity = ({ formData: { activity }, onChange }) => {
       </Grid>
     </Grid>
   );
+};
+
+Activity.propTypes = {
+  formData: PropTypes.shape({
+    activity: PropTypes.oneOf([
+      "none",
+      "light",
+      "moderate",
+      "active",
+      "intense"
+    ]).isRequired
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default Activity;

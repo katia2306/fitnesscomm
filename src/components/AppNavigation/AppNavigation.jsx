@@ -3,6 +3,7 @@ import { AppBar, Button, IconButton, Toolbar } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import useAuthenticationDialog from "../../hooks/useAuthenticationDialog";
 import Authentication from "../Authentication";
 import ToggleTheme from "../ThemeToggle";
@@ -91,6 +92,11 @@ const AppNavigation = ({ isAuthenticated, onDrawerOpen }) => {
       />
     </AppBar>
   );
+};
+
+AppNavigation.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  onDrawerOpen: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

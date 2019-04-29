@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Paper, Typography, Button, Grid } from "@material-ui/core";
 import { MacronutrientBox } from "..";
+import PropTypes from "prop-types";
 import {
   feetToCentimeters,
   poundsToKilograms
@@ -128,6 +129,26 @@ const TotalCalories = ({
       </Button>
     </Paper>
   );
+};
+
+TotalCalories.propTypes = {
+  gender: PropTypes.oneOf(["female", "male"]).isRequired,
+  age: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  weight: PropTypes.number.isRequired,
+  activity: PropTypes.oneOf(["none", "light", "moderate", "active", "intense"])
+    .isRequired,
+  goal: PropTypes.oneOf([
+    "maintenance",
+    "moderateLoss",
+    "rapidLoss",
+    "moderateGain",
+    "rapidGain"
+  ]).isRequired,
+  imperial: PropTypes.bool.isRequired,
+  onCreateProfile: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default TotalCalories;

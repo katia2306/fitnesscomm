@@ -9,6 +9,7 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import { ButtonLink } from "../../components";
@@ -149,6 +150,11 @@ const SignupForm = ({ onLoginButtonClick, userSignup }) => {
       </div>
     </form>
   );
+};
+
+SignupForm.propTypes = {
+  onLoginButtonClick: PropTypes.func.isRequired,
+  userSignup: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

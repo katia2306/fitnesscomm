@@ -13,6 +13,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
+import PropTypes from "prop-types";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import useFormData from "../../hooks/useFormData";
 import { ButtonLink } from "../../components";
@@ -167,6 +168,16 @@ const LoginForm = ({
       </div>
     </form>
   );
+};
+
+LoginForm.propTypes = {
+  onSignupButtonClick: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired,
+  loginFormReset: PropTypes.func.isRequired,
+  loginError: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({

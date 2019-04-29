@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
+import PropTypes from "prop-types";
 import BasicInformation from "./BasicInformation";
 import Activity from "./Activity";
 import Goal from "./Goal";
@@ -140,6 +141,15 @@ const CaloriesCalculator = ({
       )}
     </div>
   );
+};
+
+CaloriesCalculator.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  createProfileError: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired
+  }).isRequired,
+  createProfilesFormReset: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

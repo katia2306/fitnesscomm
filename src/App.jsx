@@ -6,6 +6,7 @@ import { SnackbarProvider } from "notistack";
 import { Button, Grid } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import loadable from "@loadable/component";
+import PropTypes from "prop-types";
 import { AppNavigation, AppDrawer } from "./components";
 import { themeSelectors } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
@@ -86,6 +87,11 @@ const App = ({ isThemeDark, userLoaded }) => {
       </SnackbarProvider>
     </ThemeProvider>
   );
+};
+
+App.propTypes = {
+  isThemeDark: PropTypes.bool.isRequired,
+  userLoaded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

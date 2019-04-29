@@ -10,6 +10,7 @@ import {
   ListItemIcon
 } from "@material-ui/core";
 import { AccountBox, ExitToApp } from "@material-ui/icons";
+import PropTypes from "prop-types";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import { MenuItemLink } from "..";
 import { appRoutes } from "../../routes/app.routes";
@@ -115,6 +116,15 @@ const AccountMenu = ({ user, userLogout }) => {
       </Menu>
     </Fragment>
   );
+};
+
+AccountMenu.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
+    shortName: PropTypes.string.isRequired
+  }).isRequired,
+  userLogout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

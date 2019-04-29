@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   root: {
@@ -35,14 +36,27 @@ const PageWrapper = ({
     classNameProp
   );
 
-  let Component: React.ReactType<PageContainerProps> = container
-    ? "section"
-    : "div";
+  let Component = container ? "section" : "div";
   if (componentProp) {
     Component = componentProp;
   }
 
   return <Component className={className}>{children}</Component>;
+};
+
+PageWrapper.defaultProps = {
+  className: "",
+  container: false,
+  scroll: false,
+  component: undefined
+};
+
+PageWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  container: PropTypes.bool,
+  scroll: PropTypes.bool,
+  component: PropTypes.node
 };
 
 export default PageWrapper;

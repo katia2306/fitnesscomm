@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { DateTime } from "luxon";
+import PropTypes from "prop-types";
 import {
   profilesSelectors,
   profilesActions
@@ -113,6 +114,20 @@ const ProfilesCard = ({
       </CardActions>
     </Card>
   );
+};
+
+ProfilesCard.propTypes = {
+  profile: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    dailyCalories: PropTypes.number.isRequired,
+    protein: PropTypes.number.isRequired,
+    carbohydrate: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    fiber: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired
+  }).isRequired,
+  deleteProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { id }) => ({

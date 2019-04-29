@@ -3,6 +3,7 @@ import { Grid, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { ProfileHeader } from "../../components";
 import { userSelectors } from "../../store/user.reducer";
 
@@ -19,10 +20,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = ({ user }) => {
+const Profile = ({ user: { email, displayName, shortName } }) => {
   const classes = useStyles();
-
-  const { email, displayName, shortName } = user;
 
   return (
     <Grid container item xs md={8} lg={6} direction="column">
@@ -37,6 +36,14 @@ const Profile = ({ user }) => {
       <Divider />
     </Grid>
   );
+};
+
+Profile.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
+    shortName: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({
