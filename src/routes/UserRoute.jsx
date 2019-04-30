@@ -22,7 +22,7 @@ const UserRoute = ({ isAuthenticated, component: Component, ...other }) => {
 
 UserRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  component: PropTypes.node.isRequired
+  component: PropTypes.elementType.isRequired
 };
 
 function mapStateToProps(state) {

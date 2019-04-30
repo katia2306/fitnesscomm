@@ -22,7 +22,7 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...other }) => {
 
 GuestRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  component: PropTypes.node.isRequired
+  component: PropTypes.elementType.isRequired
 };
 
 function mapStateToProps(state) {

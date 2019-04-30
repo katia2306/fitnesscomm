@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 
-const Activity = ({ formData: { activity }, onChange }) => {
+const Activity = ({ activity, onChange }) => {
   return (
     <Grid container spacing={8}>
       <Grid item>
@@ -47,15 +47,8 @@ const Activity = ({ formData: { activity }, onChange }) => {
 };
 
 Activity.propTypes = {
-  formData: PropTypes.shape({
-    activity: PropTypes.oneOf([
-      "none",
-      "light",
-      "moderate",
-      "active",
-      "intense"
-    ]).isRequired
-  }).isRequired,
+  activity: PropTypes.oneOf(["none", "light", "moderate", "active", "intense"])
+    .isRequired,
   onChange: PropTypes.func.isRequired
 };
 

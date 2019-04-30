@@ -12,7 +12,11 @@ import {
 import PropTypes from "prop-types";
 
 const BasicInformation = ({
-  formData: { gender, age = "", height = "", weight = "", imperial },
+  gender,
+  age,
+  height,
+  weight,
+  imperial,
   onChange,
   onImperialChange
 }) => {
@@ -98,14 +102,18 @@ const BasicInformation = ({
   );
 };
 
+BasicInformation.defaultProps = {
+  age: 0,
+  height: 0,
+  weight: 0
+};
+
 BasicInformation.propTypes = {
-  formData: {
-    gender: PropTypes.oneOf(["female", "male"]).isRequired,
-    age: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    weight: PropTypes.number.isRequired,
-    imperial: PropTypes.bool.isRequired
-  }.isRequired,
+  gender: PropTypes.oneOf(["female", "male"]).isRequired,
+  age: PropTypes.number,
+  height: PropTypes.number,
+  weight: PropTypes.number,
+  imperial: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onImperialChange: PropTypes.func.isRequired
 };

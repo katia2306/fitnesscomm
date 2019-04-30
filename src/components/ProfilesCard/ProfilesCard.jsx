@@ -125,7 +125,7 @@ ProfilesCard.propTypes = {
     carbohydrate: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
     fiber: PropTypes.number.isRequired,
-    createdAt: PropTypes.string.isRequired
+    createdAt: PropTypes.object.isRequired
   }).isRequired,
   deleteProfile: PropTypes.func.isRequired
 };

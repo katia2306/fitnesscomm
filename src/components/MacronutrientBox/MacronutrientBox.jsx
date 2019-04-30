@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import { Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -40,8 +39,11 @@ MacronutrientBox.defaultProps = {
 MacronutrientBox.propTypes = {
   macro: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   paperProps: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   textPrimaryProps: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   textSecondaryProps: PropTypes.object
 };
 

@@ -22,8 +22,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flex: 1,
-    overflowY: "auto"
+    flex: 1
   },
   actionsContainer: {
     marginTop: theme.spacing.unit,
@@ -104,7 +103,7 @@ const CaloriesCalculator = ({
             <StepLabel>{stepLabel}</StepLabel>
             <StepContent>
               <StepComponent
-                formData={formData}
+                {...formData}
                 onChange={handleInputChange}
                 onImperialChange={handleCheckboxChange}
               />
@@ -143,12 +142,16 @@ const CaloriesCalculator = ({
   );
 };
 
+CaloriesCalculator.defaultProps = {
+  createProfileError: undefined
+};
+
 CaloriesCalculator.propTypes = {
   createProfile: PropTypes.func.isRequired,
   createProfileError: PropTypes.shape({
     code: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   createProfilesFormReset: PropTypes.func.isRequired
 };
 
