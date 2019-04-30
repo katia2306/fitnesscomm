@@ -133,9 +133,9 @@ const TotalCalories = ({
 
 TotalCalories.propTypes = {
   gender: PropTypes.oneOf(["female", "male"]).isRequired,
-  age: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  weight: PropTypes.number.isRequired,
+  age: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  weight: PropTypes.string.isRequired,
   activity: PropTypes.oneOf(["none", "light", "moderate", "active", "intense"])
     .isRequired,
   goal: PropTypes.oneOf([

@@ -42,9 +42,9 @@ const steps = [
 
 const initialFormData = {
   gender: "female",
-  age: undefined,
-  height: undefined,
-  weight: undefined,
+  age: "",
+  height: "",
+  weight: "",
   activity: "none",
   goal: "maintenance",
   imperial: false

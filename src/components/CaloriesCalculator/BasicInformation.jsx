@@ -102,17 +102,11 @@ const BasicInformation = ({
   );
 };
 
-BasicInformation.defaultProps = {
-  age: 0,
-  height: 0,
-  weight: 0
-};
-
 BasicInformation.propTypes = {
   gender: PropTypes.oneOf(["female", "male"]).isRequired,
-  age: PropTypes.number,
-  height: PropTypes.number,
-  weight: PropTypes.number,
+  age: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  weight: PropTypes.string.isRequired,
   imperial: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onImperialChange: PropTypes.func.isRequired
