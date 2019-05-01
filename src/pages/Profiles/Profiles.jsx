@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Helmet from "react-helmet";
 import { PageWrapper } from "../../components";
-import { appRoutes } from "../../routes/app.routes";
+import { appRoutes } from "../../utils/config.utils";
 import ProfilesMainPage from "./ProfilesMainPage";
 import ProfilesNewPage from "./ProfilesNewPage";
 

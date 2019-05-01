@@ -18,15 +18,20 @@ import {
 } from "../../store/profiles.reducer";
 import { MacronutrientBox } from "..";
 
-const useStyles = makeStyles({
-  cardHeader: {
-    paddingBottom: 0
+const useStyles = makeStyles(theme => ({
+  card: {
+    width: "100%",
+    minWidth: 320
   },
   cardActions: {
     display: "flex",
     justifyContent: "flex-end"
+  },
+  dailyCalories: {
+    marginTop: theme.spacing.unit,
+    fontWeight: 300
   }
-});
+}));
 
 const ProfilesCard = ({
   profile: {
@@ -51,16 +56,15 @@ const ProfilesCard = ({
   };
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
         title={title}
         subheader={DateTime.fromJSDate(createdAt.toDate()).toLocaleString(
           DateTime.DATE_HUGE
         )}
-        className={classes.cardHeader}
       />
       <CardContent>
-        <Grid container>
+        <Grid container spacing={8}>
           <Grid item xs>
             <MacronutrientBox
               paperProps={{ elevation: 0 }}
@@ -94,9 +98,10 @@ const ProfilesCard = ({
             direction="column"
             alignItems="center"
             justify="center"
+            className={classes.dailyCalories}
           >
-            <Typography variant="body1">Calories</Typography>
-            <Typography variant="body1" color="textSecondary">
+            <Typography variant="h5">Daily Calories</Typography>
+            <Typography variant="h5" color="textSecondary">
               {dailyCalories}
             </Typography>
           </Grid>
