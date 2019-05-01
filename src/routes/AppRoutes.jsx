@@ -4,17 +4,17 @@ import { Route, Switch } from "react-router-dom";
 import loadable from "@loadable/component";
 import { makeStyles } from "@material-ui/styles";
 import UserRoute from "./UserRoute";
-import { appRoutes } from "./app.routes";
+import { appRoutes } from "../utils/config.utils";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flex: 1,
     padding: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 7,
     "@media (min-width:600px)": {
       padding: theme.spacing.unit * 2
     }
-  }
+  },
+  toolbar: theme.mixins.toolbar
 }));
 
 const loadableOptions = {
@@ -37,6 +37,7 @@ const AppRoutes = () => {
       component="main"
       spacing={8}
     >
+      <div className={classes.toolbar} />
       <Switch>
         <Route exact path={appRoutes.HOME} component={Home} />
         <UserRoute path={appRoutes.USER_PROFILE} component={Profile} />

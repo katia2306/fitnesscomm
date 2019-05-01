@@ -13,7 +13,7 @@ import { AccountBox, ExitToApp } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import { userActions, userSelectors } from "../../store/user.reducer";
 import { MenuItemLink } from "..";
-import { appRoutes } from "../../routes/app.routes";
+import { appRoutes } from "../../utils/config.utils";
 
 const useStyles = makeStyles(theme => ({
   avatar: {
