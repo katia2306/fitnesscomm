@@ -10,8 +10,7 @@ import { makeStyles } from "@material-ui/styles";
 import { AssignmentInd } from "@material-ui/icons";
 import { ListItemLink } from "..";
 import PropTypes from "prop-types";
-import { appRoutes , APP_DRAWER_WIDTH } from "../../utils/config.utils";
-
+import { appRoutes, APP_DRAWER_WIDTH } from "../../utils/config.utils";
 
 const useStyles = makeStyles(theme => ({
   drawer: {
