@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 const Activity = ({ activity, onChange }) => {
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item>
         <FormControl component="fieldset">
           <RadioGroup name="activity" value={activity} onChange={onChange}>

@@ -1,26 +1,21 @@
 import React from "react";
-import {
-  Drawer,
-  ListItemText,
-  List,
-  ListItemIcon,
-  Hidden
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Drawer, ListItemText, List, ListItemIcon } from "@material-ui/core";
 import { AssignmentInd } from "@material-ui/icons";
 import { ListItemLink } from "..";
 import PropTypes from "prop-types";
-import { appRoutes, APP_DRAWER_WIDTH } from "../../utils/config.utils";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles, useTheme } from "@material-ui/styles";
+import { appRoutes } from "../../utils/config.utils";
 
 const useStyles = makeStyles(theme => ({
   drawer: {
     [theme.breakpoints.up("sm")]: {
-      width: APP_DRAWER_WIDTH,
+      width: theme.appDrawer.width,
       flexShrink: 0
     }
   },
   drawerPaper: {
-    width: APP_DRAWER_WIDTH
+    width: theme.appDrawer.width
   },
   list: {
     width: "100%"
@@ -39,6 +34,8 @@ const drawerList = [
 
 const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesMediaQuery = useMediaQuery(theme.breakpoints.down("xs"));
 
   const drawer = (
     <List>
@@ -55,12 +52,15 @@ const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
 
   return (
     <nav className={classes.drawer}>
-      <Hidden smUp implementation="css">
+      {matchesMediaQuery ? (
         <Drawer
           open={drawerOpen}
           onClose={onDrawerClose}
           classes={{
             paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true
           }}
         >
           <div
@@ -73,8 +73,7 @@ const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
             {drawer}
           </div>
         </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
+      ) : (
         <Drawer
           variant="permanent"
           classes={{
@@ -84,7 +83,7 @@ const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
           <div className={classes.toolbar} />
           {drawer}
         </Drawer>
-      </Hidden>
+      )}
     </nav>
   );
 };

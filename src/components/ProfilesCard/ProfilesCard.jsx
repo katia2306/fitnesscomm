@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end"
   },
   dailyCalories: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
     fontWeight: 300
   }
 }));
@@ -64,7 +64,7 @@ const ProfilesCard = ({
         )}
       />
       <CardContent>
-        <Grid container spacing={8}>
+        <Grid container>
           <Grid item xs>
             <MacronutrientBox
               paperProps={{ elevation: 0 }}
@@ -107,7 +107,7 @@ const ProfilesCard = ({
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions className={classes.cardActions} disableActionSpacing>
+      <CardActions className={classes.cardActions} disableSpacing>
         <Button
           size="small"
           color="secondary"

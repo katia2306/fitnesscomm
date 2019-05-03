@@ -2,15 +2,16 @@ import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { ListItem } from "@material-ui/core";
 
-const RouterLink = props => <Link {...props} />;
+const WrappedRouterLink = forwardRef(function RouterLink(props, ref) {
+  return <Link ref={ref} {...props} />;
+});
 
-// eslint-disable-next-line react/display-name
-const ListItemLink = forwardRef((props, ref) => {
+const ListItemLink = props => {
   return (
     <li>
-      <ListItem ref={ref} component={RouterLink} button {...props} />
+      <ListItem component={WrappedRouterLink} button {...props} />
     </li>
   );
-});
+};
 
 export default ListItemLink;

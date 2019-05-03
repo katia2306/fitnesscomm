@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     zIndex: theme.zIndex.drawer + 1,
     "& $signupButton, & $title": {
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         display: "none"
       }
     }
@@ -84,16 +84,16 @@ const AppNavigation = ({ isAuthenticated, onDrawerOpen }) => {
             >
               Sign up
             </Button>
+            <Authentication
+              dialogOpen={dialogOpen}
+              authForm={authForm}
+              showLoginForm={showLoginForm}
+              showSignupForm={showSignupForm}
+              closeAuthDialog={closeAuthDialog}
+            />
           </div>
         )}
       </Toolbar>
-      <Authentication
-        dialogOpen={dialogOpen}
-        authForm={authForm}
-        showLoginForm={showLoginForm}
-        showSignupForm={showSignupForm}
-        closeAuthDialog={closeAuthDialog}
-      />
     </AppBar>
   );
 };

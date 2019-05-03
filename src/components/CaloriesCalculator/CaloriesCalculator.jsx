@@ -25,12 +25,12 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   },
   actionsContainer: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -149,7 +149,7 @@ CaloriesCalculator.defaultProps = {
 CaloriesCalculator.propTypes = {
   createProfile: PropTypes.func.isRequired,
   createProfileError: PropTypes.shape({
-    code: PropTypes.string.isRequired,
+    code: PropTypes.string,
     message: PropTypes.string.isRequired
   }),
   createProfilesFormReset: PropTypes.func.isRequired

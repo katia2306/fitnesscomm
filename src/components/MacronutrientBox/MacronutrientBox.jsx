@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing.unit
+    padding: theme.spacing(1)
   }
 }));
 

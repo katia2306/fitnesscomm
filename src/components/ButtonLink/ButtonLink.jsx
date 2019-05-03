@@ -1,16 +1,12 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Button, Fab } from "@material-ui/core";
 import PropTypes from "prop-types";
 
-const RouterLink = props => <Link {...props} />;
+const WrappedRouterLink = forwardRef(function RouterLink(props, ref) {
+  return <Link ref={ref} {...props} />;
+});
 
-/**
- *
- * @param props
- *
- * render react-router-link if required props are provided
- */
 const ButtonLink = ({ button, fab, ...restProps }) => {
   if (button) {
     return (
@@ -19,9 +15,9 @@ const ButtonLink = ({ button, fab, ...restProps }) => {
   }
 
   if (fab) {
-    return <Fab component={RouterLink} {...restProps} />;
+    return <Fab component={WrappedRouterLink} {...restProps} />;
   }
-  return <Button component={RouterLink} {...restProps} />;
+  return <Button component={WrappedRouterLink} {...restProps} />;
 };
 
 ButtonLink.defaultProps = {

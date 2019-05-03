@@ -9,34 +9,34 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary[theme.palette.type],
     cursor: "pointer",
     textTransform: "uppercase",
-    width: theme.spacing.unit * 10,
-    height: theme.spacing.unit * 10,
-    fontSize: theme.spacing.unit * 4,
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+    fontSize: theme.spacing(4),
     fontWeight: 300,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 16,
-      height: theme.spacing.unit * 16,
-      fontSize: theme.spacing.unit * 8
+      width: theme.spacing(16),
+      height: theme.spacing(16),
+      fontSize: theme.spacing(8)
     },
     [theme.breakpoints.up("lg")]: {
-      width: theme.spacing.unit * 17,
-      height: theme.spacing.unit * 17,
-      fontSize: theme.spacing.unit * 9
+      width: theme.spacing(17),
+      height: theme.spacing(17),
+      fontSize: theme.spacing(9)
     },
     [theme.breakpoints.up("xl")]: {
-      width: theme.spacing.unit * 19,
-      height: theme.spacing.unit * 19,
-      fontSize: theme.spacing.unit * 10
+      width: theme.spacing(19),
+      height: theme.spacing(19),
+      fontSize: theme.spacing(10)
     }
   },
   profileContainer: {
     [theme.breakpoints.down("sm")]: {
-      marginLeft: theme.spacing.unit * 2
+      marginLeft: theme.spacing(2)
     }
   },
   profileInfo: {
     flexDirection: "column",
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.up("sm")]: {
       flexDirection: "row"
     }
@@ -44,10 +44,10 @@ const useStyles = makeStyles(theme => ({
   editProfileButton: {
     whiteSpace: "nowrap",
     flexShrink: 0,
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
     [theme.breakpoints.up("sm")]: {
       marginTop: 0,
-      marginLeft: theme.spacing.unit * 4
+      marginLeft: theme.spacing(4)
     }
   },
   emailProfileHeader: {
@@ -80,7 +80,6 @@ const ProfileHeader = ({ email, displayName, shortName }) => {
           <Typography
             component="h1"
             variant="h5"
-            inline
             noWrap
             className={classes.displayName}
           >

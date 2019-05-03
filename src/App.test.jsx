@@ -1,6 +1,3 @@
-import "./bootstrapMUI";
-/* Remove previous lines after Material-UI v4 release */
-
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

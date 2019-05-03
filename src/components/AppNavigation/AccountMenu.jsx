@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
     textTransform: "uppercase",
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type],
-    marginLeft: theme.spacing.unit * 2,
+    marginLeft: theme.spacing(2),
     cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
-      marginLeft: theme.spacing.unit
+      marginLeft: theme.spacing(1)
     }
   },
   accountMenu: {
@@ -32,17 +32,17 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 0
   },
   accountMenuHeader: {
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    marginBottom: theme.spacing(1),
     "&, &:hover, &:focus": {
       backgroundColor: `${theme.palette.action.hover} !important`
     }
   },
   menuAvatar: {
     textTransform: "uppercase",
-    width: theme.spacing.unit * 6,
-    height: theme.spacing.unit * 6,
+    width: theme.spacing(6),
+    height: theme.spacing(6),
     color: "#fff",
     backgroundColor: theme.palette.secondary[theme.palette.type]
   }
@@ -79,8 +79,8 @@ const AccountMenu = ({ user, userLogout }) => {
         open={accountMenuOpen}
         onClose={handleAccountMenuClose}
         MenuListProps={{ className: classes.accountMenu }}
-        PaperProps={{ component: "nav" }}
         disableAutoFocusItem
+        keepMounted
       >
         <MenuItemLink
           to={appRoutes.USER_PROFILE}

@@ -24,7 +24,7 @@ const BasicInformation = ({
   const weightMetric = imperial ? "lb" : "kg";
 
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item xs={12}>
         <FormControl component="fieldset">
           <RadioGroup name="gender" value={gender} row onChange={onChange}>

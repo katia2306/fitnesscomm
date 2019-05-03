@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 const Goal = ({ goal, onChange }) => {
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item>
         <FormControl component="fieldset">
           <RadioGroup name="goal" value={goal} onChange={onChange}>

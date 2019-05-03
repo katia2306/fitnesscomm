@@ -9,9 +9,9 @@ import { appRoutes } from "../utils/config.utils";
 const useStyles = makeStyles(theme => ({
   root: {
     flex: 1,
-    padding: theme.spacing.unit,
-    "@media (min-width:600px)": {
-      padding: theme.spacing.unit * 2
+    padding: theme.spacing(1),
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing(2)
     }
   },
   toolbar: theme.mixins.toolbar
@@ -35,7 +35,7 @@ const AppRoutes = () => {
       alignItems="center"
       className={classes.root}
       component="main"
-      spacing={8}
+      spacing={1}
     >
       <div className={classes.toolbar} />
       <Switch>
