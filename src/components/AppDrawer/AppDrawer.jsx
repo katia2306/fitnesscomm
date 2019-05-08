@@ -80,16 +80,16 @@ const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
           </div>
         </Drawer>
       ) : (
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: classes.drawerPaper
-            }}
-          >
-            <div className={classes.toolbar} />
-            {drawer}
-          </Drawer>
-        )}
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <div className={classes.toolbar} />
+          {drawer}
+        </Drawer>
+      )}
     </nav>
   );
 };

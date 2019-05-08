@@ -247,13 +247,13 @@ const ExerciseForm = () => {
           <div className={classes.paper}>
             {formActive === "cardiovascular" ? (
               <CardiovascularBox
-                handleAddExercise={handleAddExercise}
+                handleSubmit={handleAddExercise}
                 handleClose={handleClose}
                 inputChange={cardiovascularInputChange}
               />
             ) : (
                 <TrainingBox
-                  handleAddExercise={handleAddTraining}
+                  handleSubmit={handleAddTraining}
                   handleClose={handleClose}
                   inputChange={trainingInputChange}
                 />

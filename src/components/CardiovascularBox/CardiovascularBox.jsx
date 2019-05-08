@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, TextField, Divider, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
+const CardiovascularBox = ({ handleSubmit, handleClose, inputChange }) => {
   const classes = useStyles();
 
   return (
@@ -16,7 +17,7 @@ const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
       <Typography variant="h5">Add Cardio exercise</Typography>
       <Divider />
 
-      <form noValidate onSubmit={handleAddExercise}>
+      <form noValidate onSubmit={handleSubmit}>
         <TextField
           name="exercise"
           label="Exercise"
@@ -52,5 +53,11 @@ const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
     </div>
   );
 };
+
+CardiovascularBox.PropTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  inputChange: PropTypes.func.isRequired
+}
 
 export default CardiovascularBox;
