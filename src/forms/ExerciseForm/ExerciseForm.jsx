@@ -103,8 +103,8 @@ const ExerciseForm = () => {
 
   const handleAddExercise = () => {
     setCardiovascular([...cardiovascular, { dataCardiovascular }]);
-    setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories));
-    setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time));
+    setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories, 10));
+    setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time, 10));
     handleClose();
   };
 

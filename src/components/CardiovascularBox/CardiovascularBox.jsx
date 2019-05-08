@@ -58,6 +58,6 @@ CardiovascularBox.PropTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired
-}
+};
 
 export default CardiovascularBox;
