@@ -1,6 +1,5 @@
 import React from "react";
 import { Drawer, ListItemText, List, ListItemIcon } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import { AssignmentInd, FitnessCenter } from "@material-ui/icons";
 import { ListItemLink } from "..";
 import PropTypes from "prop-types";

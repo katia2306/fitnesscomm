@@ -102,7 +102,6 @@ const ExerciseForm = () => {
   };
 
   const handleAddExercise = () => {
-    const hola = dataCardiovascular;
     setCardiovascular([...cardiovascular, { dataCardiovascular }]);
     setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories));
     setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time));
@@ -253,12 +252,12 @@ const ExerciseForm = () => {
                 inputChange={cardiovascularInputChange}
               />
             ) : (
-              <TrainingBox
-                handleAddExercise={handleAddTraining}
-                handleClose={handleClose}
-                inputChange={trainingInputChange}
-              />
-            )}
+                <TrainingBox
+                  handleAddExercise={handleAddTraining}
+                  handleClose={handleClose}
+                  inputChange={trainingInputChange}
+                />
+              )}
           </div>
         </Modal>
       </div>
