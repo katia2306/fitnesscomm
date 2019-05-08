@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  TextField,
-  Divider,
-  Button,
-} from "@material-ui/core";
+import { Typography, TextField, Divider, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +22,8 @@ const TrainingBox = ({ inputChange, handleAddExercise, handleClose }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
+          fullWidth
+        />
 
         <TextField
           name="series"
@@ -35,7 +31,8 @@ const TrainingBox = ({ inputChange, handleAddExercise, handleClose }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
+          fullWidth
+        />
 
         <TextField
           name="repetitions"
@@ -43,7 +40,8 @@ const TrainingBox = ({ inputChange, handleAddExercise, handleClose }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
+          fullWidth
+        />
 
         <TextField
           name="weight"
@@ -51,19 +49,15 @@ const TrainingBox = ({ inputChange, handleAddExercise, handleClose }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
-        <Button
-          variant="contained"
-          color="primary"
           fullWidth
-          type="submit"
-        >
+        />
+        <Button variant="contained" color="primary" fullWidth type="submit">
           Submit
         </Button>
         <Button onClick={handleClose}>Close</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default TrainingBox;

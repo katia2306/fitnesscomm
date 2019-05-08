@@ -11,8 +11,8 @@ import {
   Button,
   Modal
 } from "@material-ui/core";
-import { ButtonLink, CardiovascularBox, TrainingBox } from "../../components";
 import { makeStyles, withStyles } from "@material-ui/styles";
+import { ButtonLink, CardiovascularBox, TrainingBox } from "../../components";
 import useFormData from "../../hooks/useFormData";
 
 const CustomTableCell = withStyles(theme => ({
@@ -25,7 +25,7 @@ const CustomTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   form: {
     padding: "1%",
     overflowY: "scroll"
@@ -50,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none"
   },
   textField: {
     marginBottom: theme.spacing.unit
@@ -66,14 +66,14 @@ const initialFormData = {
   exercise: "",
   time: 0,
   calories: 0
-}
+};
 
 const initialFormDataTraining = {
   exercise: "",
   series: 0,
   repetitions: 0,
   weight: 0
-}
+};
 
 const ExerciseForm = () => {
   const classes = useStyles();
@@ -92,14 +92,14 @@ const ExerciseForm = () => {
   const [training, setTraining] = useState([]);
   const [formActive, setFormActive] = useState([]);
 
-  const handleModalOpen = (formData) => {
+  const handleModalOpen = formData => {
     setFormActive(formData);
     setModalOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setModalOpen(false);
-  }
+  };
 
   const handleAddExercise = () => {
     const hola = dataCardiovascular;
@@ -107,12 +107,12 @@ const ExerciseForm = () => {
     setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories));
     setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time));
     handleClose();
-  }
+  };
 
   const handleAddTraining = () => {
     setTraining([...training, { dataTraining }]);
     handleClose();
-  }
+  };
 
   return (
     <div className={classes.form}>
@@ -135,7 +135,13 @@ const ExerciseForm = () => {
         <div className={classes.segments}>
           <Typography variant="h5">Cardiovascular</Typography>
           <Typography className={classes.links}>
-            <ButtonLink button onClick={() => handleModalOpen("cardiovascular")}>Add</ButtonLink>|<ButtonLink button>Quick tools</ButtonLink>
+            <ButtonLink
+              button
+              onClick={() => handleModalOpen("cardiovascular")}
+            >
+              Add
+            </ButtonLink>
+            |<ButtonLink button>Quick tools</ButtonLink>
           </Typography>
 
           <Table>
@@ -147,15 +153,21 @@ const ExerciseForm = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {
-                cardiovascular.map((cardio) => {
-                  return <TableRow className={classes.row}>
-                    <CustomTableCell>{cardio.dataCardiovascular.exercise}</CustomTableCell>
-                    <CustomTableCell>{cardio.dataCardiovascular.time} minutes</CustomTableCell>
-                    <CustomTableCell>{cardio.dataCardiovascular.calories}</CustomTableCell>
+              {cardiovascular.map(cardio => {
+                return (
+                  <TableRow className={classes.row}>
+                    <CustomTableCell>
+                      {cardio.dataCardiovascular.exercise}
+                    </CustomTableCell>
+                    <CustomTableCell>
+                      {cardio.dataCardiovascular.time} minutes
+                    </CustomTableCell>
+                    <CustomTableCell>
+                      {cardio.dataCardiovascular.calories}
+                    </CustomTableCell>
                   </TableRow>
-                })
-              }
+                );
+              })}
             </TableBody>
           </Table>
 
@@ -178,7 +190,10 @@ const ExerciseForm = () => {
         <div className={classes.segments}>
           <Typography variant="h5">Training</Typography>
           <Typography className={classes.links}>
-            <ButtonLink button onClick={() => handleModalOpen("training")}>Add</ButtonLink>|<ButtonLink button>Quick tools</ButtonLink>
+            <ButtonLink button onClick={() => handleModalOpen("training")}>
+              Add
+            </ButtonLink>
+            |<ButtonLink button>Quick tools</ButtonLink>
           </Typography>
 
           <Table>
@@ -191,16 +206,24 @@ const ExerciseForm = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {
-                training.map((item) => {
-                  return <TableRow className={classes.row}>
-                    <CustomTableCell>{item.dataTraining.exercise}</CustomTableCell>
-                    <CustomTableCell>{item.dataTraining.series} minutes</CustomTableCell>
-                    <CustomTableCell>{item.dataTraining.repetitions}</CustomTableCell>
-                    <CustomTableCell>{item.dataTraining.weight}</CustomTableCell>
+              {training.map(item => {
+                return (
+                  <TableRow className={classes.row}>
+                    <CustomTableCell>
+                      {item.dataTraining.exercise}
+                    </CustomTableCell>
+                    <CustomTableCell>
+                      {item.dataTraining.series} minutes
+                    </CustomTableCell>
+                    <CustomTableCell>
+                      {item.dataTraining.repetitions}
+                    </CustomTableCell>
+                    <CustomTableCell>
+                      {item.dataTraining.weight}
+                    </CustomTableCell>
                   </TableRow>
-                })
-              }
+                );
+              })}
             </TableBody>
           </Table>
         </div>
@@ -221,22 +244,21 @@ const ExerciseForm = () => {
       </form>
 
       <div>
-        <Modal
-          open={modalOpen}
-          onClose={handleClose}
-        >
+        <Modal open={modalOpen} onClose={handleClose}>
           <div className={classes.paper}>
-            {formActive === "cardiovascular" ?
+            {formActive === "cardiovascular" ? (
               <CardiovascularBox
                 handleAddExercise={handleAddExercise}
                 handleClose={handleClose}
-                inputChange={cardiovascularInputChange} />
-              :
+                inputChange={cardiovascularInputChange}
+              />
+            ) : (
               <TrainingBox
                 handleAddExercise={handleAddTraining}
                 handleClose={handleClose}
-                inputChange={trainingInputChange} />
-            }
+                inputChange={trainingInputChange}
+              />
+            )}
           </div>
         </Modal>
       </div>

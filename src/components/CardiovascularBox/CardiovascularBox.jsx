@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  TextField,
-  Divider,
-  Button,
-} from "@material-ui/core";
+import { Typography, TextField, Divider, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +23,8 @@ const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
           variant="outlined"
           className={classes.textField}
           onChange={inputChange}
-          fullWidth />
+          fullWidth
+        />
 
         <TextField
           name="time"
@@ -36,7 +32,8 @@ const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
+          fullWidth
+        />
 
         <TextField
           name="calories"
@@ -44,20 +41,16 @@ const CardiovascularBox = ({ handleAddExercise, handleClose, inputChange }) => {
           variant="outlined"
           onChange={inputChange}
           className={classes.textField}
-          fullWidth />
-
-        <Button
-          variant="contained"
-          color="primary"
           fullWidth
-          type="submit"
-        >
+        />
+
+        <Button variant="contained" color="primary" fullWidth type="submit">
           Submit
         </Button>
         <Button onClick={handleClose}>Close</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default CardiovascularBox;

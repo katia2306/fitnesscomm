@@ -10,8 +10,7 @@ import { themeSelectors } from "./store/theme.reducer";
 import { darkTheme, lightTheme } from "./themes";
 import { userSelectors } from "./store/user.reducer";
 import { setAPIUrl } from "./utils/api.utils";
-import UserRoute from "./routes/UserRoute";
-import { appRoutes } from "./routes/app.routes";
+import AppRoutes from "./routes/AppRoutes";
 
 setAPIUrl();
 
@@ -46,21 +45,7 @@ const App = ({ isThemeDark, userLoaded }) => {
         <CssBaseline />
         <AppNavigation onDrawerOpen={handleDrawerOpen} />
         <AppDrawer drawerOpen={drawerOpen} onDrawerClose={handleDrawerClose} />
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          className={classes.root}
-          component="main"
-          spacing={8}
-        >
-          <Switch>
-            <Route exact path={appRoutes.HOME} component={Home} />
-            <UserRoute path={appRoutes.USER_PROFILE} component={Profile} />
-            <UserRoute path={appRoutes.PROFILES} component={Profiles} />
-            <Route exact component={undefined} />
-          </Switch>
-        </Grid>
+        <AppRoutes />
       </SnackbarProvider>
     </ThemeProvider>
   );
