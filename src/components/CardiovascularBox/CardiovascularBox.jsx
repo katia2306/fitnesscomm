@@ -54,7 +54,7 @@ const CardiovascularBox = ({ handleSubmit, handleClose, inputChange }) => {
   );
 };
 
-CardiovascularBox.PropTypes = {
+CardiovascularBox.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired

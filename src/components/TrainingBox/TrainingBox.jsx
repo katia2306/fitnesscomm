@@ -61,7 +61,7 @@ const TrainingBox = ({ inputChange, handleSubmit, handleClose }) => {
   );
 };
 
-TrainingBox.PropTypes = {
+TrainingBox.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   inputChange: PropTypes.func.isRequired
