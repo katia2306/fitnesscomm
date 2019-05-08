@@ -4,5 +4,7 @@ export const appRoutes = {
   USER_PROFILE: "/profile",
 
   PROFILES: "/profiles",
-  PROFILES_NEW: "/profiles/new"
+  PROFILES_NEW: "/profiles/new",
+
+  EXERCISE: "/exercise"
 };

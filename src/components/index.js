@@ -12,3 +12,5 @@ export { default as ButtonLink } from "./ButtonLink";
 export { default as TextLink } from "./TextLink";
 export { default as ProfilesCard } from "./ProfilesCard";
 export { default as PageWrapper } from "./PageWrapper";
+export { default as CardiovascularBox } from "./CardiovascularBox";
+export { default as TrainingBox } from "./TrainingBox";

@@ -14,6 +14,7 @@ import { userSelectors } from "./store/user.reducer";
 import { setAPIUrl } from "./utils/api.utils";
 import UserRoute from "./routes/UserRoute";
 import { appRoutes } from "./routes/app.routes";
+import Exercise from "../src/pages/Exercise";
 
 setAPIUrl();
 
@@ -69,6 +70,7 @@ const App = ({ isThemeDark, userLoaded }) => {
         <CssBaseline />
         <AppNavigation onDrawerOpen={handleDrawerOpen} />
         <AppDrawer drawerOpen={drawerOpen} onDrawerClose={handleDrawerClose} />
+        <Exercise />
         <Grid
           container
           direction="column"

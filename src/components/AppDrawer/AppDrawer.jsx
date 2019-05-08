@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer, ListItemText, List, ListItemIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { AssignmentInd } from "@material-ui/icons";
+import { AssignmentInd, FitnessCenter } from "@material-ui/icons";
 import { ListItemLink } from "..";
 import PropTypes from "prop-types";
 import { appRoutes } from "../../routes/app.routes";
@@ -19,6 +19,12 @@ const drawerList = [
     text: "Profiles",
     to: appRoutes.PROFILES,
     Icon: AssignmentInd
+  },
+  {
+    id: 1,
+    text: "Exercise",
+    to: appRoutes.EXERCISE,
+    Icon: FitnessCenter
   }
 ];
 

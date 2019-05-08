@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   TextField,
   Divider,
-  Theme,
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
-  Button
+  Button,
+  Modal
 } from "@material-ui/core";
+import { ButtonLink, CardiovascularBox, TrainingBox } from "../../components";
 import { makeStyles, withStyles } from "@material-ui/styles";
+import useFormData from "../../hooks/useFormData";
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -23,7 +25,7 @@ const CustomTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   form: {
     padding: "1%",
     overflowY: "scroll"
@@ -46,11 +48,71 @@ const useStyles = makeStyles((theme: Theme) => ({
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.background.default
     }
+  },
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none'
+  },
+  textField: {
+    marginBottom: theme.spacing.unit
   }
 }));
 
+const initialFormData = {
+  exercise: "",
+  time: 0,
+  calories: 0
+}
+
+const initialFormDataTraining = {
+  exercise: "",
+  series: 0,
+  repetitions: 0,
+  weight: 0
+}
+
 const ExerciseForm = () => {
   const classes = useStyles();
+  const {
+    formData: dataCardiovascular,
+    formDataActions: { handleInputChange: cardiovascularInputChange }
+  } = useFormData(initialFormData);
+  const {
+    formData: dataTraining,
+    formDataActions: { handleInputChange: trainingInputChange }
+  } = useFormData(initialFormDataTraining);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [cardiovascular, setCardiovascular] = useState([]);
+  const [burnedCalories, setBurnedCalories] = useState(0);
+  const [totalMinutes, setTotalMinutes] = useState(0);
+  const [training, setTraining] = useState([]);
+  const [formActive, setFormActive] = useState([]);
+
+  const handleModalOpen = (formData) => {
+    setFormActive(formData);
+    setModalOpen(true);
+  }
+
+  const handleClose = () => {
+    setModalOpen(false);
+  }
+
+  const handleAddExercise = () => {
+    const hola = dataCardiovascular;
+    setCardiovascular([...cardiovascular, { dataCardiovascular }]);
+    setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories));
+    setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time));
+    handleClose();
+  }
+
+  const handleAddTraining = () => {
+    setTraining([...training, { dataTraining }]);
+    handleClose();
+  }
 
   return (
     <div className={classes.form}>
@@ -73,29 +135,39 @@ const ExerciseForm = () => {
         <div className={classes.segments}>
           <Typography variant="h5">Cardiovascular</Typography>
           <Typography className={classes.links}>
-            <div>Añadir</div>|<div>Herramientas rápidas</div>
+            <ButtonLink button onClick={() => handleModalOpen("cardiovascular")}>Add</ButtonLink>|<ButtonLink button>Quick tools</ButtonLink>
           </Typography>
 
           <Table>
             <TableHead>
               <TableRow className={classes.row}>
-                <CustomTableCell>Minutos</CustomTableCell>
-                <CustomTableCell>Minutos</CustomTableCell>
-                <CustomTableCell>Calorías quemadas</CustomTableCell>
+                <CustomTableCell>Exercise</CustomTableCell>
+                <CustomTableCell>Minutes</CustomTableCell>
+                <CustomTableCell>Burned calories</CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableBody />
+            <TableBody>
+              {
+                cardiovascular.map((cardio) => {
+                  return <TableRow className={classes.row}>
+                    <CustomTableCell>{cardio.dataCardiovascular.exercise}</CustomTableCell>
+                    <CustomTableCell>{cardio.dataCardiovascular.time} minutes</CustomTableCell>
+                    <CustomTableCell>{cardio.dataCardiovascular.calories}</CustomTableCell>
+                  </TableRow>
+                })
+              }
+            </TableBody>
           </Table>
 
           <Table>
             <TableBody>
               <TableRow>
-                <CustomTableCell>Total diario / Objetivo</CustomTableCell>
-                <CustomTableCell>0/70</CustomTableCell>
-                <CustomTableCell>0/503</CustomTableCell>
+                <CustomTableCell>Diary total / Goal</CustomTableCell>
+                <CustomTableCell>{totalMinutes}/70</CustomTableCell>
+                <CustomTableCell>{burnedCalories}/503</CustomTableCell>
               </TableRow>
               <TableRow>
-                <CustomTableCell>Total semanal / Objetivo</CustomTableCell>
+                <CustomTableCell>Week total / Goal</CustomTableCell>
                 <CustomTableCell>0/280</CustomTableCell>
                 <CustomTableCell>0/2.010</CustomTableCell>
               </TableRow>
@@ -104,32 +176,42 @@ const ExerciseForm = () => {
         </div>
         <Divider />
         <div className={classes.segments}>
-          <Typography variant="h5">Entrenamiento</Typography>
+          <Typography variant="h5">Training</Typography>
           <Typography className={classes.links}>
-            <div>Añadir</div>|<div>Herramientas rápidas</div>
+            <ButtonLink button onClick={() => handleModalOpen("training")}>Add</ButtonLink>|<ButtonLink button>Quick tools</ButtonLink>
           </Typography>
 
           <Table>
             <TableHead>
               <TableRow className={classes.row}>
+                <CustomTableCell>Exercise</CustomTableCell>
                 <CustomTableCell>Series</CustomTableCell>
-                <CustomTableCell>Repeticiones / Series</CustomTableCell>
-                <CustomTableCell>Peso / series</CustomTableCell>
+                <CustomTableCell>Repetitions / Series</CustomTableCell>
+                <CustomTableCell>Weight / series</CustomTableCell>
               </TableRow>
             </TableHead>
-            <TableBody />
+            <TableBody>
+              {
+                training.map((item) => {
+                  return <TableRow className={classes.row}>
+                    <CustomTableCell>{item.dataTraining.exercise}</CustomTableCell>
+                    <CustomTableCell>{item.dataTraining.series} minutes</CustomTableCell>
+                    <CustomTableCell>{item.dataTraining.repetitions}</CustomTableCell>
+                    <CustomTableCell>{item.dataTraining.weight}</CustomTableCell>
+                  </TableRow>
+                })
+              }
+            </TableBody>
           </Table>
         </div>
         <div>
-          <Typography variant="body1">
-            Notas sobre el ejercicio de hoy
-          </Typography>
           <TextField
             id="notes"
-            label="Notas sobre el ejercicio de hoy"
+            label="Notes about the exercise of the day"
             multiline
             rows="2"
             variant="outlined"
+            className={classes.textField}
             fullWidth
           />
         </div>
@@ -137,6 +219,27 @@ const ExerciseForm = () => {
           Ver informe Completo (Para imprimir)
         </Button>
       </form>
+
+      <div>
+        <Modal
+          open={modalOpen}
+          onClose={handleClose}
+        >
+          <div className={classes.paper}>
+            {formActive === "cardiovascular" ?
+              <CardiovascularBox
+                handleAddExercise={handleAddExercise}
+                handleClose={handleClose}
+                inputChange={cardiovascularInputChange} />
+              :
+              <TrainingBox
+                handleAddExercise={handleAddTraining}
+                handleClose={handleClose}
+                inputChange={trainingInputChange} />
+            }
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 };
