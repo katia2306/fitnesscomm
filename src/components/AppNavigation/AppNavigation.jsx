@@ -10,19 +10,23 @@ import ToggleTheme from "../ThemeToggle";
 import { userSelectors } from "../../store/user.reducer";
 import AccountMenu from "./AccountMenu";
 import { TextLink } from "..";
-import { appRoutes } from "../../routes/app.routes";
+import { appRoutes } from "../../utils/config.utils";
 
 const useStyles = makeStyles(theme => ({
   root: {
+    zIndex: theme.zIndex.drawer + 1,
     "& $signupButton, & $title": {
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         display: "none"
       }
     }
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   },
   title: {},
   grow: {
@@ -49,7 +53,7 @@ const AppNavigation = ({ isAuthenticated, onDrawerOpen }) => {
   }, [closeAuthDialog, dialogOpen, isAuthenticated]);
 
   return (
-    <AppBar className={classes.root} color="inherit">
+    <AppBar className={classes.root} position="fixed" color="inherit">
       <Toolbar>
         <IconButton
           aria-label="Menu"
@@ -80,16 +84,16 @@ const AppNavigation = ({ isAuthenticated, onDrawerOpen }) => {
             >
               Sign up
             </Button>
+            <Authentication
+              dialogOpen={dialogOpen}
+              authForm={authForm}
+              showLoginForm={showLoginForm}
+              showSignupForm={showSignupForm}
+              closeAuthDialog={closeAuthDialog}
+            />
           </div>
         )}
       </Toolbar>
-      <Authentication
-        dialogOpen={dialogOpen}
-        authForm={authForm}
-        showLoginForm={showLoginForm}
-        showSignupForm={showSignupForm}
-        closeAuthDialog={closeAuthDialog}
-      />
     </AppBar>
   );
 };

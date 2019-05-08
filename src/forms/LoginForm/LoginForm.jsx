@@ -20,25 +20,25 @@ import { ButtonLink } from "../../components";
 
 const useStyles = makeStyles(theme => ({
   loginContainer: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     textAlign: "center"
   },
   rememberMeContainer: {
     textAlign: "left",
-    marginTop: theme.spacing.unit - 4
+    marginTop: theme.spacing(1) - 4
   },
   forgotPassword: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1)
   },
   signupContainer: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     textAlign: "center"
   },
   signupButton: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   }
 }));
 
@@ -155,7 +155,7 @@ const LoginForm = ({
       </div>
       <Divider />
       <div className={classes.signupContainer}>
-        <Typography variant="body1" component="span" inline>
+        <Typography variant="body1" component="span">
           Don&apos;t have an account?
         </Typography>
         <ButtonLink
@@ -170,14 +170,18 @@ const LoginForm = ({
   );
 };
 
+LoginForm.defaultProps = {
+  loginError: undefined
+};
+
 LoginForm.propTypes = {
   onSignupButtonClick: PropTypes.func.isRequired,
   userLogin: PropTypes.func.isRequired,
   loginFormReset: PropTypes.func.isRequired,
   loginError: PropTypes.shape({
-    error: PropTypes.string.isRequired,
+    code: PropTypes.string,
     message: PropTypes.string.isRequired
-  }).isRequired
+  })
 };
 
 const mapStateToProps = state => ({

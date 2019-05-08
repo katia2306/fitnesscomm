@@ -12,7 +12,11 @@ import {
 import PropTypes from "prop-types";
 
 const BasicInformation = ({
-  formData: { gender, age = "", height = "", weight = "", imperial },
+  gender,
+  age,
+  height,
+  weight,
+  imperial,
   onChange,
   onImperialChange
 }) => {
@@ -20,7 +24,7 @@ const BasicInformation = ({
   const weightMetric = imperial ? "lb" : "kg";
 
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item xs={12}>
         <FormControl component="fieldset">
           <RadioGroup name="gender" value={gender} row onChange={onChange}>
@@ -99,13 +103,11 @@ const BasicInformation = ({
 };
 
 BasicInformation.propTypes = {
-  formData: {
-    gender: PropTypes.oneOf(["female", "male"]).isRequired,
-    age: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    weight: PropTypes.number.isRequired,
-    imperial: PropTypes.bool.isRequired
-  }.isRequired,
+  gender: PropTypes.oneOf(["female", "male"]).isRequired,
+  age: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  weight: PropTypes.string.isRequired,
+  imperial: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onImperialChange: PropTypes.func.isRequired
 };

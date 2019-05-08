@@ -2,7 +2,7 @@ import { call, put } from "redux-saga/effects";
 import { userActions } from "../store/user.reducer";
 import firebase, { db } from "../firebase/firebase";
 import browserHistory from "../browserHistory";
-import { appRoutes } from "../routes/app.routes";
+import { appRoutes } from "../utils/config.utils";
 import userAPI from "../api/user.api";
 
 const onAuthStateChanged = () => {

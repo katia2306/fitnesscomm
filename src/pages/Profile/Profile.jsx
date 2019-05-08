@@ -9,13 +9,13 @@ import { userSelectors } from "../../store/user.reducer";
 
 const useStyles = makeStyles(theme => ({
   headerContainer: {
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginBottom: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
-      paddingLeft: theme.spacing.unit * 3,
-      paddingRight: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 4
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
+      marginBottom: theme.spacing(4)
     }
   }
 }));

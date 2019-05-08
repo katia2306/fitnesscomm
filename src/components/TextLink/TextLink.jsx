@@ -8,6 +8,7 @@ const TextLink = props => {
   return (
     <Typography
       style={{ textDecoration: "none" }}
+      color="inherit"
       component={RouterLink}
       {...props}
     />

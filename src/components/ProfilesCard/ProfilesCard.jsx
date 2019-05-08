@@ -18,15 +18,20 @@ import {
 } from "../../store/profiles.reducer";
 import { MacronutrientBox } from "..";
 
-const useStyles = makeStyles({
-  cardHeader: {
-    paddingBottom: 0
+const useStyles = makeStyles(theme => ({
+  card: {
+    width: "100%",
+    minWidth: 320
   },
   cardActions: {
     display: "flex",
     justifyContent: "flex-end"
+  },
+  dailyCalories: {
+    marginTop: theme.spacing(1),
+    fontWeight: 300
   }
-});
+}));
 
 const ProfilesCard = ({
   profile: {
@@ -51,13 +56,12 @@ const ProfilesCard = ({
   };
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
         title={title}
         subheader={DateTime.fromJSDate(createdAt.toDate()).toLocaleString(
           DateTime.DATE_HUGE
         )}
-        className={classes.cardHeader}
       />
       <CardContent>
         <Grid container>
@@ -94,15 +98,16 @@ const ProfilesCard = ({
             direction="column"
             alignItems="center"
             justify="center"
+            className={classes.dailyCalories}
           >
-            <Typography variant="body1">Calories</Typography>
-            <Typography variant="body1" color="textSecondary">
+            <Typography variant="h5">Daily Calories</Typography>
+            <Typography variant="h5" color="textSecondary">
               {dailyCalories}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions className={classes.cardActions} disableActionSpacing>
+      <CardActions className={classes.cardActions} disableSpacing>
         <Button
           size="small"
           color="secondary"
@@ -125,7 +130,7 @@ ProfilesCard.propTypes = {
     carbohydrate: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
     fiber: PropTypes.number.isRequired,
-    createdAt: PropTypes.string.isRequired
+    createdAt: PropTypes.object.isRequired
   }).isRequired,
   deleteProfile: PropTypes.func.isRequired
 };

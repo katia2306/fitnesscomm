@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { ButtonLink, ProfilesCard, PageWrapper } from "../../components";
-import { appRoutes } from "../../routes/app.routes";
+import { appRoutes } from "../../utils/config.utils";
 import {
   profilesActions,
   profilesSelectors
@@ -14,8 +14,8 @@ import {
 const useStyles = makeStyles(theme => ({
   fab: {
     position: "absolute",
-    bottom: theme.spacing.unit,
-    right: theme.spacing.unit
+    bottom: theme.spacing(1),
+    right: theme.spacing(1)
   }
 }));
 
@@ -31,9 +31,9 @@ const ProfilesMainPage = ({ profiles, profilesLoaded, fetchProfiles }) => {
   let profilesList;
   if (profilesLoaded && profiles) {
     profilesList = (
-      <Grid container spacing={8}>
+      <Grid container wrap="wrap" spacing={1}>
         {profiles.map(id => (
-          <Grid item xs={12} sm={2} key={id}>
+          <Grid item xs={12} md={6} lg={4} xl={3} key={id}>
             <ProfilesCard id={id} />
           </Grid>
         ))}

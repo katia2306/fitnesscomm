@@ -4,14 +4,25 @@ import { makeStyles } from "@material-ui/styles";
 import { AssignmentInd, FitnessCenter } from "@material-ui/icons";
 import { ListItemLink } from "..";
 import PropTypes from "prop-types";
-import { appRoutes } from "../../routes/app.routes";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles, useTheme } from "@material-ui/styles";
+import { appRoutes } from "../../utils/config.utils";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: theme.appDrawer.width,
+      flexShrink: 0
+    }
+  },
+  drawerPaper: {
+    width: theme.appDrawer.width
+  },
   list: {
-    width: 280,
-    maxWidth: 280
-  }
-});
+    width: "100%"
+  },
+  toolbar: theme.mixins.toolbar
+}));
 
 const drawerList = [
   {
@@ -30,28 +41,57 @@ const drawerList = [
 
 const AppDrawer = ({ drawerOpen, onDrawerClose }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesMediaQuery = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const drawer = (
+    <List>
+      {drawerList.map(({ id, text, to, Icon }) => (
+        <ListItemLink key={id} to={to}>
+          <ListItemIcon>
+            <Icon />
+          </ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItemLink>
+      ))}
+    </List>
+  );
 
   return (
-    <Drawer open={drawerOpen} onClose={onDrawerClose}>
-      <div
-        tabIndex={0}
-        role="button"
-        onClick={onDrawerClose}
-        onKeyDown={onDrawerClose}
-        className={classes.list}
-      >
-        <List>
-          {drawerList.map(({ id, text, to, Icon }) => (
-            <ListItemLink key={id} to={to}>
-              <ListItemIcon>
-                <Icon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemLink>
-          ))}
-        </List>
-      </div>
-    </Drawer>
+    <nav className={classes.drawer}>
+      {matchesMediaQuery ? (
+        <Drawer
+          open={drawerOpen}
+          onClose={onDrawerClose}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true
+          }}
+        >
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={onDrawerClose}
+            onKeyDown={onDrawerClose}
+            className={classes.list}
+          >
+            {drawer}
+          </div>
+        </Drawer>
+      ) : (
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <div className={classes.toolbar} />
+            {drawer}
+          </Drawer>
+        )}
+    </nav>
   );
 };
 

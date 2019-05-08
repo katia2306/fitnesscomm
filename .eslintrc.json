@@ -57,7 +57,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
 
-    "prefer-arrow-callback": ["error", { "allowNamedFunctions": false }],
     "no-restricted-imports": [
       "error",
       {

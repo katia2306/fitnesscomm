@@ -8,9 +8,9 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 
-const Goal = ({ formData: { goal }, onChange }) => {
+const Goal = ({ goal, onChange }) => {
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item>
         <FormControl component="fieldset">
           <RadioGroup name="goal" value={goal} onChange={onChange}>
@@ -47,15 +47,13 @@ const Goal = ({ formData: { goal }, onChange }) => {
 };
 
 Goal.propTypes = {
-  formData: PropTypes.shape({
-    goal: PropTypes.oneOf([
-      "maintenance",
-      "moderateLoss",
-      "rapidLoss",
-      "moderateGain",
-      "rapidGain"
-    ]).isRequired
-  }).isRequired,
+  goal: PropTypes.oneOf([
+    "maintenance",
+    "moderateLoss",
+    "rapidLoss",
+    "moderateGain",
+    "rapidGain"
+  ]).isRequired,
   onChange: PropTypes.func.isRequired
 };
 

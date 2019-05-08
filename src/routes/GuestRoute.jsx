@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { userSelectors } from "../store/user.reducer";
-import { appRoutes } from "./app.routes";
+import { appRoutes } from "../utils/config.utils";
 
 const GuestRoute = ({ isAuthenticated, component: Component, ...other }) => {
   return (
@@ -22,7 +22,7 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...other }) => {
 
 GuestRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  component: PropTypes.node.isRequired
+  component: PropTypes.elementType.isRequired
 };
 
 function mapStateToProps(state) {

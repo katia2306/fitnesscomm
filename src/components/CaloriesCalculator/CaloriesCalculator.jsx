@@ -22,16 +22,15 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flex: 1,
-    overflowY: "auto"
+    flex: 1
   },
   actionsContainer: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -43,9 +42,9 @@ const steps = [
 
 const initialFormData = {
   gender: "female",
-  age: undefined,
-  height: undefined,
-  weight: undefined,
+  age: "",
+  height: "",
+  weight: "",
   activity: "none",
   goal: "maintenance",
   imperial: false
@@ -104,7 +103,7 @@ const CaloriesCalculator = ({
             <StepLabel>{stepLabel}</StepLabel>
             <StepContent>
               <StepComponent
-                formData={formData}
+                {...formData}
                 onChange={handleInputChange}
                 onImperialChange={handleCheckboxChange}
               />
@@ -143,12 +142,16 @@ const CaloriesCalculator = ({
   );
 };
 
+CaloriesCalculator.defaultProps = {
+  createProfileError: undefined
+};
+
 CaloriesCalculator.propTypes = {
   createProfile: PropTypes.func.isRequired,
   createProfileError: PropTypes.shape({
-    code: PropTypes.string.isRequired,
+    code: PropTypes.string,
     message: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   createProfilesFormReset: PropTypes.func.isRequired
 };
 

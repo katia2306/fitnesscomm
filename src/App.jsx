@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { ThemeProvider, makeStyles } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { SnackbarProvider } from "notistack";
-import { Button, Grid } from "@material-ui/core";
-import { Route, Switch } from "react-router-dom";
-import loadable from "@loadable/component";
+import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { AppNavigation, AppDrawer } from "./components";
 import { themeSelectors } from "./store/theme.reducer";
@@ -14,32 +12,10 @@ import { userSelectors } from "./store/user.reducer";
 import { setAPIUrl } from "./utils/api.utils";
 import UserRoute from "./routes/UserRoute";
 import { appRoutes } from "./routes/app.routes";
-import Exercise from "../src/pages/Exercise";
 
 setAPIUrl();
 
-const loadableOptions = {
-  fallback: <div>Loading...</div>
-};
-
-const Home = loadable(() => import("./pages/Home"), loadableOptions);
-const Profile = loadable(() => import("./pages/Profile"), loadableOptions);
-const Profiles = loadable(() => import("./pages/Profiles"), loadableOptions);
-
-const useStyles = makeStyles({
-  root: {
-    flex: 1,
-    padding: 8,
-    marginTop: 56,
-    "@media (min-width:600px)": {
-      padding: 16
-    }
-  }
-});
-
 const App = ({ isThemeDark, userLoaded }) => {
-  const classes = useStyles();
-
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const theme = isThemeDark ? darkTheme : lightTheme;
@@ -70,7 +46,6 @@ const App = ({ isThemeDark, userLoaded }) => {
         <CssBaseline />
         <AppNavigation onDrawerOpen={handleDrawerOpen} />
         <AppDrawer drawerOpen={drawerOpen} onDrawerClose={handleDrawerClose} />
-        <Exercise />
         <Grid
           container
           direction="column"

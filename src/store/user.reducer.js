@@ -17,7 +17,9 @@ export const userTypes = {
   LOGIN_FORM_RESET: "@@USER/LOGIN_FORM_RESET"
 };
 
-const initialState = {};
+const initialState = {
+  loaded: false
+};
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
@@ -42,7 +44,7 @@ export default (state = initialState, action) => {
       return { ...state, loaded: true };
 
     case userTypes.USER_LOGOUT_SUCCESS:
-      return { loaded: true };
+      return { ...initialState };
 
     case userTypes.USER_LOGOUT_FAILURE:
     default:

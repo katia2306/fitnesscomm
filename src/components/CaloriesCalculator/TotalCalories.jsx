@@ -15,19 +15,19 @@ import {
 
 const useStyles = makeStyles(theme => ({
   actionsContainer: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   button: {
-    marginTop: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(1)
   },
   resultContainer: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     paddingTop: 0
   },
   macrosContainer: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   }
 }));
 
@@ -94,7 +94,7 @@ const TotalCalories = ({
       </Grid>
       <Grid
         container
-        spacing={8}
+        spacing={1}
         justify="center"
         className={classes.macrosContainer}
       >
@@ -133,9 +133,9 @@ const TotalCalories = ({
 
 TotalCalories.propTypes = {
   gender: PropTypes.oneOf(["female", "male"]).isRequired,
-  age: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  weight: PropTypes.number.isRequired,
+  age: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  weight: PropTypes.string.isRequired,
   activity: PropTypes.oneOf(["none", "light", "moderate", "active", "intense"])
     .isRequired,
   goal: PropTypes.oneOf([

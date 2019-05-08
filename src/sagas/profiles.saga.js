@@ -3,7 +3,7 @@ import { profilesActions } from "../store/profiles.reducer";
 import firebase, { db } from "../firebase/firebase";
 import { parseError } from "../utils/firebase.utils";
 import browserHistory from "../browserHistory";
-import { appRoutes } from "../routes/app.routes";
+import { appRoutes } from "../utils/config.utils";
 
 export function* createProfile(action) {
   try {

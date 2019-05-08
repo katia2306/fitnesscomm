@@ -1,19 +1,19 @@
 import React from "react";
 import { Dialog, IconButton } from "@material-ui/core";
-import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Close as CloseIcon } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import { LoginForm, SignupForm } from "../../forms";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2)
   },
   closeButton: {
-    marginTop: theme.spacing.unit,
-    marginLeft: -theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginLeft: -theme.spacing(1),
     marginRight: "auto"
   }
 }));
@@ -26,7 +26,8 @@ const Authentication = ({
   showSignupForm
 }) => {
   const classes = useStyles();
-  const matchesMediaQuery = useMediaQuery("(max-width:600px)");
+  const theme = useTheme();
+  const matchesMediaQuery = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <Dialog

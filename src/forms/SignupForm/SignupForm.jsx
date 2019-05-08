@@ -22,14 +22,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   textField: {
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing(1)
   },
   birthdayContainer: {
     textAlign: "left"
   },
   signupContainer: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 4
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(4)
   },
   passwordContainer: {
     display: "inline"
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   passwordInput: {
     width: "40%",
     marginRight: 10,
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing(1)
   }
 }));
 
@@ -141,7 +141,7 @@ const SignupForm = ({ onLoginButtonClick, userSignup }) => {
       </Button>
       <Divider />
       <div className={classes.signupContainer}>
-        <Typography variant="body1" component="span" inline>
+        <Typography variant="body1" component="span">
           Do you already have an account?
         </Typography>
         <ButtonLink button onClick={onLoginButtonClick}>
