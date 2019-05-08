@@ -103,7 +103,9 @@ const ExerciseForm = () => {
 
   const handleAddExercise = () => {
     setCardiovascular([...cardiovascular, { dataCardiovascular }]);
-    setBurnedCalories(burnedCalories + parseInt(dataCardiovascular.calories, 10));
+    setBurnedCalories(
+      burnedCalories + parseInt(dataCardiovascular.calories, 10)
+    );
     setTotalMinutes(totalMinutes + parseInt(dataCardiovascular.time, 10));
     handleClose();
   };
@@ -152,9 +154,9 @@ const ExerciseForm = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cardiovascular.map(cardio => {
+              {cardiovascular.map((cardio, i) => {
                 return (
-                  <TableRow className={classes.row}>
+                  <TableRow className={classes.row} key={i}>
                     <CustomTableCell>
                       {cardio.dataCardiovascular.exercise}
                     </CustomTableCell>
@@ -205,9 +207,9 @@ const ExerciseForm = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {training.map(item => {
+              {training.map((item, i) => {
                 return (
-                  <TableRow className={classes.row}>
+                  <TableRow className={classes.row} key={i}>
                     <CustomTableCell>
                       {item.dataTraining.exercise}
                     </CustomTableCell>
